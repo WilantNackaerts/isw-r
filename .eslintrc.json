@@ -1,4 +1,4 @@
-module.exports = {
+{
     "env": {
         "browser": true,
         "es6": true
@@ -12,7 +12,8 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-native"
     ],
     "rules": {
         "indent": [
@@ -32,4 +33,4 @@ module.exports = {
             "always"
         ]
     }
-};
+}
