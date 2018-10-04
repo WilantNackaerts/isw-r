@@ -17,7 +17,7 @@ export default ( props: Props ) => {
           vertical
           active={props.navigation.state.index === 0}
           onPress={() => props.navigation.navigate( TEST1 )}>
-          <Icon name='bowtie' />
+          <Icon android='md-bowtie' ios='ios-bowtie' />
           <Text>Test 1</Text>
         </Button>
         <Button
