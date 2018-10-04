@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "flow": "flow"
+    "flow": "flow",
+    "run": "react-native run-android",
+    "run:ios": "react-native run-ios",
+    "test": "jest"
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
