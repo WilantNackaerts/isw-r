@@ -7,13 +7,13 @@
  */
 
 import React, { Component } from 'react';
-import Test1 from './screens/Test1.js';
+import Navigator from './navigation/Navigator.js';
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <Test1 />
+      <Navigator />
     );
   }
 }

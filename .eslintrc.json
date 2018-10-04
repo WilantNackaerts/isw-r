@@ -47,14 +47,25 @@
           "error",
           "always"
         ],
+        "array-bracket-spacing": [
+          "error",
+          "always"
+        ],
+        "computed-property-spacing": [
+          "error",
+          "always"
+        ],
         "space-before-blocks": [
+          "error",
+          "always"
+        ],
+        "space-in-parens": [
           "error",
           "always"
         ],
         "keyword-spacing": 2,
         "react-native/no-unused-styles": "error",
         "react-native/no-inline-styles": "error",
-        "react/jsx-no-bind": "warn",
         "flowtype/require-valid-file-annotation": [
             "error",
             "always"
