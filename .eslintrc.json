@@ -18,7 +18,6 @@
         "sourceType": "module"
     },
     "plugins": [
-        "standard",
         "react",
         "react-native",
         "flowtype"
@@ -44,13 +43,16 @@
             "error",
             "always-multiline"
         ],
+        "object-curly-spacing": [
+          "error",
+          "always"
+        ],
         "react-native/no-unused-styles": "error",
         "react-native/no-inline-styles": "error",
         "react/jsx-no-bind": "warn",
         "flowtype/require-valid-file-annotation": [
             "error",
-            "always",
-            { "annotationStyle": "block" }
+            "always"
         ]
     }
 }
