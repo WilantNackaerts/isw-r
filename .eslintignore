@@ -1,0 +1,7 @@
+coverage/*
+build/
+flow-typed/
+node_modules/
+dist/
+ios/
+android/
