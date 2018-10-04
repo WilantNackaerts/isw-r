@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "flow": "flow",
     "run": "react-native run-android",
     "run:ios": "react-native run-ios",
     "test": "jest"
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
+    "flow-bin": "^0.78.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.47.0",
     "react-test-renderer": "16.5.0"
