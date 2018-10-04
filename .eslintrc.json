@@ -47,6 +47,11 @@
           "error",
           "always"
         ],
+        "space-before-blocks": [
+          "error",
+          "always"
+        ],
+        "keyword-spacing": 2,
         "react-native/no-unused-styles": "error",
         "react-native/no-inline-styles": "error",
         "react/jsx-no-bind": "warn",
