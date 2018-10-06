@@ -15,15 +15,27 @@ export default ( props: Props ) => {
     <Footer>
       <FooterTab>
         <Tab
-          icon='bowtie'
-          label='Test 1'
-          routeName={routes.TEST1}
+          icon='cart'
+          label='Shop'
+          routeName={routes.SHOP}
           navigation={props.navigation}
         />
         <Tab
-          icon='briefcase'
-          label='Test 2'
-          routeName={routes.TEST2}
+          icon='musical-note'
+          label='Media'
+          routeName={routes.MEDIA}
+          navigation={props.navigation}
+        />
+        <Tab
+          icon='snow'
+          label='Airco'
+          routeName={routes.AIRCO}
+          navigation={props.navigation}
+        />
+        <Tab
+          icon='camera'
+          label='Cams'
+          routeName={routes.CAMS}
           navigation={props.navigation}
         />
       </FooterTab>

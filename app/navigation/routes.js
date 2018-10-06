@@ -1,12 +1,18 @@
 // @flow
 
-import Test1 from '../screens/Test1.js';
-import Test2 from '../screens/Test2.js';
+import Shop from '../screens/Shop.js';
+import Media from '../screens/Media.js';
+import Airco from '../screens/Airco.js';
+import Cams from '../screens/Cams.js';
 
-export const TEST1: 'Test1' = 'Test1';
-export const TEST2: 'Test2' = 'Test2';
+export const SHOP: 'shop' = 'shop';
+export const MEDIA: 'media' = 'media';
+export const AIRCO: 'airco' = 'airco';
+export const CAMS: 'cams' = 'cams';
 
 export default {
-  [ TEST1 ]: Test1,
-  [ TEST2 ]: Test2,
+  [ SHOP ]: Shop,
+  [ MEDIA ]: Media,
+  [ AIRCO ]: Airco,
+  [ CAMS ]: Cams,
 };
