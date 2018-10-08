@@ -1,18 +1,13 @@
 // @flow
 
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
+import shop from './reducers/shop.js';
 
 const reactDevtoolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__ &&
   window.__REDUX_DEVTOOLS_EXTENSION__();
 
-function reducer( state = { test: 'test' }, action ) {
-  switch ( action.type ) {
-    case 'setTest':
-      return { ...state, test: action.test };
-    default:
-      return state;
+const rootReducer = combineReducers( {
+  shop,
+} );
 
-  }
-}
-
-export default createStore( reducer, reactDevtoolsExtension ); 
+export default createStore( rootReducer, reactDevtoolsExtension ); 

@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { Text, View, Button } from 'native-base';
 import { connect } from 'react-redux';
+import { shopTest } from '../store/actions/shop.js';
 
 type Props = {
   test: string,
@@ -22,13 +23,13 @@ class Shop extends Component<Props> {
 }
 
 function mapStateToProps( state ) {
-  return state;
+  return { test: state.shop.test };
 }
 
 function mapDispatchToProps( dispatch ) {
   return {
     onPress() {
-      dispatch( { type: 'setTest', test: 'uht78yjhijkh8niuhgt67' } );
+      dispatch( shopTest() );
     },
   };
 }
