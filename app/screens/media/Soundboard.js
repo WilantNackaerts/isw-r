@@ -34,7 +34,7 @@ class Soundboard extends Component<Props> {
   }
 
   render() {
-    if ( !this.props.isloading && this.props.folders ) {
+    if ( !this.props.isLoading && this.props.folders ) {
       return (
         <Container>
           <Content>
