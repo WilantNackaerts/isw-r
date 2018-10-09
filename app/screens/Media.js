@@ -1,12 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Text } from 'native-base';
+import MediaTabs from '../components/MediaTabs.js';
 
 export default class Media extends Component<{}> {
   render() {
     return (
-      <Text>Media</Text>
+      <MediaTabs />
     );
   }
 }
