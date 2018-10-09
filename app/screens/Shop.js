@@ -16,7 +16,9 @@ class Shop extends Component<Props> {
       <View>
         <Text>Shop</Text>
         <Text>{this.props.test}</Text>
-        <Button onPress={this.props.onPress} ><Text>setTest</Text></Button>
+        <Button onPress={this.props.onPress}>
+          <Text>setTest</Text>
+        </Button>
       </View>
     );
   }
