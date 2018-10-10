@@ -44,6 +44,10 @@ class Soundboard extends Component<Props> {
     return Array.from( array );
   }
 
+  onPress( sound ) {
+    fetch( url + sound );
+  }
+
   render() {
     if ( !this.props.isLoading && this.props.folders ) {
       return (
@@ -62,7 +66,7 @@ class Soundboard extends Component<Props> {
               } />
             <List dataArray={this.props.soundsNF}
               renderRow={( sound ) =>
-                <ListItem>
+                <ListItem onPress={() => this.onPress( sound )}>
                   <Text>{sound}</Text>
                 </ListItem>
               } />
