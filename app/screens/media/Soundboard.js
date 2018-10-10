@@ -1,15 +1,16 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Text, Container, List, ListItem, Content, Spinner } from 'native-base';
+import { Text, Container, List, ListItem, Content, Spinner, Right, Icon, Left } from 'native-base';
 import { connect } from 'react-redux';
 import { soundboardSetSounds } from '../../store/actions/media/soundboard.js';
 const url = 'http://m.isw/api/sb/';
 
 type Props = {
   sounds: [],
+  soundsNF: [],
+  folders: [],
   isLoading: boolean,
-  folders: [String],
   setSounds: () => void,
 }
 
@@ -19,7 +20,7 @@ class Soundboard extends Component<Props> {
     fetch( url )
       .then( response => response.json() )
       .then( sounds => 
-        this.props.setSounds( sounds, this.detectFolders( sounds ) )
+        this.props.setSounds( sounds, this.detectFolders( sounds ), this.detectSoundsNF( sounds ) )
       );
   }
 
@@ -33,6 +34,16 @@ class Soundboard extends Component<Props> {
     return Array.from( array );
   }
 
+  detectSoundsNF( sounds ) {
+    const array = new Set();
+    sounds.forEach( sound => {
+      if ( String( sound.urlSnip ).indexOf( '/' ) === -1 ) {
+        array.add( String( sound.urlSnip ) );
+      }
+    } );
+    return Array.from( array );
+  }
+
   render() {
     if ( !this.props.isLoading && this.props.folders ) {
       return (
@@ -41,8 +52,19 @@ class Soundboard extends Component<Props> {
             <List dataArray={this.props.folders}
               renderRow={( folder ) => 
                 <ListItem>
-                  <Text>{folder}</Text>
+                  <Left>
+                    <Text>{folder}</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="arrow-forward" />
+                  </Right>
                 </ListItem> 
+              } />
+            <List dataArray={this.props.soundsNF}
+              renderRow={( sound ) =>
+                <ListItem>
+                  <Text>{sound}</Text>
+                </ListItem>
               } />
           </Content>
         </Container>
@@ -64,13 +86,14 @@ function mapStateToProps( state ) {
     isLoading: state.soundboard.isloading,
     sounds: state.soundboard.sounds,
     folders: state.soundboard.folders,
+    soundsNF: state.soundboard.soundsNF,
   };
 }
 
 function mapDispatchToProps( dispatch ) {
   return {
-    setSounds( sounds, folders ) {
-      dispatch( soundboardSetSounds( sounds, folders ) );
+    setSounds( sounds, folders, soundsNF ) {
+      dispatch( soundboardSetSounds( sounds, folders, soundsNF ) );
     },
   };
 }
