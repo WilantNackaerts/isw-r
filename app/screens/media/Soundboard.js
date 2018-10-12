@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import { Text, Container, List, ListItem, Content, Spinner, Right, Icon, Left } from 'native-base';
 import { connect } from 'react-redux';
 import { soundboardSetSounds } from '../../store/actions/media/soundboard.js';
+
+// TODO: put in .env
 const url = 'http://m.isw/api/sb/';
 
 type Props = {

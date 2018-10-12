@@ -1,11 +1,11 @@
 // @flow
-import { SOUNDBOARD_SETSOUNDS } from '../../actions';
+import { SOUNDBOARD_SETSOUNDS } from '../../actions.js';
 
 type SoundboardSetSoundAction = {
-  type: typeof SOUNDBOARD_SETSOUND,
-  sounds: [],
-  folders: [],
-  soundsNF: [],
+  type: typeof SOUNDBOARD_SETSOUNDS,
+  sounds: [string],
+  folders: [string],
+  soundsNF: [string],
 }
 
 export function soundboardSetSounds( sounds, folders, soundsNF ): SoundboardSetSoundAction {
