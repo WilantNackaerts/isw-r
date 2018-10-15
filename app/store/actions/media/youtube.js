@@ -7,7 +7,7 @@ type YoutubeSetSongAction = {
   song: string,
 }
 
-export function youtubeSetSong( song ): YoutubeSetSongAction {
+export function youtubeSetSong( song: string ): YoutubeSetSongAction {
   return {
     type: YOUTUBE_SETSONG,
     song,

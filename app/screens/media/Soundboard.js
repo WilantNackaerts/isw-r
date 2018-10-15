@@ -13,7 +13,7 @@ type Props = {
   soundsNF: [],
   folders: [],
   isLoading: boolean,
-  setSounds: () => void,
+  setSounds: ( string[], string[], string[] ) => void,
 }
 
 class Soundboard extends Component<Props> {
@@ -26,7 +26,7 @@ class Soundboard extends Component<Props> {
       );
   }
 
-  detectFolders( sounds ) {
+  detectFolders( sounds ): string[] {
     const array = new Set();
     sounds.forEach( sound => {
       if ( String( sound.urlSnip ).indexOf( '/' ) !== -1 ) {
@@ -36,7 +36,7 @@ class Soundboard extends Component<Props> {
     return Array.from( array );
   }
 
-  detectSoundsNF( sounds ) {
+  detectSoundsNF( sounds ): string[] {
     const array = new Set();
     sounds.forEach( sound => {
       if ( String( sound.urlSnip ).indexOf( '/' ) === -1 ) {

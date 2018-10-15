@@ -8,7 +8,7 @@ type SoundboardSetSoundAction = {
   soundsNF: [string],
 }
 
-export function soundboardSetSounds( sounds, folders, soundsNF ): SoundboardSetSoundAction {
+export function soundboardSetSounds( sounds: [string], folders: [string], soundsNF: [string] ): SoundboardSetSoundAction {
   return {
     type: SOUNDBOARD_SETSOUNDS,
     sounds,

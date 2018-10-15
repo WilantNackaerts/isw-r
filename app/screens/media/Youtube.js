@@ -11,6 +11,7 @@ import { youtubeSetSong } from '../../store/actions/media/youtube.js';
 
 type Props = {
   song: '',
+  videos: [],
 }
 
 class Youtube extends Component<Props> {
@@ -20,7 +21,7 @@ class Youtube extends Component<Props> {
         <Item>
           <Icon name='search' />
           <Input placeholder='Search' 
-            onChangeText={( song ) => this.setState( { song } )}
+            
             autoFocus
           />
           <Icon name='musical-note' />
