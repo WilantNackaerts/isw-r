@@ -3,13 +3,14 @@
 import React, { Component } from 'react';
 import { Text } from 'native-base';
 import { connect } from 'react-redux';
+import { radioSetStations } from '../../store/actions/media/radio.js';
 
 // toDo: set in .env
 const url = 'https://m.isw/api/';
 
 type Props ={
-  vrtItems: [],
-  setStation: () => void,
+  vrtItems: [string],
+  setStation: ( string[] ) => void,
 }
 
 class Radio extends Component<Props> {
@@ -36,7 +37,7 @@ function mapStateToProps( state ) {
 function mapDispatchToProps( dispatch ) {
   return {
     setStation( vrtItems ) {
-      dispatch( radioSetStation( vrtItems ) );
+      dispatch( radioSetStations( vrtItems ) );
     },
   };
 }
