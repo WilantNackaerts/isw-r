@@ -4,11 +4,9 @@ import React, { Component } from 'react';
 import { Text, Container, Content, List, ListItem, Spinner,Thumbnail } from 'native-base';
 import { connect } from 'react-redux';
 import { radioSetVrtStations,radioSetBeStations } from '../../store/actions/media/radio.js';
+import { MEDIA_URL, MEDIA_API_URL } from '../../config.js';
 
-// toDo: set in .env
-const url = 'http://m.isw/api/';
-
-type Props ={
+type Props = {
   vrtItems: [],
   beItems: [],
   isLoading: boolean,
@@ -19,17 +17,17 @@ type Props ={
 class Radio extends Component<Props> {
 
   componentDidMount() {
-    fetch( url + 'vrt/list' )
+    fetch( MEDIA_API_URL + '/vrt/list' )
       .then( response => response.json() )
       .then( vrtItems => this.props.setVrtItems( vrtItems.stations ) );
     
-    fetch( url + 'be/list' )
+    fetch( MEDIA_API_URL + '/be/list' )
       .then( response => response.json() )
       .then( beItems => this.props.setBeItems( beItems.stations ) );
   }
 
   onPress( station ) {
-    fetch( url + station.command + '/' + station.params );
+    fetch( MEDIA_API_URL + '/' + station.command + '/' + station.params );
   }
 
   render() {
@@ -40,14 +38,14 @@ class Radio extends Component<Props> {
             <List dataArray={this.props.vrtItems}
               renderRow={( vrtItem ) => 
                 <ListItem onPress={() => this.onPress( vrtItem )}>
-                  <Thumbnail square source={{ uri: 'http://m.isw' + vrtItem.logo }} />
+                  <Thumbnail square source={{ uri: MEDIA_URL + vrtItem.logo }} />
                   <Text>{vrtItem.TITLE}</Text>
                 </ListItem>
               } />
             <List dataArray={this.props.beItems}
               renderRow={( beItem ) =>
                 <ListItem onPress={() => this.onPress( beItem )}>
-                  <Thumbnail square source={{ uri: 'http://m.isw' + beItem.logo }} />
+                  <Thumbnail square source={{ uri: MEDIA_URL + beItem.logo }} />
                   <Text>{beItem.TITLE}</Text>
                 </ListItem>
               } />

@@ -5,10 +5,6 @@ import { Text, Container, Item, Icon, Input } from 'native-base';
 import { connect } from 'react-redux';
 import { youtubeSetSong } from '../../store/actions/media/youtube.js';
 
-// TODO: put in .env
-// const url = 'http://m.isw/api/';
-// const key = 'xxx';
-
 type Props = {
   song: '',
   videos: [],

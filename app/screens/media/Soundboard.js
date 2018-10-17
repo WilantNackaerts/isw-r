@@ -4,9 +4,7 @@ import React, { Component } from 'react';
 import { Text, Container, List, ListItem, Content, Spinner, Right, Icon, Left } from 'native-base';
 import { connect } from 'react-redux';
 import { soundboardSetSounds } from '../../store/actions/media/soundboard.js';
-
-// TODO: put in .env
-const url = 'http://m.isw/api/sb/';
+import { SOUNDBOARD_URL } from '../../config.js';
 
 type Props = {
   sounds: [],
@@ -19,7 +17,7 @@ type Props = {
 class Soundboard extends Component<Props> {
 
   componentDidMount() {
-    fetch( url )
+    fetch( SOUNDBOARD_URL )
       .then( response => response.json() )
       .then( sounds => 
         this.props.setSounds( sounds, this.detectFolders( sounds ), this.detectSoundsNF( sounds ) )
@@ -47,7 +45,7 @@ class Soundboard extends Component<Props> {
   }
 
   onPress( sound ) {
-    fetch( url + sound );
+    fetch( SOUNDBOARD_URL + '/' + sound );
   }
 
   render() {
