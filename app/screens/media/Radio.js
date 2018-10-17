@@ -33,7 +33,7 @@ class Radio extends Component<Props> {
   }
 
   render() {
-    if ( !this.props.isLoading && this.props.vrtItems ) {
+    if ( !this.props.isLoading && this.props.vrtItems && this.props.beItems ) {
       return (
         <Container>
           <Content>
