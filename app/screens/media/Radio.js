@@ -69,6 +69,7 @@ class Radio extends Component<Props> {
 function mapStateToProps( state ) {
   return {
     vrtItems: state.radio.vrtItems,
+    beItems: state.radio.beItems,
   };
 }
 
