@@ -5,7 +5,7 @@ import { Content } from 'native-base';
 import { connect } from 'react-redux';
 import RadioRegion from '../../components/media/radio/RadioRegion.js';
 import { fetchAllStations } from '../../store/actions/media/radio.js';
-import type { Region } from '../../store/reducers/media/radio.js';
+import type { Region } from '../../types/media/radio/index.js';
 
 type Props = {
   regions: Region[],

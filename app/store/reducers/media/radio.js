@@ -1,19 +1,7 @@
 // @flow
 
-import * as actions from '../../actionTypes/media/radio.js';
-
-export type Station = {
-  name: string,
-  logo: string,
-  url: string,
-};
-
-export type Region = {
-  name: string,
-  apiName: string,
-  loading: boolean,
-  stations: Station[],
-};
+import * as actions from '../../../types/media/radio/actions.js';
+import type { Region } from '../../../types/media/radio';
 
 function createDefaultState(): Region[] {
   return [ {

@@ -1,31 +1,11 @@
 // @flow
 
-import * as actions from '../../actionTypes/media/radio.js';
+import * as actions from '../../../types/media/radio/actions.js';
 import { MEDIA_API_URL } from '../../../config.js';
-import type { Station } from '../../reducers/media/radio.js';
+import type { Station } from '../../../types/media/radio';
 import type { Dispatch, GetState } from 'redux';
-
-type FetchStartAction = {
-  type: typeof actions.FETCH_START,
-  region: string,
-};
-
-type FetchEndAction = {
-  type: typeof actions.FETCH_END,
-  region: string,
-  stations: Station[],
-};
-
-type ApiStation = {
-  command: string,
-  params: string,
-  TITLE: string,
-  logo: string,
-};
-
-type ApiStations = {
-  stations: ApiStation[],
-};
+import type { StationsResponse } from '../../../types/media/radio/api.js';
+import type { FetchStartAction, FetchEndAction } from '../../../types/media/radio/store.js';
 
 export function startFetchStations( region: string ): FetchStartAction {
   return {
@@ -48,7 +28,7 @@ export function fetchStationsForRegion( region: string ) {
 
     fetch( `${MEDIA_API_URL}/${region}/list` )
       .then( response => response.json() )
-      .then( ( response: ApiStations ) => {
+      .then( ( response: StationsResponse ) => {
         const stations = response.stations.map( station => ( {
           name: station.TITLE,
           url: `${station.command}/${station.params}`,

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { View, ListItem, Text, Spinner, Separator, Thumbnail } from 'native-base';
 import { MEDIA_URL, MEDIA_API_URL } from '../../../config.js';
-import type { Region, Station } from '../../../store/reducers/media/radio.js';
+import type { Region, Station } from '../../../types/media/radio/index.js';
 
 type Props = {
   region: Region,
