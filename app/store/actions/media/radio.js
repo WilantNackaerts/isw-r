@@ -1,15 +1,27 @@
 // @flow
 
-import { RADIO_SETSTATIONS } from '../../actions.js';
+import { RADIO_SETVRT, RADIO_SETBE } from '../../actions.js';
 
-type RadioSetStationAction = {
-  type: typeof RADIO_SETSTATIONS,
+type RadioSetVrtAction = {
+  type: typeof RADIO_SETVRT,
   vrtItems: [string],
 }
 
-export function radioSetStations( vrtItems: [string] ): RadioSetStationAction {
+type RadioSetBeAction = {
+  type: typeof RADIO_SETBE,
+  beItems: [string],
+}
+
+export function radioSetVrtStations( vrtItems: [string] ): RadioSetVrtAction {
   return {
-    type: RADIO_SETSTATIONS,
+    type: RADIO_SETVRT,
     vrtItems,
+  };
+}
+
+export function radioSetBeStations( beItems: [string] ): RadioSetBeAction {
+  return {
+    type: RADIO_SETBE,
+    beItems,
   };
 }

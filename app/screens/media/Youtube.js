@@ -20,9 +20,7 @@ class Youtube extends Component<Props> {
       <Container>
         <Item>
           <Icon name='search' />
-          <Input placeholder='Search' 
-            
-            autoFocus
+          <Input placeholder='Search'
           />
           <Icon name='musical-note' />
         </Item>
