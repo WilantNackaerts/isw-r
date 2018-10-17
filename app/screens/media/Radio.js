@@ -3,27 +3,22 @@
 import React, { Component } from 'react';
 import { Text, Container, Content, List, ListItem, Spinner,Thumbnail } from 'native-base';
 import { connect } from 'react-redux';
-import { radioSetVrtStations,radioSetBeStations } from '../../store/actions/media/radio.js';
+import { fetchVrtStations, fetchBeStations } from '../../store/actions/media/radio.js';
 import { MEDIA_URL, MEDIA_API_URL } from '../../config.js';
 
 type Props = {
   vrtItems: [],
   beItems: [],
   isLoading: boolean,
-  setVrtItems: ( string[] ) => void,
-  setBeItems: ( string[] ) => void,
+  fetchVrtStations: () => void,
+  fetchBeStations: () => void,
 }
 
 class Radio extends Component<Props> {
 
   componentDidMount() {
-    fetch( MEDIA_API_URL + '/vrt/list' )
-      .then( response => response.json() )
-      .then( vrtItems => this.props.setVrtItems( vrtItems.stations ) );
-    
-    fetch( MEDIA_API_URL + '/be/list' )
-      .then( response => response.json() )
-      .then( beItems => this.props.setBeItems( beItems.stations ) );
+    this.props.fetchVrtStations();
+    this.props.fetchBeStations();
   }
 
   onPress( station ) {
@@ -73,11 +68,11 @@ function mapStateToProps( state ) {
 
 function mapDispatchToProps( dispatch ) {
   return {
-    setVrtItems( vrtItems ) {
-      dispatch( radioSetVrtStations( vrtItems ) );
+    fetchVrtStations() {
+      dispatch( fetchVrtStations() );
     },
-    setBeItems( beItems ) {
-      dispatch( radioSetBeStations( beItems ) );
+    fetchBeStations() {
+      dispatch( fetchBeStations() );
     },
   };
 }
