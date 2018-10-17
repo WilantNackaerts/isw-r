@@ -28,7 +28,7 @@ class Youtube extends Component<Props> {
 
 function mapStateToProps( state ) {
   return {
-    song: state.youtube.song,
+    song: state.media.youtube.song,
   };
 }
 

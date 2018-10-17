@@ -87,10 +87,10 @@ class Soundboard extends Component<Props> {
 
 function mapStateToProps( state ) {
   return {
-    isLoading: state.soundboard.isloading,
-    sounds: state.soundboard.sounds,
-    folders: state.soundboard.folders,
-    soundsNF: state.soundboard.soundsNF,
+    isLoading: state.media.soundboard.isloading,
+    sounds: state.media.soundboard.sounds,
+    folders: state.media.soundboard.folders,
+    soundsNF: state.media.soundboard.soundsNF,
   };
 }
 

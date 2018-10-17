@@ -32,7 +32,7 @@ class Radio extends Component<Props> {
 
 function mapStateToProps( state ) {
   return {
-    regions: state.radio,
+    regions: state.media.radio,
   };
 }
 

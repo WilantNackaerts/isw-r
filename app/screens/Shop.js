@@ -25,7 +25,9 @@ class Shop extends Component<Props> {
 }
 
 function mapStateToProps( state ) {
-  return { test: state.shop.test };
+  return {
+    test: state.shop.test,
+  };
 }
 
 function mapDispatchToProps( dispatch ) {

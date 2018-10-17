@@ -62,6 +62,6 @@ export function fetchStationsForRegion( region: string ) {
 
 export function fetchAllStations() {
   return function( dispatch: Dispatch, getState: GetState ) {
-    getState().radio.forEach( region => fetchStationsForRegion( region.apiName )( dispatch ) );
+    getState().media.radio.forEach( region => fetchStationsForRegion( region.apiName )( dispatch ) );
   };
 }
