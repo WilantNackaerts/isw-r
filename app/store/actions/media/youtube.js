@@ -1,15 +1,15 @@
 // @flow
 
-import { YOUTUBE_SETSONG } from '../../actions.js';
+import * as actions from '../../actionTypes/media/youtube.js';
 
 type YoutubeSetSongAction = {
-  type: typeof YOUTUBE_SETSONG,
+  type: typeof actions.SET_SONG,
   song: string,
 }
 
 export function youtubeSetSong( song: string ): YoutubeSetSongAction {
   return {
-    type: YOUTUBE_SETSONG,
+    type: actions.SET_SONG,
     song,
   };
 }
