@@ -2,64 +2,66 @@
 
 import * as actions from '../../actionTypes/media/radio.js';
 import { MEDIA_API_URL } from '../../../config.js';
-import type { Dispatch } from 'redux';
+import type { Station } from '../../reducers/media/radio.js';
+import type { Dispatch, GetState } from 'redux';
 
-type RadioSetVrtAction = {
-  type: typeof actions.SET_VRT,
-  vrtItems: [string],
-}
+type FetchStartAction = {
+  type: typeof actions.FETCH_START,
+  region: string,
+};
 
-type RadioSetBeAction = {
-  type: typeof actions.SET_BE,
-  beItems: [string],
-}
+type FetchEndAction = {
+  type: typeof actions.FETCH_END,
+  region: string,
+  stations: Station[],
+};
 
-function _fetchVrtStation( dispatch: Dispatch ) {
-  dispatch( startFetchVrtStations() );
+type ApiStation = {
+  command: string,
+  params: string,
+  TITLE: string,
+  logo: string,
+};
 
-  fetch( MEDIA_API_URL + '/vrt/list' )
-    .then( response => response.json() )
-    .then( vrtItems => dispatch( setVrtStations( vrtItems.stations ) ) );
-}
+type ApiStations = {
+  stations: ApiStation[],
+};
 
-function _fetchBeStations( dispatch: Dispatch ) {
-  dispatch( startFetchBeStations() );
-  
-  fetch( MEDIA_API_URL + '/be/list' )
-    .then( response => response.json() )
-    .then( beItems => dispatch( setBeStations( beItems.stations ) ) );
-}
-
-export function fetchVrtStations() {
-  return _fetchVrtStation;
-}
-
-export function fetchBeStations() {
-  return _fetchBeStations;
-}
-
-export function startFetchVrtStations() {
+export function startFetchStations( region: string ): FetchStartAction {
   return {
-    type: actions.FETCH_VRT,
+    type: actions.FETCH_START,
+    region,
   };
 }
 
-export function startFetchBeStations() {
+export function endFetchStations( region: string, stations: Station[] ): FetchEndAction {
   return {
-    type: actions.FETCH_BE,
+    type: actions.FETCH_END,
+    region,
+    stations,
   };
 }
 
-export function setVrtStations( vrtItems: [string] ): RadioSetVrtAction {
-  return {
-    type: actions.SET_VRT,
-    vrtItems,
+export function fetchStationsForRegion( region: string ) {
+  return function( dispatch: Dispatch ) {
+    dispatch( startFetchStations( region ) );
+
+    fetch( `${MEDIA_API_URL}/${region}/list` )
+      .then( response => response.json() )
+      .then( ( response: ApiStations ) => {
+        const stations = response.stations.map( station => ( {
+          name: station.TITLE,
+          url: `${station.command}/${station.params}`,
+          logo: station.logo,
+        } ) );
+
+        dispatch( endFetchStations( region, stations ) );
+      } );
   };
 }
 
-export function setBeStations( beItems: [string] ): RadioSetBeAction {
-  return {
-    type: actions.SET_BE,
-    beItems,
+export function fetchAllStations() {
+  return function( dispatch: Dispatch, getState: GetState ) {
+    getState().radio.forEach( region => fetchStationsForRegion( region.apiName )( dispatch ) );
   };
 }
