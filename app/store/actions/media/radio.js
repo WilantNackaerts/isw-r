@@ -2,8 +2,7 @@
 
 import * as actions from '../../../types/media/radio/actions.js';
 import { MEDIA_API_URL } from '../../../config.js';
-import type { Dispatch, GetState } from 'redux';
-import type { Thunk } from '../../../types';
+import type { Thunk, Dispatch, GetState } from '../../../types';
 import type { Station, StationsResponse, FetchStartAction, FetchEndAction } from '../../../types/media/radio';
 
 export function startFetchStations( region: string ): FetchStartAction {
@@ -39,8 +38,8 @@ export function fetchStationsForRegion( region: string ): Thunk {
   };
 }
 
-export function fetchAllStations() {
+export function fetchAllStations(): Thunk {
   return function( dispatch: Dispatch, getState: GetState ) {
-    getState().media.radio.forEach( region => fetchStationsForRegion( region.apiName )( dispatch ) );
+    getState().media.radio.forEach( region => fetchStationsForRegion( region.apiName )( dispatch, getState ) );
   };
 }
