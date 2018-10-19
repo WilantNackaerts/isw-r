@@ -2,12 +2,12 @@
 
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import ReduxThunk from 'redux-thunk';
-import { DEVELOPMENT } from '../config.js';
+import { DEVELOPMENT } from '../config';
 
-import shop from './reducers/shop.js';
-import soundboard from './reducers/media/soundboard.js';
-import youtube from './reducers/media/youtube.js';
-import radio from './reducers/media/radio.js';
+import shop from './reducers/shop';
+import soundboard from './reducers/media/soundboard';
+import youtube from './reducers/media/youtube';
+import radio from './reducers/media/radio';
 
 const devtools =
   (

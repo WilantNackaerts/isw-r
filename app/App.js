@@ -7,9 +7,9 @@
  */
 
 import React, { Component } from 'react';
-import Navigator from './navigation/Navigator.js';
+import Navigator from './navigation/Navigator';
 import { Provider } from 'react-redux';
-import store from './store/store.js';
+import store from './store';
 
 type Props = {};
 export default class App extends Component<Props> {

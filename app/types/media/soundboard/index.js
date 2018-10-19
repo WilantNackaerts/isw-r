@@ -1,6 +1,6 @@
 // @flow
 
-import * as actions from './actions.js';
+import * as actions from './actions';
 
 export type Sound = string;
 export type Folder = string;

@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Text, Container, Item, Icon, Input } from 'native-base';
 import { connect } from 'react-redux';
-import { youtubeSetSong } from '../../store/actions/media/youtube.js';
+import { youtubeSetSong } from '../../store/actions/media/youtube';
 
 type Props = {
   song: '',

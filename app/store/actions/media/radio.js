@@ -1,7 +1,7 @@
 // @flow
 
-import * as actions from '../../../types/media/radio/actions.js';
-import { MEDIA_API_URL } from '../../../config.js';
+import * as actions from '../../../types/media/radio/actions';
+import { MEDIA_API_URL } from '../../../config';
 import type { Thunk, Dispatch, GetState } from '../../../types';
 import type { Station, StationsResponse, FetchStartAction, FetchEndAction } from '../../../types/media/radio';
 

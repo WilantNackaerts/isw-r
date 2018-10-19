@@ -1,6 +1,6 @@
 // @flow
 
-import * as actions from '../../../types/media/radio/actions.js';
+import * as actions from '../../../types/media/radio/actions';
 import type { Action } from '../../../types';
 import type { State, Region } from '../../../types/media/radio';
 

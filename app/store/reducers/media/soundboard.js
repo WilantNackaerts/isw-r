@@ -1,6 +1,6 @@
 // @flow
 
-import * as actions from '../../../types/media/soundboard/actions.js';
+import * as actions from '../../../types/media/soundboard/actions';
 import type { State } from '../../../types/media/soundboard';
 import type { Action } from '../../../types';
 

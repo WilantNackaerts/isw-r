@@ -1,6 +1,6 @@
 // @flow
  
-import * as actions from '../../actionTypes/media/youtube.js';
+import * as actions from '../../actionTypes/media/youtube';
 
 export default function youtubeReducer( state: any = { song: '' }, action: any ) {
   switch ( action. type ) {
