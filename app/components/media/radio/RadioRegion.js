@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { View, ListItem, Text, Spinner, Separator, Thumbnail } from 'native-base';
-import { MEDIA_URL, MEDIA_API_URL } from '../../../config';
-import type { Region, Station } from '../../../types/media/radio';
+import { MEDIA_URL, MEDIA_API_URL } from '/config';
+import type { Region, Station } from '/types/media/radio';
 
 type Props = {
   region: Region,
