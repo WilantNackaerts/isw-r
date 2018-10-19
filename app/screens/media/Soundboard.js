@@ -5,13 +5,15 @@ import { Text, Container, List, ListItem, Content, Spinner, Right, Icon, Left } 
 import { connect } from 'react-redux';
 import { soundboardSetSounds } from '../../store/actions/media/soundboard.js';
 import { SOUNDBOARD_URL } from '../../config.js';
+import type { State, Dispatch } from '../../types';
+import type { Sound, Folder, Item } from '../../types/media/soundboard';
 
 type Props = {
-  sounds: [],
-  soundsNF: [],
-  folders: [],
+  sounds: Item[],
+  soundsNF: Sound[],
+  folders: Folder[],
   isLoading: boolean,
-  setSounds: ( string[], string[], string[] ) => void,
+  setSounds: ( sounds: Item[], folder: Folder[], soundsNF: Sound[] ) => void,
 }
 
 class Soundboard extends Component<Props> {
@@ -85,18 +87,18 @@ class Soundboard extends Component<Props> {
   }
 }
 
-function mapStateToProps( state ) {
+function mapStateToProps( state: State ) {
   return {
-    isLoading: state.media.soundboard.isloading,
+    isLoading: state.media.soundboard.isLoading,
     sounds: state.media.soundboard.sounds,
     folders: state.media.soundboard.folders,
     soundsNF: state.media.soundboard.soundsNF,
   };
 }
 
-function mapDispatchToProps( dispatch ) {
+function mapDispatchToProps( dispatch: Dispatch ) {
   return {
-    setSounds( sounds, folders, soundsNF ) {
+    setSounds( sounds: Item[], folders: Folder[], soundsNF: Sound[] ) {
       dispatch( soundboardSetSounds( sounds, folders, soundsNF ) );
     },
   };

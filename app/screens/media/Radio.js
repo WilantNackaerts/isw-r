@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import RadioRegion from '../../components/media/radio/RadioRegion.js';
 import { fetchAllStations } from '../../store/actions/media/radio.js';
 import type { Region } from '../../types/media/radio/index.js';
+import type { State, Dispatch } from '../../types';
 
 type Props = {
   regions: Region[],
@@ -30,13 +31,13 @@ class Radio extends Component<Props> {
   }
 }
 
-function mapStateToProps( state ) {
+function mapStateToProps( state: State ) {
   return {
     regions: state.media.radio,
   };
 }
 
-function mapDispatchToProps( dispatch ) {
+function mapDispatchToProps( dispatch: Dispatch ) {
   return {
     fetchStations() {
       dispatch( fetchAllStations() );
