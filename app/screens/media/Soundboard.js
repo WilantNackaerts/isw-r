@@ -1,12 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Text, Container, List, ListItem, Content, Spinner, Right, Icon, Left } from 'native-base';
 import { connect } from 'react-redux';
-import { soundboardSetSounds } from '../../store/actions/media/soundboard';
-import { SOUNDBOARD_URL } from '../../config';
-import type { State, Dispatch } from '../../types';
-import type { Sound, Folder, Item } from '../../types/media/soundboard';
+import { Text, Container, List, ListItem, Content, Spinner, Right, Icon, Left } from 'native-base';
+import { SOUNDBOARD_URL } from '/config';
+import { soundboardSetSounds } from '/store/actions/media/soundboard';
+import type { State, Dispatch } from '/types';
+import type { Sound, Folder, Item } from '/types/media/soundboard';
 
 type Props = {
   sounds: Item[],

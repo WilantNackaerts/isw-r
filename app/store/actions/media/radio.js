@@ -1,9 +1,9 @@
 // @flow
 
-import * as actions from '../../../types/media/radio/actions';
-import { MEDIA_API_URL } from '../../../config';
-import type { Thunk, Dispatch, GetState } from '../../../types';
-import type { Station, StationsResponse, FetchStartAction, FetchEndAction } from '../../../types/media/radio';
+import * as actions from '/types/media/radio/actions';
+import { MEDIA_API_URL } from '/config';
+import type { Thunk, Dispatch, GetState } from '/types';
+import type { Station, StationsResponse, FetchStartAction, FetchEndAction } from '/types/media/radio';
 
 export function startFetchStations( region: string ): FetchStartAction {
   return {

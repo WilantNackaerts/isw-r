@@ -2,7 +2,7 @@
 
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import ReduxThunk from 'redux-thunk';
-import { DEVELOPMENT } from '../config';
+import { DEVELOPMENT } from '/config';
 
 import shop from './reducers/shop';
 import soundboard from './reducers/media/soundboard';

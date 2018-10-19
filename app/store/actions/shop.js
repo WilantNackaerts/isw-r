@@ -1,6 +1,6 @@
 // @flow
 
-import * as actions from '../actionTypes/shop';
+import * as actions from '/types/shop/actions';
 
 type ShopTestAction = {
   type: typeof actions.TEST,

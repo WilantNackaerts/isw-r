@@ -1,8 +1,8 @@
 // @flow
 
-import * as actions from '../../../types/media/soundboard/actions';
-import type { State } from '../../../types/media/soundboard';
-import type { Action } from '../../../types';
+import * as actions from '/types/media/soundboard/actions';
+import type { State } from '/types/media/soundboard';
+import type { Action } from '/types';
 
 const defaultState = (): State => ( {
   isLoading: true,

@@ -1,6 +1,6 @@
 // @flow
 
-import * as actions from '../../actionTypes/media/youtube';
+import * as actions from '/types/media/youtube/actions';
 
 type YoutubeSetSongAction = {
   type: typeof actions.SET_SONG,

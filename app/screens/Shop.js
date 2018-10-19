@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Text, View, Button } from 'native-base';
 import { connect } from 'react-redux';
-import { shopTest } from '../store/actions/shop';
+import { shopTest } from '/store/actions/shop';
 
 type Props = {
   test: string,

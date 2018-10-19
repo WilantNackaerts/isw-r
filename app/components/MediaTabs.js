@@ -2,9 +2,9 @@
 
 import React, { Component } from 'react';
 import { Tab, Tabs, TabHeading, Text, Container } from 'native-base';
-import Youtube from '../screens/media/Youtube';
-import Radio from '../screens/media/Radio';
-import Soundboard from '../screens/media/Soundboard';
+import Youtube from '/screens/media/Youtube';
+import Radio from '/screens/media/Radio';
+import Soundboard from '/screens/media/Soundboard';
 
 type Props = {}
 

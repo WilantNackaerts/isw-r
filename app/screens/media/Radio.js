@@ -3,10 +3,10 @@
 import React, { Component } from 'react';
 import { Content } from 'native-base';
 import { connect } from 'react-redux';
-import RadioRegion from '../../components/media/radio/RadioRegion';
-import { fetchAllStations } from '../../store/actions/media/radio';
-import type { Region } from '../../types/media/radio/index';
-import type { State, Dispatch } from '../../types';
+import RadioRegion from '/components/media/radio/RadioRegion';
+import { fetchAllStations } from '/store/actions/media/radio';
+import type { Region } from '/types/media/radio/index';
+import type { State, Dispatch } from '/types';
 
 type Props = {
   regions: Region[],

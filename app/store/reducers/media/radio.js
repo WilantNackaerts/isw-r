@@ -1,8 +1,8 @@
 // @flow
 
-import * as actions from '../../../types/media/radio/actions';
-import type { Action } from '../../../types';
-import type { State, Region } from '../../../types/media/radio';
+import * as actions from '/types/media/radio/actions';
+import type { Action } from '/types';
+import type { State, Region } from '/types/media/radio';
 
 const defaultState = (): State => ( [
   {

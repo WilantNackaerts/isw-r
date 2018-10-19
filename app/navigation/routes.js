@@ -1,9 +1,9 @@
 // @flow
 
-import Shop from '../screens/Shop';
-import Media from '../screens/Media';
-import Airco from '../screens/Airco';
-import Cams from '../screens/Cams';
+import Shop from '/screens/Shop';
+import Media from '/screens/Media';
+import Airco from '/screens/Airco';
+import Cams from '/screens/Cams';
 
 export const SHOP: 'shop' = 'shop';
 export const MEDIA: 'media' = 'media';
