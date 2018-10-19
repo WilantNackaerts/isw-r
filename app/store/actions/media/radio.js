@@ -2,10 +2,9 @@
 
 import * as actions from '../../../types/media/radio/actions.js';
 import { MEDIA_API_URL } from '../../../config.js';
-import type { Station } from '../../../types/media/radio';
 import type { Dispatch, GetState } from 'redux';
-import type { StationsResponse } from '../../../types/media/radio/api.js';
-import type { FetchStartAction, FetchEndAction } from '../../../types/media/radio/store.js';
+import type { Thunk } from '../../../types';
+import type { Station, StationsResponse, FetchStartAction, FetchEndAction } from '../../../types/media/radio';
 
 export function startFetchStations( region: string ): FetchStartAction {
   return {
@@ -22,7 +21,7 @@ export function endFetchStations( region: string, stations: Station[] ): FetchEn
   };
 }
 
-export function fetchStationsForRegion( region: string ) {
+export function fetchStationsForRegion( region: string ): Thunk {
   return function( dispatch: Dispatch ) {
     dispatch( startFetchStations( region ) );
 
