@@ -1,14 +1,8 @@
 // @flow
-import * as actions from '../../actionTypes/media/soundboard.js';
+import * as actions from '../../../types/media/soundboard/actions.js';
+import type { Sound, Folder, Item, SetSoundsAction } from '../../../types/media/soundboard';
 
-type SoundboardSetSoundAction = {
-  type: typeof actions.SET_SOUNDS,
-  sounds: [string],
-  folders: [string],
-  soundsNF: [string],
-}
-
-export function soundboardSetSounds( sounds: [string], folders: [string], soundsNF: [string] ): SoundboardSetSoundAction {
+export function soundboardSetSounds( sounds: Item[], folders: Folder[], soundsNF: Sound[] ): SetSoundsAction {
   return {
     type: actions.SET_SOUNDS,
     sounds,

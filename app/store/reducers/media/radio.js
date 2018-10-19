@@ -4,19 +4,20 @@ import * as actions from '../../../types/media/radio/actions.js';
 import type { Action } from '../../../types';
 import type { State, Region } from '../../../types/media/radio';
 
-function createDefaultState(): State {
-  return [ {
+const defaultState = (): State => ( [
+  {
     name: 'VRT',
     apiName: 'vrt',
     loading: true,
     stations: [],
-  }, {
+  },
+  {
     name: 'Belgium',
     apiName: 'be',
     loading: true,
     stations: [],
-  } ];
-}
+  },
+] );
 
 function regionReducer( state: Region, action: Action ): Region {
   if ( action.region === state.apiName ) {
@@ -33,7 +34,7 @@ function regionReducer( state: Region, action: Action ): Region {
   return state;
 }
 
-export default function radioReducer( state: State = createDefaultState(), action: Action ): State {
+export default function radioReducer( state: State = defaultState(), action: Action ): State {
   switch ( action.type ) {
     case actions.FETCH_START:
     case actions.FETCH_END:
