@@ -4,46 +4,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text, Container, List, ListItem, Content, Spinner, Right, Icon, Left } from 'native-base';
 import { SOUNDBOARD_URL } from '/config';
-import { soundboardSetSounds } from '/store/actions/media/soundboard';
+import { fetchSounds } from '/store/actions/media/soundboard';
 import type { State, Dispatch } from '/types';
-import type { Sound, Folder, Item } from '/types/media/soundboard';
+import type { Item } from '/types/media/soundboard';
 
 type Props = {
-  sounds: Item[],
-  soundsNF: Sound[],
-  folders: Folder[],
+  items: Item[],
   isLoading: boolean,
-  setSounds: ( sounds: Item[], folder: Folder[], soundsNF: Sound[] ) => void,
+  prefix: string,
+  fetchSounds: () => void,
+}
+
+function filter( items: Item[], prefix: string ) {
+  return items
+    .filter( item => item.path.startsWith( prefix ) )
+    .filter( item => !item.path.slice( prefix.length ).includes( '/' ) );
 }
 
 class Soundboard extends Component<Props> {
-
   componentDidMount() {
-    fetch( SOUNDBOARD_URL )
-      .then( response => response.json() )
-      .then( sounds => 
-        this.props.setSounds( sounds, this.detectFolders( sounds ), this.detectSoundsNF( sounds ) )
-      );
-  }
-
-  detectFolders( sounds ): string[] {
-    const array = new Set();
-    sounds.forEach( sound => {
-      if ( String( sound.urlSnip ).indexOf( '/' ) !== -1 ) {
-        array.add( String( sound.urlSnip ).split( '/' ) [ 0 ] );
-      }
-    } );
-    return Array.from( array );
-  }
-
-  detectSoundsNF( sounds ): string[] {
-    const array = new Set();
-    sounds.forEach( sound => {
-      if ( String( sound.urlSnip ).indexOf( '/' ) === -1 ) {
-        array.add( String( sound.urlSnip ) );
-      }
-    } );
-    return Array.from( array );
+    this.props.fetchSounds();
   }
 
   onPress( sound ) {
@@ -51,26 +31,20 @@ class Soundboard extends Component<Props> {
   }
 
   render() {
-    if ( !this.props.isLoading && this.props.folders ) {
+    if ( !this.props.isLoading && this.props.items ) {
+      const items = filter( this.props.items, this.props.prefix );
+
       return (
         <Container>
           <Content>
-            <List dataArray={this.props.folders}
-              renderRow={( folder ) => 
+            <List dataArray={items}
+              renderRow={( item ) => 
                 <ListItem>
                   <Left>
-                    <Text>{folder}</Text>
+                    <Text>{item.name}</Text>
                   </Left>
-                  <Right>
-                    <Icon name="arrow-forward" />
-                  </Right>
+                  { item.isFolder ? ( <Right><Icon name="arrow-forward" /></Right> ) : null }
                 </ListItem> 
-              } />
-            <List dataArray={this.props.soundsNF}
-              renderRow={( sound ) =>
-                <ListItem onPress={() => this.onPress( sound )}>
-                  <Text>{sound}</Text>
-                </ListItem>
               } />
           </Content>
         </Container>
@@ -90,16 +64,15 @@ class Soundboard extends Component<Props> {
 function mapStateToProps( state: State ) {
   return {
     isLoading: state.media.soundboard.isLoading,
-    sounds: state.media.soundboard.sounds,
-    folders: state.media.soundboard.folders,
-    soundsNF: state.media.soundboard.soundsNF,
+    items: state.media.soundboard.items,
+    prefix: state.media.soundboard.prefix,
   };
 }
 
 function mapDispatchToProps( dispatch: Dispatch ) {
   return {
-    setSounds( sounds: Item[], folders: Folder[], soundsNF: Sound[] ) {
-      dispatch( soundboardSetSounds( sounds, folders, soundsNF ) );
+    fetchSounds() {
+      dispatch( fetchSounds() );
     },
   };
 }

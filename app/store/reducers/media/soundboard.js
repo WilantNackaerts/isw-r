@@ -6,15 +6,16 @@ import type { Action } from '/types';
 
 const defaultState = (): State => ( {
   isLoading: true,
-  sounds: [],
-  folders: [],
-  soundsNF: [],
+  items: [],
+  prefix: '',
 } );
 
 export default function soundboardReducer( state: State = defaultState(), action: Action ): State {
   switch ( action.type ) {
-    case actions.SET_SOUNDS:
-      return { ...state, isLoading: false, sounds: action.sounds, folders: action.folders, soundsNF: action.soundsNF };
+    case actions.FETCH_START:
+      return { ...state, isLoading: true };
+    case actions.FETCH_END:
+      return { ...state, isLoading: false, items: action.items };
     default:
       return state;
   }

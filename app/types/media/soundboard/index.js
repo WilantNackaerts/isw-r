@@ -2,22 +2,33 @@
 
 import * as actions from './actions';
 
-export type Sound = string;
-export type Folder = string;
-export type Item = Sound | Folder;
-
-export type SetSoundsAction = {
-  type: typeof actions.SET_SOUNDS,
-  sounds: Item[],
-  folders: Folder[],
-  soundsNF: Sound[],
+export type ApiSound = {
+  command: string,
+  params: string,
+  urlSnip: string,
+  TITLE: string,
+  logo: string,
 };
 
-export type Action = SetSoundsAction;
+export type Item = {
+  name: string,
+  path: string,
+  isFolder: boolean,
+};
+
+export type FetchStartAction = {
+  type: typeof actions.FETCH_START,
+};
+
+export type FetchEndAction = {
+  type: typeof actions.FETCH_END,
+  items: Item[],
+};
+
+export type Action = FetchStartAction | FetchEndAction;
 
 export type State = {
   isLoading: boolean,
-  sounds: Item[],
-  folders: Folder[],
-  soundsNF: Sound[],
+  items: Item[],
+  prefix: string,
 };
