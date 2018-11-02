@@ -2,11 +2,12 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, Container, List, ListItem, Content, Spinner, Right, Icon, Left } from 'native-base';
-import { SOUNDBOARD_URL } from '/config';
+import { Container, List, ListItem, Content, Spinner } from 'native-base';
 import { fetchSounds } from '/store/actions/media/soundboard';
 import type { State, Dispatch } from '/types';
 import type { Item } from '/types/media/soundboard';
+import Sound from '/components/media/soundboard/Sound';
+import Folder from '/components/media/soundboard/Folder';
 
 type Props = {
   items: Item[],
@@ -26,24 +27,16 @@ class Soundboard extends Component<Props> {
     this.props.fetchSounds();
   }
 
-  onPress( sound ) {
-    fetch( SOUNDBOARD_URL + '/' + sound );
-  }
-
   render() {
     if ( !this.props.isLoading && this.props.items ) {
       const items = filter( this.props.items, this.props.prefix );
-
       return (
         <Container>
           <Content>
             <List dataArray={items}
               renderRow={( item ) => 
                 <ListItem>
-                  <Left>
-                    <Text>{item.name}</Text>
-                  </Left>
-                  { item.isFolder ? ( <Right><Icon name="arrow-forward" /></Right> ) : null }
+                  { item.isFolder ? <Folder folder={item} /> : <Sound sound={item} /> }
                 </ListItem> 
               } />
           </Content>
