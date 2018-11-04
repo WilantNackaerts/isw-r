@@ -1,15 +1,33 @@
 // @flow
 
 import * as actions from '/types/media/youtube/actions';
+import { YOUTUBE_URL } from '/config';
+import type { Thunk, Dispatch } from '/types';
+import type { Song, FetchStartAction, FetchEndAction, SearchTerm } from '/types/media/youtube';
 
-type YoutubeSetSongAction = {
-  type: typeof actions.SET_SONG,
-  song: string,
+function fetchStart(): FetchStartAction {
+  return {
+    type: actions.FETCH_START,
+  };
 }
 
-export function youtubeSetSong( song: string ): YoutubeSetSongAction {
+function fetchEnd( songs: Song[] ): FetchEndAction {
   return {
-    type: actions.SET_SONG,
-    song,
+    type: actions.FETCH_END,
+    songs,
+  } ;
+}
+
+export function fetchSongs( searchTerm: SearchTerm ): Thunk {
+  return function( dispatch: Dispatch ) {
+    dispatch( fetchStart() );
+
+    fetch( YOUTUBE_URL +  this.searchTerm )
+      .then( res => res.json() )
+      .then( res => {
+        console.log( res );
+        dispatch( fetchEnd( res.items ) );
+      } )
+      .catch( console.error );
   };
 }

@@ -1,41 +1,58 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Text, Container, Item, Icon, Input } from 'native-base';
+import { Container, Item, Icon, Input, List, ListItem, Text } from 'native-base';
 import { connect } from 'react-redux';
-import { youtubeSetSong } from '/store/actions/media/youtube';
+import { fetchSongs } from '/store/actions/media/youtube';
+import type { Song, SearchTerm } from '/types/media/youtube'; 
+import type { State, Dispatch } from '/types';
 
 type Props = {
-  song: '',
-  videos: [],
+  songs: Song[],
+  isLoading: boolean,
+  fetchSongs: ( searchTerm: SearchTerm ) => void,
 }
 
 class Youtube extends Component<Props> {
+
+  onChange( searchTerm ) {
+    console.log( searchTerm );
+    this.props.fetchSongs( searchTerm );
+  }
+
   render() {
     return (
       <Container>
         <Item>
           <Icon name='search' />
           <Input placeholder='Search'
+            onChangeText={( e ) => this.onChange( e )}
           />
           <Icon name='musical-note' />
         </Item>
-        <Text>Youtube</Text>
+        <List dataArray={this.props.songs}
+          renderRow={( song ) =>
+            <ListItem>
+              <Text>
+                {song}
+              </Text>
+            </ListItem>
+          } />
       </Container>
     );
   }
 }
 
-function mapStateToProps( state ) {
+function mapStateToProps( state: State ) {
   return {
-    song: state.media.youtube.song,
+    songs: state.media.youtube.songs,
   };
 }
 
-function mapDispatchToProps( dispatch ) {
+function mapDispatchToProps( dispatch: Dispatch ) {
   return {
-    setSong( song ) {
-      dispatch( youtubeSetSong( song ) );
+    fetchSongs( searchTerm ) {
+      dispatch( fetchSongs( searchTerm ) );
     },
   };
 }

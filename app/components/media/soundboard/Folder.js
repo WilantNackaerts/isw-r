@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import { Text, View } from 'native-base';
+import type { Item } from '/types/media/soundboard'; 
 
 type Props = {
   folder: Item,
