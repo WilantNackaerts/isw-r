@@ -3,7 +3,7 @@
 import * as actions from '/types/media/youtube/actions';
 import { YOUTUBE_URL } from '/config';
 import type { Thunk, Dispatch } from '/types';
-import type { Song, FetchStartAction, FetchEndAction, SearchTerm } from '/types/media/youtube';
+import type { Song, FetchStartAction, FetchEndAction } from '/types/media/youtube';
 
 function fetchStart(): FetchStartAction {
   return {
@@ -18,14 +18,13 @@ function fetchEnd( songs: Song[] ): FetchEndAction {
   } ;
 }
 
-export function fetchSongs( searchTerm: SearchTerm ): Thunk {
+export function fetchSongs( searchTerm: string ): Thunk {
   return function( dispatch: Dispatch ) {
     dispatch( fetchStart() );
 
-    fetch( YOUTUBE_URL +  this.searchTerm )
+    fetch( YOUTUBE_URL + searchTerm )
       .then( res => res.json() )
       .then( res => {
-        console.log( res );
         dispatch( fetchEnd( res.items ) );
       } )
       .catch( console.error );

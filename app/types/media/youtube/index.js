@@ -14,10 +14,6 @@ export type Song = {
   }
 };
 
-export type SearchTerm = {
-  searchTerm: string,
-};
-
 export type FetchStartAction = {
   type: typeof actions.FETCH_START,
 };
