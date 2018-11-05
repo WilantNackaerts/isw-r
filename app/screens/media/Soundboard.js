@@ -2,17 +2,24 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, List, ListItem, Content, Spinner } from 'native-base';
+import { Container, List, Content, Spinner } from 'native-base';
 import { fetchSounds } from '/store/actions/media/soundboard';
-import type { State, Dispatch } from '/types';
-import type { Item } from '/types/media/soundboard';
 import Sound from '/components/media/soundboard/Sound';
 import Folder from '/components/media/soundboard/Folder';
+import type { State, Dispatch } from '/types';
+import type { Item } from '/types/media/soundboard';
+import type { NavigationScreenProp } from 'react-navigation';
+
+type NavigationState = {
+  params: {
+    prefix: string,
+  },
+};
 
 type Props = {
   items: Item[],
   isLoading: boolean,
-  prefix: string,
+  navigation: NavigationScreenProp<NavigationState>,
   fetchSounds: () => void,
 }
 
@@ -24,20 +31,21 @@ function filter( items: Item[], prefix: string ) {
 
 class Soundboard extends Component<Props> {
   componentDidMount() {
-    this.props.fetchSounds();
+    if ( this.props.navigation.getParam( 'prefix', '' ) === '' ) {
+      this.props.fetchSounds();
+    }
   }
 
   render() {
     if ( !this.props.isLoading && this.props.items ) {
-      const items = filter( this.props.items, this.props.prefix );
+      const items = filter( this.props.items, this.props.navigation.getParam( 'prefix', '' ) );
+
       return (
         <Container>
           <Content>
             <List dataArray={items}
               renderRow={( item ) => 
-                <ListItem>
-                  { item.isFolder ? <Folder folder={item} /> : <Sound sound={item} /> }
-                </ListItem> 
+                item.isFolder ? <Folder folder={item} /> : <Sound sound={item} />
               } />
           </Content>
         </Container>
@@ -58,7 +66,6 @@ function mapStateToProps( state: State ) {
   return {
     isLoading: state.media.soundboard.isLoading,
     items: state.media.soundboard.items,
-    prefix: state.media.soundboard.prefix,
   };
 }
 

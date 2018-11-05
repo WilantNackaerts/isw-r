@@ -7,7 +7,6 @@ import type { Action } from '/types';
 const defaultState = (): State => ( {
   isLoading: true,
   items: [],
-  prefix: '',
 } );
 
 export default function soundboardReducer( state: State = defaultState(), action: Action ): State {
