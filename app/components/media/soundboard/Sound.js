@@ -18,7 +18,7 @@ export default class Sound extends Component<Props> {
     return (
       <ListItem>
         <Text onPress={this.onPress.bind( this )}>
-          {this.props.sound.name}
+          {this.props.sound.label}
         </Text>
       </ListItem>
     );

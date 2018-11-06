@@ -7,7 +7,7 @@ import routes, { SOUNDBOARD } from './routes';
 export default createStackNavigator( routes, {
   initialRouteName: SOUNDBOARD,
   initialRouteParams: {
-    prefix: '',
+    prefix: '/',
   },
   headerMode: 'none',
   transitionConfig: () => {

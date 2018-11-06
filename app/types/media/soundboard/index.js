@@ -12,7 +12,9 @@ export type ApiSound = {
 
 export type Item = {
   name: string,
+  label: string,
   path: string,
+  basename: string,
   isFolder: boolean,
 };
 
@@ -25,9 +27,15 @@ export type FetchEndAction = {
   items: Item[],
 };
 
-export type Action = FetchStartAction | FetchEndAction;
+export type SetSearchAction = {
+  type: typeof actions.SET_SEARCH,
+  searchterm: string,
+};
+
+export type Action = FetchStartAction | FetchEndAction | SetSearchAction;
 
 export type State = {
   isLoading: boolean,
   items: Item[],
+  searchterm: string,
 };

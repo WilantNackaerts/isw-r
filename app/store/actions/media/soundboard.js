@@ -1,20 +1,24 @@
 // @flow
 import * as actions from '/types/media/soundboard/actions';
 import { SOUNDBOARD_URL } from '/config';
-import type { Item, ApiSound, FetchStartAction, FetchEndAction } from '/types/media/soundboard';
+import type { Item, ApiSound, FetchStartAction, FetchEndAction, SetSearchAction } from '/types/media/soundboard';
 import type { Thunk, Dispatch } from '/types';
 
 function compare( { name: a }: Item, { name: b }: Item ): number {
   return a < b ? -1 : a === b ? 0 : 1;
 }
 
-function nameFromPath( path: string ): string {
-  return path.split( '/' ).pop();
+function itemFromPath( path: string ): { path: string, name: string, basename: string, label: string } {
+  const parts = path.split( '/' );
+  const label = parts.pop();
+  const basename = parts.join( '/' ) + '/';
+
+  return { path, label, basename, name: label.toLowerCase() };
 }
 
 function process( res: ApiSound[] ): Item[] {
   const folderNames = new Set<string>();
-  const sounds = [];
+  const sounds: Item[] = [];
 
   res.forEach( sound => {
     if ( sound.params.includes( '/' ) ) {
@@ -27,12 +31,12 @@ function process( res: ApiSound[] ): Item[] {
       } );
     }
 
-    sounds.push( { name: nameFromPath( sound.TITLE ), path: sound.params, isFolder: false } );
+    sounds.push( { ...itemFromPath( sound.TITLE ), isFolder: false } );
   } );
 
   const folders = Array.from( folderNames )
     .sort()
-    .map( path => ( { name: nameFromPath( path ), path, isFolder: true } ) );
+    .map( path => ( { ...itemFromPath( path ), isFolder: true } ) );
     
   sounds.sort( compare );
 
@@ -49,6 +53,20 @@ function fetchEnd( items: Item[] ): FetchEndAction {
   return {
     type: actions.FETCH_END,
     items,
+  };
+}
+
+export function setSearch( term: string ): SetSearchAction {
+  return {
+    type: actions.SET_SEARCH,
+    searchterm: term,
+  };
+}
+
+export function clearSearch(): SetSearchAction {
+  return {
+    type: actions.SET_SEARCH,
+    searchterm: '',
   };
 }
 

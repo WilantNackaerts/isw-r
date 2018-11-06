@@ -7,6 +7,7 @@ import type { Action } from '/types';
 const defaultState = (): State => ( {
   isLoading: true,
   items: [],
+  searchterm: '',
 } );
 
 export default function soundboardReducer( state: State = defaultState(), action: Action ): State {
@@ -15,6 +16,8 @@ export default function soundboardReducer( state: State = defaultState(), action
       return { ...state, isLoading: true };
     case actions.FETCH_END:
       return { ...state, isLoading: false, items: action.items };
+    case actions.SET_SEARCH:
+      return { ...state, searchterm: action.searchterm };
     default:
       return state;
   }
