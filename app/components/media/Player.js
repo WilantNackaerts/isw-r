@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Slider } from 'react-native';
 import { Icon, Footer, View, Text } from 'native-base';
 import type { Song } from '/types/media/player';
 import type { State, Dispatch } from '/types';
@@ -35,14 +35,27 @@ class Player extends Component<Props> {
   }
 
   render() {
+    if ( !this.props.currentSong.title ) {
+      return null;
+    }
+
     return (
-      <Footer>
-        <View style={styles.row}>
-          <Icon name='md-skip-backward' />
-          <Icon name='md-play' />
-          <Icon name='md-skip-forward' />
-          <Text>{this.props.currentSong.title}</Text>
+      <Footer style={styles.row}>
+        <View style={styles.titleAndVolume}>
+          <Text style={styles.title} numberOfLines={1}>{this.props.currentSong.title}</Text>
+          <View style={styles.volume}>
+            <Icon name={this.props.volume === 0 ? 'volume-up' : 'volume-off'} style={styles.volumeIcon} />
+            <View style={styles.sliderWrapper}>
+              <Slider
+                minimumTrackTintColor='white'
+                thumbTintColor='white'
+                maximumValue={100}
+                step={1}
+                value={this.props.volume} />
+            </View>
+          </View>
         </View>
+        <Icon name={this.props.paused ? 'play' : 'pause'} style={styles.playButton} />
       </Footer>
     );
   }
@@ -50,8 +63,35 @@ class Player extends Component<Props> {
 
 const styles = StyleSheet.create( {
   row: {
-    flex: 1,
+    flex: 0,
     flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  volumeIcon: {
+    color: 'white',
+    fontSize: 23,
+  },
+  titleAndVolume: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'stretch',
+  },
+  title: {
+    color: 'white',
+  },
+  volume: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  sliderWrapper: {
+    flex: 1,
+  },
+  playButton: {
+    marginLeft: 50,
+    color: 'white',
   },
 } );
 
