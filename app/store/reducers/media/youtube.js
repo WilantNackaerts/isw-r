@@ -8,7 +8,7 @@ const defaultState = (): State => ( {
   songs: [],
 } );
 
-export default function youtubeReducer( state: any = defaultState(), action: Action ): State {
+export default function youtubeReducer( state: State = defaultState(), action: Action ): State {
   switch ( action. type ) {
     case actions.FETCH_START:
       return { ...state };

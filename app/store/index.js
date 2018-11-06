@@ -8,6 +8,7 @@ import shop from './reducers/shop';
 import soundboard from './reducers/media/soundboard';
 import youtube from './reducers/media/youtube';
 import radio from './reducers/media/radio';
+import player from './reducers/media/player';
 
 const devtools =
   (
@@ -25,6 +26,7 @@ const rootReducer = combineReducers( {
     soundboard,
     youtube,
     radio,
+    player,
   } ),
 } );
 
