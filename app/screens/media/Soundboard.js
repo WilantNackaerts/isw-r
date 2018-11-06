@@ -1,71 +1,68 @@
 // @flow
 
 import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { Container, List, Content, Spinner } from 'native-base';
-import { fetchSounds } from '/store/actions/media/soundboard';
-import Sound from '/components/media/soundboard/Sound';
-import Folder from '/components/media/soundboard/Folder';
+import { Container, Content, Spinner, Item, Icon, Input } from 'native-base';
+import SoundboardNavigator from '/navigation/soundboard/Navigator';
+import { fetchSounds, setSearch } from '/store/actions/media/soundboard';
+import type { Item as SoundboardItem } from '/types/media/soundboard';
 import type { State, Dispatch } from '/types';
-import type { Item } from '/types/media/soundboard';
-import type { NavigationScreenProp } from 'react-navigation';
-
-type NavigationState = {
-  params: {
-    prefix: string,
-  },
-};
 
 type Props = {
-  items: Item[],
   isLoading: boolean,
-  navigation: NavigationScreenProp<NavigationState>,
+  items: SoundboardItem[],
+  searchterm: string,
   fetchSounds: () => void,
-}
-
-function filter( items: Item[], prefix: string ) {
-  return items
-    .filter( item => item.path.startsWith( prefix ) )
-    .filter( item => !item.path.slice( prefix.length ).includes( '/' ) );
-}
+  setSearch: ( term: string ) => void
+};
 
 class Soundboard extends Component<Props> {
   componentDidMount() {
-    if ( this.props.navigation.getParam( 'prefix', '' ) === '' ) {
-      this.props.fetchSounds();
-    }
+    this.props.fetchSounds();
+  }
+
+  onChange( term ) {
+    this.props.setSearch( term );
   }
 
   render() {
     if ( !this.props.isLoading && this.props.items ) {
-      const items = filter( this.props.items, this.props.navigation.getParam( 'prefix', '' ) );
-
       return (
         <Container>
-          <Content>
-            <List dataArray={items}
-              renderRow={( item ) => 
-                item.isFolder ? <Folder folder={item} /> : <Sound sound={item} />
-              } />
-          </Content>
+          <Item>
+            <Icon name="search" />
+            <Input placeholder="Search" value={this.props.searchterm} onChangeText={this.onChange.bind( this )} />
+          </Item>
+          <View style={styles.listWrapper}>
+            <SoundboardNavigator />
+          </View>
         </Container>
       );
-    } else {
+    }
+    else {
       return (
         <Container>
           <Content>
-            <Spinner color='blue' />
+            <Spinner color="blue" />
           </Content>
         </Container>
       );
     }
   }
 }
+
+const styles = StyleSheet.create( {
+  listWrapper: {
+    flexGrow: 1,
+  },
+} );
 
 function mapStateToProps( state: State ) {
   return {
     isLoading: state.media.soundboard.isLoading,
     items: state.media.soundboard.items,
+    searchterm: state.media.soundboard.searchterm,
   };
 }
 
@@ -74,9 +71,10 @@ function mapDispatchToProps( dispatch: Dispatch ) {
     fetchSounds() {
       dispatch( fetchSounds() );
     },
+    setSearch( term: string ) {
+      dispatch( setSearch( term ) );
+    },
   };
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( Soundboard );
-
-
