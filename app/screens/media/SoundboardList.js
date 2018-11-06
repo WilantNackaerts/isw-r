@@ -22,22 +22,23 @@ type Props = {
   navigation: NavigationScreenProp<NavigationState>,
 }
 
-function filter( items: SoundboardItem[], prefix: string, searchterm: string ): SoundboardItem[] {
-  items = items
-    .filter( item => item.basename === prefix );
-  
-  if ( searchterm ) {
-    const rsearch = new RegExp( searchterm.split( '' ).join( '.*' ), 'i' );
-    items = items.filter( item => rsearch.test( item.name ) );
+class Soundboard extends Component<Props> {
+  getItems(): SoundboardItem[] {
+    const prefix = this.props.navigation.getParam( 'prefix', '/' );
+    let items = this.props.items
+      .filter( item => item.basename === prefix );
+
+    if ( this.props.searchterm ) {
+      const searchterm = this.props.searchterm;
+      const rsearch = new RegExp( searchterm.split( '' ).join( '.*' ), 'i' );
+      items = items.filter( item => rsearch.test( item.name ) );
+    }
+
+    return items;
   }
 
-  return items;
-}
-
-class Soundboard extends Component<Props> {
   render() {
-    const prefix = this.props.navigation.getParam( 'prefix', '/' );
-    const items = filter( this.props.items, prefix, this.props.searchterm );
+    const items = this.getItems();
 
     return (
       <List dataArray={items} style={styles.list}
