@@ -27,8 +27,8 @@ function filter( items: SoundboardItem[], prefix: string, searchterm: string ): 
     .filter( item => item.basename === prefix );
   
   if ( searchterm ) {
-    searchterm = searchterm.toLowerCase();
-    items = items.filter( item => item.name.toLowerCase().includes( searchterm ) );
+    const rsearch = new RegExp( searchterm.split( '' ).join( '.*' ), 'i' );
+    items = items.filter( item => rsearch.test( item.name ) );
   }
 
   return items;
