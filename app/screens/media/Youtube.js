@@ -10,7 +10,6 @@ import { YOUTUBE_API_URL } from '/config';
 
 type Props = {
   songs: Song[],
-  isLoading: boolean,
   fetchSongs: ( searchTerm: string ) => void,
 }
 
