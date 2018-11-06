@@ -10,6 +10,8 @@ const defaultState = (): State => ( {
   searchterm: '',
 } );
 
+const rfilterSearch = /[^a-z0-9]/ig;
+
 export default function soundboardReducer( state: State = defaultState(), action: Action ): State {
   switch ( action.type ) {
     case actions.FETCH_START:
@@ -17,7 +19,7 @@ export default function soundboardReducer( state: State = defaultState(), action
     case actions.FETCH_END:
       return { ...state, isLoading: false, items: action.items };
     case actions.SET_SEARCH:
-      return { ...state, searchterm: action.searchterm };
+      return { ...state, searchterm: action.searchterm.replace( rfilterSearch, '' ) };
     default:
       return state;
   }

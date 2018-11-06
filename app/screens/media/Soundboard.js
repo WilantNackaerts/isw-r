@@ -23,7 +23,6 @@ class Soundboard extends Component<Props> {
   }
 
   onChange( term ) {
-    console.log( term );
     this.props.setSearch( term );
   }
 
