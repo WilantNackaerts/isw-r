@@ -30,5 +30,4 @@ export type Action = FetchStartAction | FetchEndAction;
 export type State = {
   isLoading: boolean,
   items: Item[],
-  prefix: string,
 };

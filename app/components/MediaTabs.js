@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Tab, Tabs, TabHeading, Text, Container } from 'native-base';
 import Youtube from '/screens/media/Youtube';
 import Radio from '/screens/media/Radio';
-import Soundboard from '/screens/media/Soundboard';
+import SoundboardNavigator from '/navigation/soundboard/Navigator';
 
 type Props = {}
 
@@ -20,7 +20,7 @@ export default class MediaTabs extends Component<Props> {
             <Radio />
           </Tab>
           <Tab heading={<TabHeading><Text>Soundboard</Text></TabHeading>}>
-            <Soundboard />
+            <SoundboardNavigator />
           </Tab>
         </Tabs>
       </Container>

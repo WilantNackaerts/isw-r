@@ -8,7 +8,7 @@
 
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import Navigator from '/navigation/Navigator';
+import Navigator from '/navigation/main/Navigator';
 import store from '/store';
 
 type Props = {};
