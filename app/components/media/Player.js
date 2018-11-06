@@ -6,6 +6,7 @@ import type { Song } from '/types/media/player';
 import type { State, Dispatch } from '/types';
 import { connect } from 'react-redux';
 import { fetchPlayer } from '/store/actions/media/player';
+import { withNavigation, type NavigationScreenProp } from 'react-navigation';
 
 
 type Props = {
@@ -13,6 +14,7 @@ type Props = {
   muted: false,
   paused: boolean,
   volume: number,
+  navigation: NavigationScreenProp,
   fetchPlayer: () => void,
 }
 
@@ -20,10 +22,15 @@ class Player extends Component<Props> {
   interval: IntervalID;
 
   componentDidMount() {
-    this.interval = setInterval( () => this.props.fetchPlayer(), 1000 );
+    this.props.navigation.addListener( 'didFocus', this.startPoll.bind( this ) );
+    this.props.navigation.addListener( 'willBlur', this.stopPoll.bind( this ) );
   }
 
-  componentWillUnmount() {
+  startPoll() {
+    this.interval = setInterval( this.props.fetchPlayer, 1000 );
+  }
+
+  stopPoll() {
     clearInterval( this.interval );
   }
 
@@ -65,4 +72,4 @@ function mapDispatchToProps( dispatch: Dispatch ) {
   };
 }
 
-export default connect( mapStateToProps, mapDispatchToProps )( Player );
+export default connect( mapStateToProps, mapDispatchToProps )( withNavigation( Player ) );

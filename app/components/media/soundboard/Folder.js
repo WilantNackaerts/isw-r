@@ -18,7 +18,6 @@ type Props = {
 
 class Folder extends Component<Props> {
   select() {
-    console.log( this.props.navigation );
     this.props.clearSearch();
     this.props.navigation.push( SOUNDBOARD, {
       prefix: this.props.folder.path + '/',
