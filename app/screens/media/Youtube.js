@@ -7,7 +7,6 @@ import { fetchSongs } from '/store/actions/media/youtube';
 import type { Song } from '/types/media/youtube'; 
 import type { State, Dispatch } from '/types';
 import { YOUTUBE_API_URL } from '/config';
-import Player from '/components/media/Player';
 
 type Props = {
   songs: Song[],
@@ -47,7 +46,6 @@ class Youtube extends Component<Props> {
               </Body>
             </ListItem>
           } />
-        <Player />
       </Container>
     );
   }
