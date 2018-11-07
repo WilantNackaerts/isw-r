@@ -1,0 +1,25 @@
+{
+  "soundboard": [
+    {
+      "command": "test1",
+      "params": "test1",
+      "urlSnip": "test1",
+      "TITLE": "test1",
+      "logo": "sb.png"
+    },
+    {
+      "command": "test2",
+      "params": "test2",
+      "urlSnip": "test2",
+      "TITLE": "test2",
+      "logo": "sb.png"
+    },
+    {
+      "command": "folder/folder/test3",
+      "params": "folder/test3",
+      "urlSnip": "folder/test3",
+      "TITLE": "folder/test3",
+      "logo": "sb.png"
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Text, View, Button } from 'native-base';
 import { connect } from 'react-redux';
-import { shopTest } from '../store/actions/shop.js';
+import { shopTest } from '/store/actions/shop';
 
 type Props = {
   test: string,
@@ -25,7 +25,9 @@ class Shop extends Component<Props> {
 }
 
 function mapStateToProps( state ) {
-  return { test: state.shop.test };
+  return {
+    test: state.shop.test,
+  };
 }
 
 function mapDispatchToProps( dispatch ) {

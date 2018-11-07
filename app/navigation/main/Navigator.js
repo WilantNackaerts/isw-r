@@ -1,8 +1,8 @@
 // @flow
 
 import { createBottomTabNavigator } from 'react-navigation';
-import routes from './routes.js';
-import FooterTabs from '../components/FooterTabs.js';
+import routes from './routes';
+import FooterTabs from '/components/FooterTabs';
 
 export default createBottomTabNavigator( routes, {
   tabBarComponent: FooterTabs,

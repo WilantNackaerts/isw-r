@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import { Footer, FooterTab } from 'native-base';
-import Tab from './Tab.js';
-import * as routes from '../navigation/routes.js';
+import Tab from './Tab';
+import * as routes from '/navigation/main/routes';
 import type { Navigation } from 'react-navigation';
 
 type Props = {
