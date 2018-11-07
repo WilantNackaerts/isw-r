@@ -5,7 +5,7 @@ import { Icon, Footer, View, Text } from 'native-base';
 import type { Song } from '/types/media/player';
 import type { State, Dispatch } from '/types';
 import { connect } from 'react-redux';
-import { fetchPlayer } from '/store/actions/media/player';
+import { fetchPlayer, play, pause, volume } from '/store/actions/media/player';
 import { withNavigation, type NavigationScreenProp } from 'react-navigation';
 import { MEDIA_API_URL } from '/config';
 
@@ -16,7 +16,10 @@ type Props = {
   volume: number,
   navigation: NavigationScreenProp,
   fetchPlayer: () => void,
-}
+  play: () => void,
+  pause: () => void,
+  setVolume: ( value: number ) => void,
+};
 
 class Player extends Component<Props> {
   interval: IntervalID;
@@ -35,17 +38,12 @@ class Player extends Component<Props> {
   }
 
   playPause() {
-    const status = this.props.paused ? '/play' : '/pause';
-    fetch( MEDIA_API_URL + status );
+    this.props.paused ? this.props.play() : this.props.pause();
   }
 
-  volume( value ) {
-    fetch( MEDIA_API_URL + '/volume/' + value );
-  }
-
-  volumeOf() {
-    const volume = this.props.volume !== 0 ? '0' : '50';
-    fetch( MEDIA_API_URL + '/volume/' + volume ); 
+  toggleVolume() {
+    const volume = this.props.volume !== 0 ? 0 : 50;
+    this.props.setVolume( volume );
   }
 
   playNext() {
@@ -63,7 +61,7 @@ class Player extends Component<Props> {
           <Text style={styles.title} numberOfLines={1}>{this.props.currentSong.title}</Text>
           <View style={styles.volume}>
             <Icon name={this.props.volume === 0 ? 'volume-up' : 'volume-off'} style={styles.volumeIcon} 
-              onPress={this.volumeOf.bind( this )}
+              onPress={this.toggleVolume.bind( this )}
             />
             <View style={styles.sliderWrapper}>
               <Slider
@@ -72,7 +70,7 @@ class Player extends Component<Props> {
                 maximumValue={100}
                 step={1}
                 value={this.props.volume} 
-                onValueChange={( value ) => this.volume( value )} />
+                onValueChange={this.props.setVolume} />
             </View>
           </View>
         </View>
@@ -140,6 +138,15 @@ function mapDispatchToProps( dispatch: Dispatch ) {
   return {
     fetchPlayer() {
       dispatch( fetchPlayer() );
+    },
+    play() {
+      dispatch( play() );
+    },
+    pause() {
+      dispatch( pause() );
+    },
+    setVolume( value: number ) {
+      dispatch( volume( value ) );
     },
   };
 }

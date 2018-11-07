@@ -17,6 +17,12 @@ export default function playerReducer( state: State = defaultState(), action: Ac
       return { ...state };
     case actions.FETCH_END:
       return { ...state, currentSong: action.currentSong, muted: action.muted, paused: action.paused, volume: action.volume };
+    case actions.PLAY:
+      return { ...state, paused: false };
+    case actions.PAUSE:
+      return { ...state, paused: true };
+    case actions.VOLUME:
+      return { ...state, volume: action.volume };
     default:
       return state;
   }

@@ -21,7 +21,24 @@ export type FetchEndAction = {
   volume: number,
 }
 
-export type Action = FetchStartAction | FetchEndAction;
+export type PlayAction = {
+  type: typeof actions.PLAY,
+};
+
+export type PauseAction = {
+  type: typeof actions.PAUSE,
+};
+
+export type VolumeAction = {
+  type: typeof actions.VOLUME,
+  volume: number,
+};
+
+export type NextAction = {
+  type: typeof actions.NEXT,
+};
+
+export type Action = FetchStartAction | FetchEndAction | PlayAction | PauseAction | VolumeAction | NextAction;
 
 export type State = {
   currentSong: Song,
