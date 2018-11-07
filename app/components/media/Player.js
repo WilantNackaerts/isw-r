@@ -7,7 +7,7 @@ import type { State, Dispatch } from '/types';
 import { connect } from 'react-redux';
 import { fetchPlayer } from '/store/actions/media/player';
 import { withNavigation, type NavigationScreenProp } from 'react-navigation';
-
+import { MEDIA_API_URL } from '/config';
 
 type Props = {
   currentSong: Song,
@@ -34,6 +34,24 @@ class Player extends Component<Props> {
     clearInterval( this.interval );
   }
 
+  playPause() {
+    const status = this.props.paused ? '/play' : '/pause';
+    fetch( MEDIA_API_URL + status );
+  }
+
+  volume( value ) {
+    fetch( MEDIA_API_URL + '/volume/' + value );
+  }
+
+  volumeOf() {
+    const volume = this.props.volume !== 0 ? '0' : '50';
+    fetch( MEDIA_API_URL + '/volume/' + volume ); 
+  }
+
+  playNext() {
+    fetch( MEDIA_API_URL + '/next' );
+  }
+
   render() {
     if ( !this.props.currentSong.title ) {
       return null;
@@ -44,18 +62,26 @@ class Player extends Component<Props> {
         <View style={styles.titleAndVolume}>
           <Text style={styles.title} numberOfLines={1}>{this.props.currentSong.title}</Text>
           <View style={styles.volume}>
-            <Icon name={this.props.volume === 0 ? 'volume-up' : 'volume-off'} style={styles.volumeIcon} />
+            <Icon name={this.props.volume === 0 ? 'volume-up' : 'volume-off'} style={styles.volumeIcon} 
+              onPress={this.volumeOf.bind( this )}
+            />
             <View style={styles.sliderWrapper}>
               <Slider
                 minimumTrackTintColor='white'
                 thumbTintColor='white'
                 maximumValue={100}
                 step={1}
-                value={this.props.volume} />
+                value={this.props.volume} 
+                onValueChange={( value ) => this.volume( value )} />
             </View>
           </View>
         </View>
-        <Icon name={this.props.paused ? 'play' : 'pause'} style={styles.playButton} />
+        <Icon name={this.props.paused ? 'play' : 'pause'} style={styles.playButton} 
+          onPress={this.playPause.bind( this )}
+        />
+        <Icon name='md-skip-forward' style={styles.nextButton} 
+          onPress={this.playNext.bind( this )}
+        />
       </Footer>
     );
   }
@@ -91,6 +117,10 @@ const styles = StyleSheet.create( {
   },
   playButton: {
     marginLeft: 50,
+    color: 'white',
+  },
+  nextButton:{
+    marginLeft: 20,
     color: 'white',
   },
 } );
