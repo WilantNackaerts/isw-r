@@ -95,6 +95,8 @@ const styles = StyleSheet.create( {
     alignItems: 'center',
     paddingLeft: 20,
     paddingRight: 20,
+    borderBottomColor: '#3848a2',
+    borderBottomWidth: 2,
   },
   volumeIcon: {
     color: 'white',
@@ -116,7 +118,7 @@ const styles = StyleSheet.create( {
     flex: 1,
   },
   playButton: {
-    marginLeft: 50,
+    marginLeft: 40,
     color: 'white',
   },
   nextButton:{
