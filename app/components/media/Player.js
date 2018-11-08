@@ -2,17 +2,21 @@
 import React, { Component } from 'react';
 import { StyleSheet, Slider } from 'react-native';
 import { Icon, Footer, View, Text } from 'native-base';
+import ClickableIcon from '/components/ClickableIcon';
 import type { Song } from '/types/media/player';
-import type { State, Dispatch } from '/types';
+import type { State, Dispatch, GetState } from '/types';
 import { connect } from 'react-redux';
 import { fetchPlayer, play, pause, volume, toggleMuted, next, previous } from '/store/actions/media/player';
 import { withNavigation, type NavigationScreenProp } from 'react-navigation';
 
 type Props = {
+  hasSongs: boolean,
   currentSong: Song,
   muted: boolean,
   paused: boolean,
   volume: number,
+  canGoForward: boolean,
+  canGoBackward: boolean,
   navigation: NavigationScreenProp,
   fetchPlayer: () => void,
   play: () => void,
@@ -51,17 +55,13 @@ class Player extends Component<Props> {
   }
 
   render() {
-    if ( !this.props.currentSong.title ) {
-      return null;
-    }
-
     return (
       <Footer style={styles.row}>
         <View style={styles.titleAndVolume}>
-          <Text style={styles.title} numberOfLines={1}>{this.props.currentSong.title}</Text>
+          <Text style={styles.enabled} numberOfLines={1}>{this.props.currentSong.title}</Text>
           <View style={styles.volume}>
             <Icon name='volume-off'
-              style={[ styles.volumeIcon, this.props.muted ? styles.volumeIconMuted : styles.volumeIconNotMuted ]} 
+              style={[ styles.volumeIcon, this.props.muted ? styles.enabled : styles.disabled ]} 
               onPress={this.props.toggleMuted}
             />
             <View style={styles.sliderWrapper}>
@@ -75,14 +75,29 @@ class Player extends Component<Props> {
             </View>
           </View>
         </View>
-        <Icon name='md-skip-backward' style={styles.skipButton} 
+        <ClickableIcon
+          name='md-skip-backward'
           onPress={this.props.previous}
+          enabled={this.props.canGoBackward}
+          style={styles.skipButton} 
+          enabledStyle={styles.enabled}
+          disabledStyle={styles.disabled}
         />
-        <Icon name={this.props.paused ? 'play' : 'pause'} style={styles.playButton} 
+        <ClickableIcon
+          name={this.props.paused ? 'play' : 'pause'}
           onPress={this.playPause.bind( this )}
+          enabled={this.props.hasSongs}
+          style={styles.playButton}
+          enabledStyle={styles.enabled}
+          disabledStyle={styles.disabled}
         />
-        <Icon name='md-skip-forward' style={styles.skipButton} 
+        <ClickableIcon
+          name='md-skip-forward'
           onPress={this.props.next}
+          enabled={this.props.canGoForward}
+          style={styles.skipButton}
+          enabledStyle={styles.enabled}
+          disabledStyle={styles.disabled}
         />
       </Footer>
     );
@@ -90,6 +105,12 @@ class Player extends Component<Props> {
 }
 
 const styles = StyleSheet.create( {
+  enabled: {
+    color: 'white',
+  },
+  disabled: {
+    color: '#B3C7F9',
+  },
   row: {
     flex: 0,
     flexDirection: 'row',
@@ -106,48 +127,39 @@ const styles = StyleSheet.create( {
     alignItems: 'stretch',
     marginRight: 30,
   },
-  title: {
-    color: 'white',
-  },
   volume: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   volumeIcon: {
-    color: 'white',
     fontSize: 23,
-  },
-  volumeIconMuted: {
-    color: 'white',
-  },
-  volumeIconNotMuted: {
-    color: 'rgba(255, 255, 255, 0.5)',
   },
   sliderWrapper: {
     flex: 1,
   },
   playButton: {
-    color: 'white',
     marginLeft: 15,
     marginRight: 15,
     fontSize: 35,
   },
   skipButton: {
-    color: 'white',
     fontSize: 22,
   },
 } );
 
 function mapStateToProps( state: State ) {
   return {
+    hasSongs: state.media.player.queue && state.media.player.queue.length > 0,
     currentSong: state.media.player.currentSong,
     muted: state.media.player.muted,
     paused: state.media.player.paused,
     volume: state.media.player.volume,
+    canGoForward: state.media.player.queuePosition < state.media.player.queue.length - 1,
+    canGoBackward: state.media.player.queuePosition > 0,
   };
 }
 
-function mapDispatchToProps( dispatch: Dispatch ) {
+function mapDispatchToProps( dispatch: Dispatch, getState: GetState ) {
   return {
     fetchPlayer() {
       dispatch( fetchPlayer() );
