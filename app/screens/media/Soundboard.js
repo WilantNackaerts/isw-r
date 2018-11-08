@@ -3,7 +3,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { Container, Content, Spinner, Item, Icon, Input } from 'native-base';
+import { Container, Content, Spinner } from 'native-base';
+import Search from '/components/Search';
 import SoundboardNavigator from '/navigation/soundboard/Navigator';
 import { fetchSounds, setSearch } from '/store/actions/media/soundboard';
 import type { Item as SoundboardItem } from '/types/media/soundboard';
@@ -30,10 +31,7 @@ class Soundboard extends Component<Props> {
     if ( !this.props.isLoading && this.props.items ) {
       return (
         <Container>
-          <Item>
-            <Icon name="search" />
-            <Input placeholder="Search" value={this.props.searchterm} onChangeText={this.onChange.bind( this )} />
-          </Item>
+          <Search term={this.props.searchterm} onChange={this.onChange.bind( this )} />
           <View style={styles.listWrapper}>
             <SoundboardNavigator />
           </View>
