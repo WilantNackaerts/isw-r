@@ -5,13 +5,12 @@ import { Icon, Footer, View, Text } from 'native-base';
 import type { Song } from '/types/media/player';
 import type { State, Dispatch } from '/types';
 import { connect } from 'react-redux';
-import { fetchPlayer, play, pause, volume } from '/store/actions/media/player';
+import { fetchPlayer, play, pause, volume, toggleMuted, next, previous } from '/store/actions/media/player';
 import { withNavigation, type NavigationScreenProp } from 'react-navigation';
-import { MEDIA_API_URL } from '/config';
 
 type Props = {
   currentSong: Song,
-  muted: false,
+  muted: boolean,
   paused: boolean,
   volume: number,
   navigation: NavigationScreenProp,
@@ -19,35 +18,36 @@ type Props = {
   play: () => void,
   pause: () => void,
   setVolume: ( value: number ) => void,
+  toggleMuted: () => void,
+  next: () => void,
+  previous: () => void,
 };
 
 class Player extends Component<Props> {
-  interval: IntervalID;
+  interval: ?IntervalID;
 
-  componentDidMount() {
+  componentWillMount() {
+    this.startPoll();
     this.props.navigation.addListener( 'didFocus', this.startPoll.bind( this ) );
     this.props.navigation.addListener( 'willBlur', this.stopPoll.bind( this ) );
   }
 
   startPoll() {
-    this.interval = setInterval( this.props.fetchPlayer, 1000 );
+    if ( !this.interval ) {
+      this.interval = setInterval( this.props.fetchPlayer, 1000 );
+      this.props.fetchPlayer();
+    }
   }
 
   stopPoll() {
-    clearInterval( this.interval );
+    if ( this.interval ) {
+      clearInterval( this.interval );
+      this.interval = null;
+    }
   }
 
   playPause() {
     this.props.paused ? this.props.play() : this.props.pause();
-  }
-
-  toggleVolume() {
-    const volume = this.props.volume !== 0 ? 0 : 50;
-    this.props.setVolume( volume );
-  }
-
-  playNext() {
-    fetch( MEDIA_API_URL + '/next' );
   }
 
   render() {
@@ -60,8 +60,9 @@ class Player extends Component<Props> {
         <View style={styles.titleAndVolume}>
           <Text style={styles.title} numberOfLines={1}>{this.props.currentSong.title}</Text>
           <View style={styles.volume}>
-            <Icon name={this.props.volume === 0 ? 'volume-up' : 'volume-off'} style={styles.volumeIcon} 
-              onPress={this.toggleVolume.bind( this )}
+            <Icon name='volume-off'
+              style={[ styles.volumeIcon, this.props.muted ? styles.volumeIconMuted : styles.volumeIconNotMuted ]} 
+              onPress={this.props.toggleMuted}
             />
             <View style={styles.sliderWrapper}>
               <Slider
@@ -74,11 +75,14 @@ class Player extends Component<Props> {
             </View>
           </View>
         </View>
+        <Icon name='md-skip-backward' style={styles.skipButton} 
+          onPress={this.props.previous}
+        />
         <Icon name={this.props.paused ? 'play' : 'pause'} style={styles.playButton} 
           onPress={this.playPause.bind( this )}
         />
-        <Icon name='md-skip-forward' style={styles.nextButton} 
-          onPress={this.playNext.bind( this )}
+        <Icon name='md-skip-forward' style={styles.skipButton} 
+          onPress={this.props.next}
         />
       </Footer>
     );
@@ -96,14 +100,11 @@ const styles = StyleSheet.create( {
     borderBottomColor: '#3848a2',
     borderBottomWidth: 2,
   },
-  volumeIcon: {
-    color: 'white',
-    fontSize: 23,
-  },
   titleAndVolume: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'stretch',
+    marginRight: 30,
   },
   title: {
     color: 'white',
@@ -112,16 +113,28 @@ const styles = StyleSheet.create( {
     flexDirection: 'row',
     alignItems: 'center',
   },
+  volumeIcon: {
+    color: 'white',
+    fontSize: 23,
+  },
+  volumeIconMuted: {
+    color: 'white',
+  },
+  volumeIconNotMuted: {
+    color: 'rgba(255, 255, 255, 0.5)',
+  },
   sliderWrapper: {
     flex: 1,
   },
   playButton: {
-    marginLeft: 40,
     color: 'white',
+    marginLeft: 15,
+    marginRight: 15,
+    fontSize: 35,
   },
-  nextButton:{
-    marginLeft: 20,
+  skipButton: {
     color: 'white',
+    fontSize: 22,
   },
 } );
 
@@ -147,6 +160,15 @@ function mapDispatchToProps( dispatch: Dispatch ) {
     },
     setVolume( value: number ) {
       dispatch( volume( value ) );
+    },
+    toggleMuted() {
+      dispatch( toggleMuted() );
+    },
+    next() {
+      dispatch( next() );
+    },
+    previous() {
+      dispatch( previous() );
     },
   };
 }
