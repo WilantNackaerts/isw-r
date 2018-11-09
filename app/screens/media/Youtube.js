@@ -1,8 +1,9 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Container, Item, Icon, Input, List, ListItem, Text, Left, Thumbnail, Body } from 'native-base';
+import { Container, List, ListItem, Text, Left, Thumbnail, Body } from 'native-base';
 import { connect } from 'react-redux';
+import Search from '/components/Search';
 import { fetchSongs } from '/store/actions/media/youtube';
 import type { Song } from '/types/media/youtube'; 
 import type { State, Dispatch } from '/types';
@@ -26,13 +27,7 @@ class Youtube extends Component<Props> {
   render() {
     return (
       <Container>
-        <Item>
-          <Icon name='search' />
-          <Input placeholder='Search'
-            onChangeText={( e ) => this.onChange( e )}
-          />
-          <Icon name='musical-note' />
-        </Item>
+        <Search onChange={this.onChange.bind( this )} />
         <List dataArray={this.props.songs}
           renderRow={( song ) =>
             <ListItem thumbnail button onPress={()=>this.onPress( song.id.videoId )}>
