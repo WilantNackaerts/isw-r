@@ -71,7 +71,8 @@ export function fetchUsers(): Thunk {
 
     fetch( SHOP_API_URL + '/users' )
       .then( res => res.json() )
-      .then( ( res: FetchUsersResponse ) => dispatch( _fetchUsersEnd( res ) ) );
+      .then( ( res: FetchUsersResponse ) => dispatch( _fetchUsersEnd( res ) ) )
+      .catch( console.error );
   };
 }
 
@@ -81,7 +82,8 @@ export function fetchProducts(): Thunk {
 
     fetch( SHOP_API_URL + '/items' )
       .then( res => res.json() )
-      .then( ( res: FetchProductsResponse ) => dispatch( _fetchProductsEnd( res ) ) );
+      .then( ( res: FetchProductsResponse ) => dispatch( _fetchProductsEnd( res ) ) )
+      .catch( console.error );
   };
 }
 

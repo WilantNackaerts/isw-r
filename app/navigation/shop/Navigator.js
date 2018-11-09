@@ -1,12 +1,22 @@
 // @flow
 
+import React from 'react';
 import { Easing, Animated } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
+import { Header, Title, Body } from 'native-base';
 import routes, { USERS } from './routes';
 
 export default createStackNavigator( routes, {
   initialRouteName: USERS,
-  headerMode: 'none',
+  navigationOptions: {
+    header: props => (
+      <Header noLeft>
+        <Body>
+          <Title>{props.scene.descriptor.options.headerTitle}</Title>
+        </Body>
+      </Header>
+    ),
+  },
   transitionConfig: () => {
     return {
       transitionSpec: {

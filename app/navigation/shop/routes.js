@@ -9,7 +9,12 @@ export const PRODUCTS: 'shop/products' = 'shop/products';
 export const ORDER: 'shop/order' = 'shop/order';
 
 export default {
-  [ USERS ]: Users,
+  [ USERS ]: {
+    screen: Users,
+    navigationOptions: {
+      headerTitle: 'Who are you?',
+    },
+  },
   [ PRODUCTS ]: Products,
   [ ORDER ]: Order,
 };
