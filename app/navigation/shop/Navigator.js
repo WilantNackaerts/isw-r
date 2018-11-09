@@ -1,21 +1,38 @@
 // @flow
 
-import React from 'react';
+import React, { Component, type Node, type Element } from 'react';
 import { Easing, Animated } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
-import { Header, Title, Body } from 'native-base';
+import { createStackNavigator, type HeaderProps } from 'react-navigation';
+import { Header, Title, Body, Left, Right } from 'native-base';
 import routes, { USERS } from './routes';
+
+function maybeRender( Container: Class<Component<any>>, elem: Node, props: HeaderProps ): ?Element<any> {
+  if ( typeof elem === 'function' ) {
+    elem = elem( props );
+  }
+  
+  if ( elem ) {
+    return ( <Container>{elem}</Container> );
+  }
+
+  return null;
+}
 
 export default createStackNavigator( routes, {
   initialRouteName: USERS,
   navigationOptions: {
-    header: props => (
-      <Header noLeft>
-        <Body>
-          <Title>{props.scene.descriptor.options.headerTitle}</Title>
-        </Body>
-      </Header>
-    ),
+    header: props => {
+      const opts = props.scene.descriptor.options;
+      return (
+        <Header noLeft={!opts.headerLeft} noRight={!opts.headerRight}>
+          { maybeRender( Left, opts.headerLeft, props ) }
+          <Body>
+            <Title>{opts.headerTitle}</Title>
+          </Body>
+          { maybeRender( Right, opts.headerRight, props ) }
+        </Header>
+      );
+    },
   },
   transitionConfig: () => {
     return {

@@ -16,27 +16,27 @@ import type {
   FetchProductsEndAction,
 } from '/types/shop';
 
-function convertUser( user: ApiUser ): User {
-  return {
-    id: user.id,
-    username: user.uname,
-    firstName: user.fname,
-    lastName: user.lname,
-    active: user.active,
-    limit: user.limit,
-  };
+function sort( a: string, b: string ): number {
+  return a < b ? -1 : a > b ? 1 : 0;
 }
 
-function filterUser( user: User ): boolean {
-  return user.active;
+function processUsers( users: ApiUser[] ): User[] {
+  return users
+    .filter( user => user.active )
+    .sort( ( a, b ) => sort( a.uname.toLowerCase(), b.uname.toLowerCase() ) )
+    .map( user => ( {
+      id: user.id,
+      username: user.uname,
+      firstName: user.fname,
+      lastName: user.lname,
+      active: user.active,
+      limit: user.limit,
+    } ) );
 }
 
-function convertProduct( product: ApiProduct ): Product {
-  return { ...product };
-}
-
-function filterProduct( product: Product ): boolean {
-  return product.shopable;
+function processProducts( products: ApiProduct[] ): Product[] {
+  return products
+    .filter( product => product.shopable );
 }
 
 function _fetchUsersStart(): FetchUsersStartAction {
@@ -48,7 +48,7 @@ function _fetchUsersStart(): FetchUsersStartAction {
 function _fetchUsersEnd( res: FetchUsersResponse ): FetchUsersEndAction {
   return {
     type: actions.FETCH_USERS_END,
-    users: res.data.map( convertUser ).filter( filterUser ),
+    users: processUsers( res.data ),
   };
 }
 
@@ -61,7 +61,7 @@ function _fetchProductsStart(): FetchProductsStartAction {
 function _fetchProductsEnd( res: FetchProductsResponse ): FetchProductsEndAction {
   return {
     type: actions.FETCH_PRODUCTS_END,
-    products: res.data.map( convertProduct ).filter( filterProduct ),
+    products: processProducts( res.data ),
   };
 }
 

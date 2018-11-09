@@ -1,9 +1,9 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Container, List, ListItem, Text, Left, Thumbnail, Body } from 'native-base';
+import { Container, ListItem, Text, Left, Thumbnail, Body } from 'native-base';
 import { connect } from 'react-redux';
-import Search from '/components/Search';
+import ListWithSearch from '/components/ListWithSearch';
 import { fetchSongs } from '/store/actions/media/youtube';
 import type { Song } from '/types/media/youtube'; 
 import type { State, Dispatch } from '/types';
@@ -27,10 +27,11 @@ class Youtube extends Component<Props> {
   render() {
     return (
       <Container>
-        <Search onChange={this.onChange.bind( this )} />
-        <List dataArray={this.props.songs}
-          renderRow={( song ) =>
-            <ListItem thumbnail button onPress={()=>this.onPress( song.id.videoId )}>
+        <ListWithSearch
+          onChange={this.onChange.bind( this )}
+          data={this.props.songs}
+          renderItem={( song ) =>
+            <ListItem thumbnail button onPress={()=>this.onPress( song.id.videoId )} key={song.id.videoId}>
               <Left>
                 <Thumbnail square source={{ uri: song.snippet.thumbnails.default.url }} />
               </Left>

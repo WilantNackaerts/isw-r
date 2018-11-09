@@ -3,11 +3,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
-import { Text, Button, Spinner } from 'native-base';
+import { Text, Spinner, ListItem, Container } from 'native-base';
 import { PRODUCTS } from '/navigation/shop/routes';
 import { fetchUsers } from '/store/actions/shop';
 import type { NavigationScreenProp } from 'react-navigation';
 import type { User } from '/types/shop';
+import FilterList from '/components/FilterList';
 import type { State, Dispatch } from '/types';
 
 type Props = {
@@ -18,8 +19,12 @@ type Props = {
 };
 
 class Users extends Component<Props> {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchUsers();
+  }
+
+  selectUser( username: string ) {
+    this.props.navigation.navigate( PRODUCTS, { username } );
   }
 
   render() {
@@ -32,12 +37,18 @@ class Users extends Component<Props> {
     }
 
     return (
-      <View style={styles.container}>
-        <Text>{this.props.users.map( user => user.username ).join( ', ' )}</Text>
-        <Button onPress={() => this.props.navigation.navigate( PRODUCTS )}>
-          <Text>Go to products</Text>
-        </Button>
-      </View>
+      <Container>
+        <FilterList
+          data={this.props.users}
+          filterProp='username'
+          keyExtractor={user => user.username}
+          renderItem={( { item: user } ) => (
+            <ListItem onPress={() => this.selectUser( user.username )} key={user.username}>
+              <Text>{user.username}</Text>
+            </ListItem>
+          )}
+        />
+      </Container>
     );
   }
 }
@@ -47,10 +58,6 @@ const styles = StyleSheet.create( {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  container: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
   },
 } );
 
