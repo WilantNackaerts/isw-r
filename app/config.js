@@ -10,3 +10,6 @@ export const SOUNDBOARD_URL = MEDIA_API_URL + '/sb';
 export const YOUTUBE_API_URL = MEDIA_API_URL + '/yt/byid'; 
 export const YOUTUBE_URL = 'https://www.googleapis.com/youtube/v3/search?type=video&maxResults=10&part=snippet&key='+ YOUTUBE_API_KEY +'&q=';
 export const MEDIA_STATUS_URL = MEDIA_API_URL + '/status';
+
+export const SHOP_URL = 'https://shop2.isw';
+export const SHOP_API_URL = SHOP_URL + '/api/v1';
