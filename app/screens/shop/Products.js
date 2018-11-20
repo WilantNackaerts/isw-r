@@ -30,7 +30,7 @@ class Products extends Component<Props> {
       );
     }
 
-    console.log( this.props.products[ 0 ].image.replace( 'https://shop2.isw', 'http://10.0.2.2' ) );
+    console.log( this.props.products[ 0 ].image.replace( 'https://10.0.2.2:3050/storage', 'http://10.0.2.2:3050/shop/storage' ) );
     return (
       <ScrollView>
         <View style={styles.container}>
@@ -39,7 +39,7 @@ class Products extends Component<Props> {
               <Card key={product.id} style={styles.product}>
                 <CardItem cardBody style={styles.cardContent}>
                   <Image
-                    source={{ uri: product.image.replace( 'https://shop2.isw', 'http://10.0.2.2:3030' ) }}
+                    source={{ uri: product.image.replace( 'https://10.0.2.2:3050/storage', 'http://10.0.2.2:3050/shop/storage' ) }}
                     style={styles.image}
                   />
                 </CardItem>
