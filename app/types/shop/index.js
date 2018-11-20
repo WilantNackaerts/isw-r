@@ -33,6 +33,14 @@ export type ApiProduct = {
 
 export type Product = ApiProduct;
 
+export type ProductMap = {
+  [ productId: number ]: Product,
+};
+
+export type Basket = {
+  [ productId: number ]: number,
+};
+
 export type FetchUsersResponse = {
   data: ApiUser[],
 };
@@ -59,15 +67,25 @@ export type FetchProductsEndAction = {
   products: Product[],
 };
 
+export type OrderItemAction = {
+  type: typeof actions.ORDER_ITEM,
+  productId: number,
+  amount: number,
+}
+
 export type Action =
   FetchUsersStartAction |
   FetchUsersEndAction |
   FetchProductsStartAction |
-  FetchProductsEndAction;
+  FetchProductsEndAction |
+  OrderItemAction;
 
 export type State = {
   users: User[],
   products: Product[],
+  productsById: ProductMap,
   loadingUsers: boolean,
   loadingProducts: boolean,
+  basket: Basket,
+  total: number,
 };

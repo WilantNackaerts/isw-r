@@ -14,6 +14,7 @@ import type {
   FetchUsersEndAction,
   FetchProductsStartAction,
   FetchProductsEndAction,
+  OrderItemAction,
 } from '/types/shop';
 
 function sort( a: string, b: string ): number {
@@ -87,3 +88,10 @@ export function fetchProducts(): Thunk {
   };
 }
 
+export function orderItem( productId: number, amount: number ): OrderItemAction {
+  return {
+    type: actions.ORDER_ITEM,
+    productId,
+    amount,
+  };
+}

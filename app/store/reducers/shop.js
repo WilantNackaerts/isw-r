@@ -1,15 +1,41 @@
 // @flow
 
 import * as actions from '/types/shop/actions';
-import type { State, Action } from '/types/shop';
+import type { State, Action, Product, ProductMap } from '/types/shop';
 
 function defaultState(): State {
   return {
     users: [],
     products: [],
+    productsById: {},
     loadingUsers: true,
     loadingProducts: true,
+    basket: {},
+    total: 0,
   };
+}
+
+function prodsById( prods: Product[] ): ProductMap {
+  const res = {};
+
+  for ( const prod of prods ) {
+    res[ prod.id ] = prod;
+  }
+
+  return res;
+}
+
+function addTotal( state: State ): State {
+  let total = 0;
+
+  for ( const [ prodId, amount ] of Object.entries( state.basket ) ) {
+    // $FlowFixMe This works, trust me
+    total += amount * state.productsById[ prodId ].price;
+  }
+
+  state.total = total;
+
+  return state;
 }
 
 export default function shopReducer( state: State = defaultState(), action: Action ) {
@@ -21,7 +47,20 @@ export default function shopReducer( state: State = defaultState(), action: Acti
     case actions.FETCH_PRODUCTS_START:
       return { ...state, loadingProducts: true };
     case actions.FETCH_PRODUCTS_END:
-      return { ...state, loadingProducts: false, products: action.products };
+      return addTotal( {
+        ...state,
+        loadingProducts: false,
+        products: action.products,
+        productsById: prodsById( action.products ),
+      } );
+    case actions.ORDER_ITEM:
+      return addTotal( {
+        ...state,
+        basket: {
+          ...state.basket,
+          [ action.productId ]: ( state.basket[ action.productId ] || 0 ) + action.amount,
+        },
+      } );
     default:
       return state;
   }

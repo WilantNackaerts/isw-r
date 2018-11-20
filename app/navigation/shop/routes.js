@@ -23,13 +23,18 @@ export default {
   [ PRODUCTS ]: {
     screen: Products,
     navigationOptions: ( props: NavigationNavigatorProps ) => ( {
-      headerTitle: props.navigation.getParam( 'username', 'Products' ),
+      headerTitle: 'Products - ' + props.navigation.getParam( 'username', '?' ),
       headerRight: ( props: HeaderProps ) => (
         <Icon name='create' style={styles.icon} onPress={() => props.navigation.navigate( USERS )} />
       ),
     } ),
   },
-  [ ORDER ]: Order,
+  [ ORDER ]: {
+    screen: Order,
+    navigationOptions: ( props: NavigationNavigatorProps ) => ( {
+      headerTitle: 'Order - ' + props.navigation.getParam( 'username', '?' ),
+    } ),
+  },
 };
 
 const styles = StyleSheet.create( {

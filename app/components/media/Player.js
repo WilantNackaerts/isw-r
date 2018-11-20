@@ -8,6 +8,7 @@ import type { State, Dispatch, GetState } from '/types';
 import { connect } from 'react-redux';
 import { fetchPlayer, play, pause, volume, toggleMuted, next, previous } from '/store/actions/media/player';
 import { withNavigation, type NavigationScreenProp } from 'react-navigation';
+import baseStyles, { FOOTER, TEXT, ICON_DISABLED } from '/styles';
 
 type Props = {
   hasSongs: boolean,
@@ -58,7 +59,7 @@ class Player extends Component<Props> {
     return (
       <Footer style={styles.row}>
         <View style={styles.titleAndVolume}>
-          <Text style={styles.enabled} numberOfLines={1}>{this.props.currentSong.title}</Text>
+          <Text style={baseStyles.text} numberOfLines={1}>{this.props.currentSong.title}</Text>
           <View style={styles.volume}>
             <Icon name='volume-off'
               style={[ styles.volumeIcon, this.props.muted ? styles.enabled : styles.disabled ]} 
@@ -105,21 +106,16 @@ class Player extends Component<Props> {
 }
 
 const styles = StyleSheet.create( {
-  enabled: {
-    color: 'white',
-  },
-  disabled: {
-    color: '#B3C7F9',
-  },
+  enabled: TEXT,
+  disabled: ICON_DISABLED,
   row: {
+    ...FOOTER,
     flex: 0,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingLeft: 20,
     paddingRight: 20,
-    borderBottomColor: '#3848a2',
-    borderBottomWidth: 2,
   },
   titleAndVolume: {
     flex: 1,

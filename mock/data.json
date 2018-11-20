@@ -1,0 +1,1813 @@
+{
+  "sb": [
+    {
+      "command": "sb",
+      "params": "evilLaugh",
+      "urlSnip": "evilLaugh",
+      "TITLE": "evilLaugh",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "idiotic",
+      "urlSnip": "idiotic",
+      "TITLE": "idiotic",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "yns",
+      "urlSnip": "yns",
+      "TITLE": "yns",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dennis",
+      "urlSnip": "dennis",
+      "TITLE": "dennis",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "shiiiit",
+      "urlSnip": "shiiiit",
+      "TITLE": "shiiiit",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "trump/grabem",
+      "urlSnip": "trump/grabem",
+      "TITLE": "trump/grabem",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "doorbell",
+      "urlSnip": "doorbell",
+      "TITLE": "doorbell",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "slowClap",
+      "urlSnip": "slowClap",
+      "TITLE": "slowClap",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "rickAndMorty/licklicklick",
+      "urlSnip": "rickAndMorty/licklicklick",
+      "TITLE": "rickAndMorty/licklicklick",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "rickAndMorty/wubalubadubdub",
+      "urlSnip": "rickAndMorty/wubalubadubdub",
+      "TITLE": "rickAndMorty/wubalubadubdub",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "drEvil/welcome",
+      "urlSnip": "drEvil/welcome",
+      "TITLE": "drEvil/welcome",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "drEvil/onemillion",
+      "urlSnip": "drEvil/onemillion",
+      "TITLE": "drEvil/onemillion",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "meme/blameItOnThe",
+      "urlSnip": "meme/blameItOnThe",
+      "TITLE": "meme/blameItOnThe",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "meme/ladywild",
+      "urlSnip": "meme/ladywild",
+      "TITLE": "meme/ladywild",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "meme/rekt",
+      "urlSnip": "meme/rekt",
+      "TITLE": "meme/rekt",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "meme/noMoney",
+      "urlSnip": "meme/noMoney",
+      "TITLE": "meme/noMoney",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "meme/myweed",
+      "urlSnip": "meme/myweed",
+      "TITLE": "meme/myweed",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "meme/TRIGGERED",
+      "urlSnip": "meme/TRIGGERED",
+      "TITLE": "meme/TRIGGERED",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "meme/stfu",
+      "urlSnip": "meme/stfu",
+      "TITLE": "meme/stfu",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "meme/die",
+      "urlSnip": "meme/die",
+      "TITLE": "meme/die",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "fucksander",
+      "urlSnip": "fucksander",
+      "TITLE": "fucksander",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "simpsons/comeAgain",
+      "urlSnip": "simpsons/comeAgain",
+      "TITLE": "simpsons/comeAgain",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "simpsons/gurgle",
+      "urlSnip": "simpsons/gurgle",
+      "TITLE": "simpsons/gurgle",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "badumTss",
+      "urlSnip": "badumTss",
+      "TITLE": "badumTss",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "pissinmeoff",
+      "urlSnip": "pissinmeoff",
+      "TITLE": "pissinmeoff",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Motk_em_stompen_of_wa",
+      "urlSnip": "newkids/Motk_em_stompen_of_wa",
+      "TITLE": "newkids/Motk_em_stompen_of_wa",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/vuurbal",
+      "urlSnip": "newkids/vuurbal",
+      "TITLE": "newkids/vuurbal",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Wie_komt_met_halen_WIE_KOM_DAN",
+      "urlSnip": "newkids/Wie_komt_met_halen_WIE_KOM_DAN",
+      "TITLE": "newkids/Wie_komt_met_halen_WIE_KOM_DAN",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Tykwando_jonguh",
+      "urlSnip": "newkids/Tykwando_jonguh",
+      "TITLE": "newkids/Tykwando_jonguh",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/geen_ruzie",
+      "urlSnip": "newkids/geen_ruzie",
+      "TITLE": "newkids/geen_ruzie",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Gij_blijft_GODVERDOMME_van_men_bier_af_VUILE_KUT_HOER",
+      "urlSnip": "newkids/Gij_blijft_GODVERDOMME_van_men_bier_af_VUILE_KUT_HOER",
+      "TITLE": "newkids/Gij_blijft_GODVERDOMME_van_men_bier_af_VUILE_KUT_HOER",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Eey_terug_naar_boven_KUT",
+      "urlSnip": "newkids/Eey_terug_naar_boven_KUT",
+      "TITLE": "newkids/Eey_terug_naar_boven_KUT",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Nondeju",
+      "urlSnip": "newkids/Nondeju",
+      "TITLE": "newkids/Nondeju",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/1_Nieuw_body",
+      "urlSnip": "newkids/1_Nieuw_body",
+      "TITLE": "newkids/1_Nieuw_body",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/gistrn_sate_op",
+      "urlSnip": "newkids/gistrn_sate_op",
+      "TITLE": "newkids/gistrn_sate_op",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Homows",
+      "urlSnip": "newkids/Homows",
+      "TITLE": "newkids/Homows",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/ken_je_der_kut_zien",
+      "urlSnip": "newkids/ken_je_der_kut_zien",
+      "TITLE": "newkids/ken_je_der_kut_zien",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/alsikdierooiezie",
+      "urlSnip": "newkids/alsikdierooiezie",
+      "TITLE": "newkids/alsikdierooiezie",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/zo_dies_kapot",
+      "urlSnip": "newkids/zo_dies_kapot",
+      "TITLE": "newkids/zo_dies_kapot",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Verrekte_KUT",
+      "urlSnip": "newkids/Verrekte_KUT",
+      "TITLE": "newkids/Verrekte_KUT",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/jawat",
+      "urlSnip": "newkids/jawat",
+      "TITLE": "newkids/jawat",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Recht_op_zn_neus_bot",
+      "urlSnip": "newkids/Recht_op_zn_neus_bot",
+      "TITLE": "newkids/Recht_op_zn_neus_bot",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/doe_is_normaal_jongen",
+      "urlSnip": "newkids/doe_is_normaal_jongen",
+      "TITLE": "newkids/doe_is_normaal_jongen",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/nou_moet_je_echt_ophouden",
+      "urlSnip": "newkids/nou_moet_je_echt_ophouden",
+      "TITLE": "newkids/nou_moet_je_echt_ophouden",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/oprappen_kut_hoer",
+      "urlSnip": "newkids/oprappen_kut_hoer",
+      "TITLE": "newkids/oprappen_kut_hoer",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Ik_dacht_dat_die_telefoon_waterdicht_was",
+      "urlSnip": "newkids/Ik_dacht_dat_die_telefoon_waterdicht_was",
+      "TITLE": "newkids/Ik_dacht_dat_die_telefoon_waterdicht_was",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Hedde_gij_geld_bij",
+      "urlSnip": "newkids/Hedde_gij_geld_bij",
+      "TITLE": "newkids/Hedde_gij_geld_bij",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/tuurlijknietman",
+      "urlSnip": "newkids/tuurlijknietman",
+      "TITLE": "newkids/tuurlijknietman",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Kut_ben_ik_godnondeju_weer_te_laat",
+      "urlSnip": "newkids/Kut_ben_ik_godnondeju_weer_te_laat",
+      "TITLE": "newkids/Kut_ben_ik_godnondeju_weer_te_laat",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/aant_werk",
+      "urlSnip": "newkids/aant_werk",
+      "TITLE": "newkids/aant_werk",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/kiekemgoan",
+      "urlSnip": "newkids/kiekemgoan",
+      "TITLE": "newkids/kiekemgoan",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/vuurbal2",
+      "urlSnip": "newkids/vuurbal2",
+      "TITLE": "newkids/vuurbal2",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/3_Gsi_Veertjes",
+      "urlSnip": "newkids/3_Gsi_Veertjes",
+      "TITLE": "newkids/3_Gsi_Veertjes",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/En_HUP_wegwezen_naar_uw_eigenland",
+      "urlSnip": "newkids/En_HUP_wegwezen_naar_uw_eigenland",
+      "TITLE": "newkids/En_HUP_wegwezen_naar_uw_eigenland",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Die_gasten_kunnen_trappen_jonguh",
+      "urlSnip": "newkids/Die_gasten_kunnen_trappen_jonguh",
+      "TITLE": "newkids/Die_gasten_kunnen_trappen_jonguh",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Komt_der_uit_dan_mietjes_kom_dan_BAM",
+      "urlSnip": "newkids/Komt_der_uit_dan_mietjes_kom_dan_BAM",
+      "TITLE": "newkids/Komt_der_uit_dan_mietjes_kom_dan_BAM",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/niet_zo_friz",
+      "urlSnip": "newkids/niet_zo_friz",
+      "TITLE": "newkids/niet_zo_friz",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Hallo_hebben_jullie_mijn_dochtertje_gezien",
+      "urlSnip": "newkids/Hallo_hebben_jullie_mijn_dochtertje_gezien",
+      "TITLE": "newkids/Hallo_hebben_jullie_mijn_dochtertje_gezien",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/hallo_ik_ben_epter",
+      "urlSnip": "newkids/hallo_ik_ben_epter",
+      "TITLE": "newkids/hallo_ik_ben_epter",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Echt_die_trappen_zo_n_brommer_frame_krom",
+      "urlSnip": "newkids/Echt_die_trappen_zo_n_brommer_frame_krom",
+      "TITLE": "newkids/Echt_die_trappen_zo_n_brommer_frame_krom",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Jaa_jonguh_van_me_werk_meegenomen",
+      "urlSnip": "newkids/Jaa_jonguh_van_me_werk_meegenomen",
+      "TITLE": "newkids/Jaa_jonguh_van_me_werk_meegenomen",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Als_ik_em_zie_kapot",
+      "urlSnip": "newkids/Als_ik_em_zie_kapot",
+      "TITLE": "newkids/Als_ik_em_zie_kapot",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/ikmaakemkapot",
+      "urlSnip": "newkids/ikmaakemkapot",
+      "TITLE": "newkids/ikmaakemkapot",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Wat_doete_gij_nou_jonguh",
+      "urlSnip": "newkids/Wat_doete_gij_nou_jonguh",
+      "TITLE": "newkids/Wat_doete_gij_nou_jonguh",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/GVD_echt_enuh_grote_kut_wat_n_knoepert",
+      "urlSnip": "newkids/GVD_echt_enuh_grote_kut_wat_n_knoepert",
+      "TITLE": "newkids/GVD_echt_enuh_grote_kut_wat_n_knoepert",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Ik_heb_geen_geld_bij_jonguh",
+      "urlSnip": "newkids/Ik_heb_geen_geld_bij_jonguh",
+      "TITLE": "newkids/Ik_heb_geen_geld_bij_jonguh",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/gratisbier",
+      "urlSnip": "newkids/gratisbier",
+      "TITLE": "newkids/gratisbier",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/lievehond",
+      "urlSnip": "newkids/lievehond",
+      "TITLE": "newkids/lievehond",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/denk_je_nou_dat_je_populair_bent_met_je_broodj",
+      "urlSnip": "newkids/denk_je_nou_dat_je_populair_bent_met_je_broodj",
+      "TITLE": "newkids/denk_je_nou_dat_je_populair_bent_met_je_broodj",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/wateenknoepert",
+      "urlSnip": "newkids/wateenknoepert",
+      "TITLE": "newkids/wateenknoepert",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/25duizendeuro",
+      "urlSnip": "newkids/25duizendeuro",
+      "TITLE": "newkids/25duizendeuro",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/niet_naar_binnen_vet_verstopt",
+      "urlSnip": "newkids/niet_naar_binnen_vet_verstopt",
+      "TITLE": "newkids/niet_naar_binnen_vet_verstopt",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Heeej_manuela_jij_ook_hier,_leuk_hoor",
+      "urlSnip": "newkids/Heeej_manuela_jij_ook_hier,_leuk_hoor",
+      "TITLE": "newkids/Heeej_manuela_jij_ook_hier,_leuk_hoor",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/kan_et_wat_rustiger",
+      "urlSnip": "newkids/kan_et_wat_rustiger",
+      "TITLE": "newkids/kan_et_wat_rustiger",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Bier_hoer_Bier_hoer",
+      "urlSnip": "newkids/Bier_hoer_Bier_hoer",
+      "TITLE": "newkids/Bier_hoer_Bier_hoer",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/echtnamaak",
+      "urlSnip": "newkids/echtnamaak",
+      "TITLE": "newkids/echtnamaak",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/04_agente",
+      "urlSnip": "newkids/04_agente",
+      "TITLE": "newkids/04_agente",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/eej_sorry_man",
+      "urlSnip": "newkids/eej_sorry_man",
+      "TITLE": "newkids/eej_sorry_man",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Wat_een_mooie_dag_he_ricket_barry",
+      "urlSnip": "newkids/Wat_een_mooie_dag_he_ricket_barry",
+      "TITLE": "newkids/Wat_een_mooie_dag_he_ricket_barry",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/blijfmetjepoten",
+      "urlSnip": "newkids/blijfmetjepoten",
+      "TITLE": "newkids/blijfmetjepoten",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/al_een_maand_lost",
+      "urlSnip": "newkids/al_een_maand_lost",
+      "TITLE": "newkids/al_een_maand_lost",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/02_agente",
+      "urlSnip": "newkids/02_agente",
+      "TITLE": "newkids/02_agente",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/mongoljonguh",
+      "urlSnip": "newkids/mongoljonguh",
+      "TITLE": "newkids/mongoljonguh",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/dit_is_bram_en_hij_moet_schijten",
+      "urlSnip": "newkids/dit_is_bram_en_hij_moet_schijten",
+      "TITLE": "newkids/dit_is_bram_en_hij_moet_schijten",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/maakemkapot",
+      "urlSnip": "newkids/maakemkapot",
+      "TITLE": "newkids/maakemkapot",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/wat_een_lucht",
+      "urlSnip": "newkids/wat_een_lucht",
+      "TITLE": "newkids/wat_een_lucht",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Ik_ga_geen_mongool_stompen_jonguh",
+      "urlSnip": "newkids/Ik_ga_geen_mongool_stompen_jonguh",
+      "TITLE": "newkids/Ik_ga_geen_mongool_stompen_jonguh",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Kende_netzo_goed_aan_mij_geven_jonguh",
+      "urlSnip": "newkids/Kende_netzo_goed_aan_mij_geven_jonguh",
+      "TITLE": "newkids/Kende_netzo_goed_aan_mij_geven_jonguh",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/manuela",
+      "urlSnip": "newkids/manuela",
+      "TITLE": "newkids/manuela",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Goed_geregeld_jonguh",
+      "urlSnip": "newkids/Goed_geregeld_jonguh",
+      "TITLE": "newkids/Goed_geregeld_jonguh",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/maaskantj",
+      "urlSnip": "newkids/maaskantj",
+      "TITLE": "newkids/maaskantj",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Godnondeju_hij_eet_die_frikkandel_aant_opeten",
+      "urlSnip": "newkids/Godnondeju_hij_eet_die_frikkandel_aant_opeten",
+      "TITLE": "newkids/Godnondeju_hij_eet_die_frikkandel_aant_opeten",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/wie_ben_jij",
+      "urlSnip": "newkids/wie_ben_jij",
+      "TITLE": "newkids/wie_ben_jij",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/verrektemongol",
+      "urlSnip": "newkids/verrektemongol",
+      "TITLE": "newkids/verrektemongol",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Waarom_zit_gij_buiten_schotel_stuk_geen_zender",
+      "urlSnip": "newkids/Waarom_zit_gij_buiten_schotel_stuk_geen_zender",
+      "TITLE": "newkids/Waarom_zit_gij_buiten_schotel_stuk_geen_zender",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/pvv",
+      "urlSnip": "newkids/pvv",
+      "TITLE": "newkids/pvv",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/zo_dies_gebroken",
+      "urlSnip": "newkids/zo_dies_gebroken",
+      "TITLE": "newkids/zo_dies_gebroken",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/ja_wat_jonge",
+      "urlSnip": "newkids/ja_wat_jonge",
+      "TITLE": "newkids/ja_wat_jonge",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/oprapen_die_steen",
+      "urlSnip": "newkids/oprapen_die_steen",
+      "TITLE": "newkids/oprapen_die_steen",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Wat_jonguh_kom_dan_bam",
+      "urlSnip": "newkids/Wat_jonguh_kom_dan_bam",
+      "TITLE": "newkids/Wat_jonguh_kom_dan_bam",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Vuile_homos_BAM",
+      "urlSnip": "newkids/Vuile_homos_BAM",
+      "TITLE": "newkids/Vuile_homos_BAM",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Komte_daar_aan_jonguh",
+      "urlSnip": "newkids/Komte_daar_aan_jonguh",
+      "TITLE": "newkids/Komte_daar_aan_jonguh",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/HEEJ_hier_met_die_bal_jonguh",
+      "urlSnip": "newkids/HEEJ_hier_met_die_bal_jonguh",
+      "TITLE": "newkids/HEEJ_hier_met_die_bal_jonguh",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Dis_een_mongool",
+      "urlSnip": "newkids/Dis_een_mongool",
+      "TITLE": "newkids/Dis_een_mongool",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Niet_nodig_op_uwe_werk_tuurlijk_niet_jonguh",
+      "urlSnip": "newkids/Niet_nodig_op_uwe_werk_tuurlijk_niet_jonguh",
+      "TITLE": "newkids/Niet_nodig_op_uwe_werk_tuurlijk_niet_jonguh",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Gij_bent_in_den_broek_aant_pissen_jonguh",
+      "urlSnip": "newkids/Gij_bent_in_den_broek_aant_pissen_jonguh",
+      "TITLE": "newkids/Gij_bent_in_den_broek_aant_pissen_jonguh",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/scooterkopen",
+      "urlSnip": "newkids/scooterkopen",
+      "TITLE": "newkids/scooterkopen",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/watdenkthij",
+      "urlSnip": "newkids/watdenkthij",
+      "TITLE": "newkids/watdenkthij",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Ik_maak_em_kapot",
+      "urlSnip": "newkids/Ik_maak_em_kapot",
+      "TITLE": "newkids/Ik_maak_em_kapot",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/HE_2",
+      "urlSnip": "newkids/HE_2",
+      "TITLE": "newkids/HE_2",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Ik_heb_ook_best_veel_ervaring_kei_hard_geneukt",
+      "urlSnip": "newkids/Ik_heb_ook_best_veel_ervaring_kei_hard_geneukt",
+      "TITLE": "newkids/Ik_heb_ook_best_veel_ervaring_kei_hard_geneukt",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/jijscooterkopen",
+      "urlSnip": "newkids/jijscooterkopen",
+      "TITLE": "newkids/jijscooterkopen",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Limonade",
+      "urlSnip": "newkids/Limonade",
+      "TITLE": "newkids/Limonade",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/jawat_jawat",
+      "urlSnip": "newkids/jawat_jawat",
+      "TITLE": "newkids/jawat_jawat",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/HOER",
+      "urlSnip": "newkids/HOER",
+      "TITLE": "newkids/HOER",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/2_Dtm_Uitlaat_Kut",
+      "urlSnip": "newkids/2_Dtm_Uitlaat_Kut",
+      "TITLE": "newkids/2_Dtm_Uitlaat_Kut",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Wat_ze_dan_doen_jonge,_net_zo_lang_trappen_niks_meer_voelen",
+      "urlSnip": "newkids/Wat_ze_dan_doen_jonge,_net_zo_lang_trappen_niks_meer_voelen",
+      "TITLE": "newkids/Wat_ze_dan_doen_jonge,_net_zo_lang_trappen_niks_meer_voelen",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/03_agente",
+      "urlSnip": "newkids/03_agente",
+      "TITLE": "newkids/03_agente",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/vuilekuthoer",
+      "urlSnip": "newkids/vuilekuthoer",
+      "TITLE": "newkids/vuilekuthoer",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Hedden_em",
+      "urlSnip": "newkids/Hedden_em",
+      "TITLE": "newkids/Hedden_em",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/stompen",
+      "urlSnip": "newkids/stompen",
+      "TITLE": "newkids/stompen",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Hallo_Dokter",
+      "urlSnip": "newkids/Hallo_Dokter",
+      "TITLE": "newkids/Hallo_Dokter",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Gerrie_doe_nou_is_normaal_straks_zien_de_woutuh_u_nog",
+      "urlSnip": "newkids/Gerrie_doe_nou_is_normaal_straks_zien_de_woutuh_u_nog",
+      "TITLE": "newkids/Gerrie_doe_nou_is_normaal_straks_zien_de_woutuh_u_nog",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/01_agente",
+      "urlSnip": "newkids/01_agente",
+      "TITLE": "newkids/01_agente",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/newkids_kutfries",
+      "urlSnip": "newkids/newkids_kutfries",
+      "TITLE": "newkids/newkids_kutfries",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/vrachtwagenchauffeurToetToet",
+      "urlSnip": "newkids/vrachtwagenchauffeurToetToet",
+      "TITLE": "newkids/vrachtwagenchauffeurToetToet",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Heb_ik_hier_niet_gekocht_hoor_had_ik_al",
+      "urlSnip": "newkids/Heb_ik_hier_niet_gekocht_hoor_had_ik_al",
+      "TITLE": "newkids/Heb_ik_hier_niet_gekocht_hoor_had_ik_al",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Sorry_voor_het_urineren",
+      "urlSnip": "newkids/Sorry_voor_het_urineren",
+      "TITLE": "newkids/Sorry_voor_het_urineren",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Zo_jij_bent_ook_geen_maagd_meer_of_wa",
+      "urlSnip": "newkids/Zo_jij_bent_ook_geen_maagd_meer_of_wa",
+      "TITLE": "newkids/Zo_jij_bent_ook_geen_maagd_meer_of_wa",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/ja_dus",
+      "urlSnip": "newkids/ja_dus",
+      "TITLE": "newkids/ja_dus",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/jij_ook_stomp_of_wa",
+      "urlSnip": "newkids/jij_ook_stomp_of_wa",
+      "TITLE": "newkids/jij_ook_stomp_of_wa",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Was_je_pincode_jonguh",
+      "urlSnip": "newkids/Was_je_pincode_jonguh",
+      "TITLE": "newkids/Was_je_pincode_jonguh",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/U_heeft_uw_bus_gemist_VERTEKTE_koekwaus",
+      "urlSnip": "newkids/U_heeft_uw_bus_gemist_VERTEKTE_koekwaus",
+      "TITLE": "newkids/U_heeft_uw_bus_gemist_VERTEKTE_koekwaus",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/newkids_verstdrniksvan",
+      "urlSnip": "newkids/newkids_verstdrniksvan",
+      "TITLE": "newkids/newkids_verstdrniksvan",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Jaa_jonguh_met_dit_ding_kan_je_alles_optilen",
+      "urlSnip": "newkids/Jaa_jonguh_met_dit_ding_kan_je_alles_optilen",
+      "TITLE": "newkids/Jaa_jonguh_met_dit_ding_kan_je_alles_optilen",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/05_agente",
+      "urlSnip": "newkids/05_agente",
+      "TITLE": "newkids/05_agente",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Gvd_lekker_Gvd",
+      "urlSnip": "newkids/Gvd_lekker_Gvd",
+      "TITLE": "newkids/Gvd_lekker_Gvd",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/kennuh_cker_wel_paar_halve_liters_in",
+      "urlSnip": "newkids/kennuh_cker_wel_paar_halve_liters_in",
+      "TITLE": "newkids/kennuh_cker_wel_paar_halve_liters_in",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/zoek_ie_ruzie_nee_poplair_sukkel",
+      "urlSnip": "newkids/zoek_ie_ruzie_nee_poplair_sukkel",
+      "TITLE": "newkids/zoek_ie_ruzie_nee_poplair_sukkel",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/newkids_pillenkopen",
+      "urlSnip": "newkids/newkids_pillenkopen",
+      "TITLE": "newkids/newkids_pillenkopen",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/wieshiernoudensackbar",
+      "urlSnip": "newkids/wieshiernoudensackbar",
+      "TITLE": "newkids/wieshiernoudensackbar",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/HE",
+      "urlSnip": "newkids/HE",
+      "TITLE": "newkids/HE",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/stompenofwat",
+      "urlSnip": "newkids/stompenofwat",
+      "TITLE": "newkids/stompenofwat",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Gij_ken_zeker_geen_wheelie_of_wel",
+      "urlSnip": "newkids/Gij_ken_zeker_geen_wheelie_of_wel",
+      "TITLE": "newkids/Gij_ken_zeker_geen_wheelie_of_wel",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "newkids/Je_denkt_cker_dat_ie_stuk_is_of_wa",
+      "urlSnip": "newkids/Je_denkt_cker_dat_ie_stuk_is_of_wa",
+      "TITLE": "newkids/Je_denkt_cker_dat_ie_stuk_is_of_wa",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "whip",
+      "urlSnip": "whip",
+      "TITLE": "whip",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "prettyGood",
+      "urlSnip": "prettyGood",
+      "TITLE": "prettyGood",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "shitNegro",
+      "urlSnip": "shitNegro",
+      "TITLE": "shitNegro",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "HoHoHo",
+      "urlSnip": "HoHoHo",
+      "TITLE": "HoHoHo",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "youFuckinDruggo",
+      "urlSnip": "youFuckinDruggo",
+      "TITLE": "youFuckinDruggo",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/nice",
+      "urlSnip": "southPark/nice",
+      "TITLE": "southPark/nice",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/high",
+      "urlSnip": "southPark/high",
+      "TITLE": "southPark/high",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/allegedly",
+      "urlSnip": "southPark/allegedly",
+      "TITLE": "southPark/allegedly",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/timmay",
+      "urlSnip": "southPark/timmay",
+      "TITLE": "southPark/timmay",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/wannagethigh",
+      "urlSnip": "southPark/wannagethigh",
+      "TITLE": "southPark/wannagethigh",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/towel",
+      "urlSnip": "southPark/towel",
+      "TITLE": "southPark/towel",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/buddy",
+      "urlSnip": "southPark/buddy",
+      "TITLE": "southPark/buddy",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/beanertowel",
+      "urlSnip": "southPark/beanertowel",
+      "TITLE": "southPark/beanertowel",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/shittyWok",
+      "urlSnip": "southPark/shittyWok",
+      "TITLE": "southPark/shittyWok",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/marijuana",
+      "urlSnip": "southPark/marijuana",
+      "TITLE": "southPark/marijuana",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/moreMoney",
+      "urlSnip": "southPark/moreMoney",
+      "TITLE": "southPark/moreMoney",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/no",
+      "urlSnip": "southPark/no",
+      "TITLE": "southPark/no",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/abc",
+      "urlSnip": "southPark/abc",
+      "TITLE": "southPark/abc",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/strike",
+      "urlSnip": "southPark/strike",
+      "TITLE": "southPark/strike",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/buckaroo",
+      "urlSnip": "southPark/buckaroo",
+      "TITLE": "southPark/buckaroo",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/fighting",
+      "urlSnip": "southPark/fighting",
+      "TITLE": "southPark/fighting",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/fighting2",
+      "urlSnip": "southPark/fighting2",
+      "TITLE": "southPark/fighting2",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "southPark/respect",
+      "urlSnip": "southPark/respect",
+      "TITLE": "southPark/respect",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "farts/fart1",
+      "urlSnip": "farts/fart1",
+      "TITLE": "farts/fart1",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "farts/fart",
+      "urlSnip": "farts/fart",
+      "TITLE": "farts/fart",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "farts/fart2",
+      "urlSnip": "farts/fart2",
+      "TITLE": "farts/fart2",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "Wadiyatalkinabeet",
+      "urlSnip": "Wadiyatalkinabeet",
+      "TITLE": "Wadiyatalkinabeet",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "mnm/motivatie",
+      "urlSnip": "mnm/motivatie",
+      "TITLE": "mnm/motivatie",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "mnm/jacava",
+      "urlSnip": "mnm/jacava",
+      "TITLE": "mnm/jacava",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "mnm/et",
+      "urlSnip": "mnm/et",
+      "TITLE": "mnm/et",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "mnm/yeswecanobama",
+      "urlSnip": "mnm/yeswecanobama",
+      "TITLE": "mnm/yeswecanobama",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "mnm/volhouden",
+      "urlSnip": "mnm/volhouden",
+      "TITLE": "mnm/volhouden",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "mnm/yeswecan",
+      "urlSnip": "mnm/yeswecan",
+      "TITLE": "mnm/yeswecan",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "mnm/justdoit",
+      "urlSnip": "mnm/justdoit",
+      "TITLE": "mnm/justdoit",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "mnm/gaangaangaan",
+      "urlSnip": "mnm/gaangaangaan",
+      "TITLE": "mnm/gaangaangaan",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "mnm/concentratie",
+      "urlSnip": "mnm/concentratie",
+      "TITLE": "mnm/concentratie",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "mnm/buzzegeven",
+      "urlSnip": "mnm/buzzegeven",
+      "TITLE": "mnm/buzzegeven",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "mnm/allesgevenhe",
+      "urlSnip": "mnm/allesgevenhe",
+      "TITLE": "mnm/allesgevenhe",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "mnm/komaan",
+      "urlSnip": "mnm/komaan",
+      "TITLE": "mnm/komaan",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "mnm/allesisop",
+      "urlSnip": "mnm/allesisop",
+      "TITLE": "mnm/allesisop",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "mnm/letitgo",
+      "urlSnip": "mnm/letitgo",
+      "TITLE": "mnm/letitgo",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "mnm/blijvenzwemmen",
+      "urlSnip": "mnm/blijvenzwemmen",
+      "TITLE": "mnm/blijvenzwemmen",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "fail",
+      "urlSnip": "fail",
+      "TITLE": "fail",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "Temptation/mensen",
+      "urlSnip": "Temptation/mensen",
+      "TITLE": "Temptation/mensen",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "kaching",
+      "urlSnip": "kaching",
+      "TITLE": "kaching",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "icandream",
+      "urlSnip": "icandream",
+      "TITLE": "icandream",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "party",
+      "urlSnip": "party",
+      "TITLE": "party",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "cappelleShow/freecrack",
+      "urlSnip": "cappelleShow/freecrack",
+      "TITLE": "cappelleShow/freecrack",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "cappelleShow/weedlove",
+      "urlSnip": "cappelleShow/weedlove",
+      "TITLE": "cappelleShow/weedlove",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "cappelleShow/drugs",
+      "urlSnip": "cappelleShow/drugs",
+      "TITLE": "cappelleShow/drugs",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "whothefuck",
+      "urlSnip": "whothefuck",
+      "TITLE": "whothefuck",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "ripIsw",
+      "urlSnip": "ripIsw",
+      "TITLE": "ripIsw",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "willemJan/pussy",
+      "urlSnip": "willemJan/pussy",
+      "TITLE": "willemJan/pussy",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "willemJan/bigcock",
+      "urlSnip": "willemJan/bigcock",
+      "TITLE": "willemJan/bigcock",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "willemJan/computer_says_no",
+      "urlSnip": "willemJan/computer_says_no",
+      "TITLE": "willemJan/computer_says_no",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "borat/prostitute",
+      "urlSnip": "borat/prostitute",
+      "TITLE": "borat/prostitute",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "borat/tight",
+      "urlSnip": "borat/tight",
+      "TITLE": "borat/tight",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "borat/my_sister",
+      "urlSnip": "borat/my_sister",
+      "TITLE": "borat/my_sister",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "borat/inside",
+      "urlSnip": "borat/inside",
+      "TITLE": "borat/inside",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "borat/borat",
+      "urlSnip": "borat/borat",
+      "TITLE": "borat/borat",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "blameSossen",
+      "urlSnip": "blameSossen",
+      "TITLE": "blameSossen",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/rip",
+      "urlSnip": "dukeNukem/rip",
+      "TITLE": "dukeNukem/rip",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/make_my_day",
+      "urlSnip": "dukeNukem/make_my_day",
+      "TITLE": "dukeNukem/make_my_day",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/asshole",
+      "urlSnip": "dukeNukem/asshole",
+      "TITLE": "dukeNukem/asshole",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/fucked",
+      "urlSnip": "dukeNukem/fucked",
+      "TITLE": "dukeNukem/fucked",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/ugly",
+      "urlSnip": "dukeNukem/ugly",
+      "TITLE": "dukeNukem/ugly",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/die4that",
+      "urlSnip": "dukeNukem/die4that",
+      "TITLE": "dukeNukem/die4that",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/ballsofsteel",
+      "urlSnip": "dukeNukem/ballsofsteel",
+      "TITLE": "dukeNukem/ballsofsteel",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/damngood",
+      "urlSnip": "dukeNukem/damngood",
+      "TITLE": "dukeNukem/damngood",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/birthcontrol",
+      "urlSnip": "dukeNukem/birthcontrol",
+      "TITLE": "dukeNukem/birthcontrol",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/wasted",
+      "urlSnip": "dukeNukem/wasted",
+      "TITLE": "dukeNukem/wasted",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/sonOfABitch",
+      "urlSnip": "dukeNukem/sonOfABitch",
+      "TITLE": "dukeNukem/sonOfABitch",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/ball",
+      "urlSnip": "dukeNukem/ball",
+      "TITLE": "dukeNukem/ball",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/suck",
+      "urlSnip": "dukeNukem/suck",
+      "TITLE": "dukeNukem/suck",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/seemydick",
+      "urlSnip": "dukeNukem/seemydick",
+      "TITLE": "dukeNukem/seemydick",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/shitHappens",
+      "urlSnip": "dukeNukem/shitHappens",
+      "TITLE": "dukeNukem/shitHappens",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/holyShit",
+      "urlSnip": "dukeNukem/holyShit",
+      "TITLE": "dukeNukem/holyShit",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/die",
+      "urlSnip": "dukeNukem/die",
+      "TITLE": "dukeNukem/die",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/wastingmytime",
+      "urlSnip": "dukeNukem/wastingmytime",
+      "TITLE": "dukeNukem/wastingmytime",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/hurt",
+      "urlSnip": "dukeNukem/hurt",
+      "TITLE": "dukeNukem/hurt",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/shitDownYourNeck",
+      "urlSnip": "dukeNukem/shitDownYourNeck",
+      "TITLE": "dukeNukem/shitDownYourNeck",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "dukeNukem/blowass",
+      "urlSnip": "dukeNukem/blowass",
+      "TITLE": "dukeNukem/blowass",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "familyGuy/butt",
+      "urlSnip": "familyGuy/butt",
+      "TITLE": "familyGuy/butt",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "familyGuy/omg",
+      "urlSnip": "familyGuy/omg",
+      "TITLE": "familyGuy/omg",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "familyGuy/crack",
+      "urlSnip": "familyGuy/crack",
+      "TITLE": "familyGuy/crack",
+      "logo": "sb.png"
+    },
+    {
+      "command": "sb",
+      "params": "familyGuy/crazy",
+      "urlSnip": "familyGuy/crazy",
+      "TITLE": "familyGuy/crazy",
+      "logo": "sb.png"
+    }
+  ],
+  "status": {
+    "playlist": [
+      {
+        "id": 0,
+        "TITLE": "VRT - Studio Brussel",
+        "URL": "http://icecast.vrtcdn.be/stubru-high.mp3",
+        "CLIENT_DNS_ADDRESS": "tuurs-mbp-6.isw",
+        "CLIENT_ADDRESS": "172.20.40.9",
+        "TIMESTAMP": "Nov 8, 2018 10:11:37 AM",
+        "logo": "/img/vrt/sb.png",
+        "command": "vrt",
+        "params": "sb"
+      },
+      {
+        "id": 1,
+        "TITLE": "Spring - Dansen",
+        "URL": "/home/isw/.mediacontroller/cache/Spring - Dansen.webm",
+        "CLIENT_DNS_ADDRESS": "thomass-mbp.isw",
+        "CLIENT_ADDRESS": "172.20.32.103",
+        "TIMESTAMP": "Nov 8, 2018 10:11:58 AM",
+        "logo": "https://i.ytimg.com/vi/-SdGGKnoc-A/default.jpg",
+        "command": "yt",
+        "params": "byid -SdGGKnoc-A"
+      },
+      {
+        "id": 2,
+        "TITLE": "K3 Doe Maar",
+        "URL": "/home/isw/.mediacontroller/cache/K3 Doe Maar.webm",
+        "CLIENT_DNS_ADDRESS": "thomass-mbp.isw",
+        "CLIENT_ADDRESS": "172.20.32.103",
+        "TIMESTAMP": "Nov 8, 2018 10:12:09 AM",
+        "logo": "https://i.ytimg.com/vi/vr84dPwJ9ng/default.jpg",
+        "command": "yt",
+        "params": "byid vr84dPwJ9ng"
+      },
+      {
+        "id": 3,
+        "TITLE": "Samson \u0026 Gert - Joebadoebadoe",
+        "URL": "/home/isw/.mediacontroller/cache/Samson \u0026 Gert - Joebadoebadoe.m4a",
+        "CLIENT_DNS_ADDRESS": "thomass-mbp.isw",
+        "CLIENT_ADDRESS": "172.20.32.103",
+        "TIMESTAMP": "Nov 8, 2018 10:12:17 AM",
+        "logo": "https://i.ytimg.com/vi/a3caUnQrzUs/default.jpg",
+        "command": "yt",
+        "params": "byid a3caUnQrzUs"
+      },
+      {
+        "id": 4,
+        "TITLE": "VRT - Klara Continuo",
+        "URL": "http://icecast.vrtcdn.be/klaracontinuo-high.mp3",
+        "CLIENT_DNS_ADDRESS": "tuurs-mbp-6.isw",
+        "CLIENT_ADDRESS": "172.20.40.9",
+        "TIMESTAMP": "Nov 8, 2018 10:17:05 AM",
+        "logo": "/img/vrt/kc.png",
+        "command": "vrt",
+        "params": "kc"
+      }
+    ],
+    "current": {
+      "title": "Samson \u0026 Gert - Joebadoebadoe",
+      "thumb": "https://i.ytimg.com/vi/a3caUnQrzUs/default.jpg",
+      "position": 0.0,
+      "length": 484275
+    },
+    "playingNow": {
+      "id": 3,
+      "TITLE": "Samson \u0026 Gert - Joebadoebadoe",
+      "URL": "/home/isw/.mediacontroller/cache/Samson \u0026 Gert - Joebadoebadoe.m4a",
+      "CLIENT_DNS_ADDRESS": "thomass-mbp.isw",
+      "CLIENT_ADDRESS": "172.20.32.103",
+      "TIMESTAMP": "Nov 8, 2018 10:12:17 AM",
+      "logo": "https://i.ytimg.com/vi/a3caUnQrzUs/default.jpg",
+      "command": "yt",
+      "params": "byid a3caUnQrzUs"
+    },
+    "previous": {
+      "id": 2,
+      "TITLE": "K3 Doe Maar",
+      "URL": "/home/isw/.mediacontroller/cache/K3 Doe Maar.webm",
+      "CLIENT_DNS_ADDRESS": "thomass-mbp.isw",
+      "CLIENT_ADDRESS": "172.20.32.103",
+      "TIMESTAMP": "Nov 8, 2018 10:12:09 AM",
+      "logo": "https://i.ytimg.com/vi/vr84dPwJ9ng/default.jpg",
+      "command": "yt",
+      "params": "byid vr84dPwJ9ng"
+    },
+    "next": {
+      "id": 4,
+      "TITLE": "VRT - Klara Continuo",
+      "URL": "http://icecast.vrtcdn.be/klaracontinuo-high.mp3",
+      "CLIENT_DNS_ADDRESS": "tuurs-mbp-6.isw",
+      "CLIENT_ADDRESS": "172.20.40.9",
+      "TIMESTAMP": "Nov 8, 2018 10:17:05 AM",
+      "logo": "/img/vrt/kc.png",
+      "command": "vrt",
+      "params": "kc"
+    },
+    "muted": true,
+    "paused": false,
+    "volume": 95,
+    "plp": 3
+  },
+  "users": {
+    "data": [
+      {
+        "id": 1,
+        "uname": "tuur",
+        "fname": "Tuur",
+        "lname": "Dutoit",
+        "active": true,
+        "limit": 20
+      }, {
+        "id": 2,
+        "uname": "tuur2",
+        "fname": "Tuur",
+        "lname": "Dutoit",
+        "active": true,
+        "limit": 20
+      }, {
+        "id": 3,
+        "uname": "tuur3",
+        "fname": "Tuur",
+        "lname": "Dutoit",
+        "active": true,
+        "limit": 20
+      }
+    ]
+  },
+  "items": {
+    "data": [
+      {
+        "id": 1,
+        "name": "Wafel",
+        "drink": true,
+        "shopable": true,
+        "image": "http://10.0.2.2:3000/wafel.jpeg",
+        "price": 2,
+        "price2": 2.5,
+        "cal": 150
+      }, {
+        "id": 2,
+        "name": "Wafel",
+        "drink": true,
+        "shopable": true,
+        "image": "http://10.0.2.2:3000/wafel.jpeg",
+        "price": 2,
+        "price2": 2.5,
+        "cal": 150
+      }, {
+        "id": 3,
+        "name": "Wafel",
+        "drink": true,
+        "shopable": true,
+        "image": "http://10.0.2.2:3000/wafel.jpeg",
+        "price": 2,
+        "price2": 2.5,
+        "cal": 150
+      }, {
+        "id": 4,
+        "name": "Wafel",
+        "drink": true,
+        "shopable": true,
+        "image": "http://10.0.2.2:3000/wafel.jpeg",
+        "price": 2,
+        "price2": 2.5,
+        "cal": 150
+      }
+    ]
+  },
+  "radio": [
+    {
+      "id": "vrt",
+      "stations": [
+        {
+          "TITLE": "Studio Brussel",
+          "logo": "http://10.0.2.2:3000/stubru.png",
+          "command": "radio",
+          "params": "stubru"
+        }
+      ]
+    }, {
+      "id": "be",
+      "stations": [
+        {
+          "TITLE": "Radio Contact",
+          "logo": "http://10.0.2.2:3000/contact.png",
+          "command": "radio",
+          "params": "contact"
+        }
+      ]
+    }
+  ]
+}

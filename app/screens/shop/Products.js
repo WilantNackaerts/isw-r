@@ -3,8 +3,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View, Image, ScrollView } from 'react-native';
-import { Card, CardItem, Spinner } from 'native-base';
-import { fetchProducts } from '/store/actions/shop';
+import { Card, CardItem, Spinner, Footer, Text, Container } from 'native-base';
+import ClickableIcon from '/components/ClickableIcon';
+import { fetchProducts, orderItem } from '/store/actions/shop';
+import { TEXT, FOOTER } from '/styles';
+import { ORDER } from '/navigation/shop/routes';
 import type { NavigationScreenProp } from 'react-navigation';
 import type { State, Dispatch } from '/types';
 import type { Product } from '/types/shop';
@@ -12,13 +15,22 @@ import type { Product } from '/types/shop';
 type Props = {
   products: Product[],
   loadingProducts: boolean,
+  total: number,
+  canOrder: boolean,
   navigation: NavigationScreenProp,
   fetchProducts: () => void,
+  orderItem: ( productId: number, amount: 1 | -1 ) => void,
 };
 
 class Products extends Component<Props> {
   componentDidMount() {
     this.props.fetchProducts();
+  }
+
+  order() {
+    this.props.navigation.navigate( ORDER, {
+      username: this.props.navigation.getParam( 'username', '' ),
+    } );
   }
 
   render() {
@@ -30,24 +42,33 @@ class Products extends Component<Props> {
       );
     }
 
-    console.log( this.props.products[ 0 ].image.replace( 'https://shop2.isw', 'http://10.0.2.2' ) );
     return (
-      <ScrollView>
-        <View style={styles.container}>
-          {
-            this.props.products.map( product => (
-              <Card key={product.id} style={styles.product}>
-                <CardItem cardBody style={styles.cardContent}>
-                  <Image
-                    source={{ uri: product.image.replace( 'https://shop2.isw', 'http://10.0.2.2:3030' ) }}
-                    style={styles.image}
-                  />
-                </CardItem>
-              </Card>
-            ) )
-          }
-        </View>
-      </ScrollView>
+      <Container>
+        <ScrollView>
+          <View style={styles.cardContainer}>
+            {
+              this.props.products.map( product => (
+                <Card key={product.id} style={styles.product}>
+                  <CardItem button cardBody style={styles.cardContent} onPress={() => this.props.orderItem( product.id, 1 )}>
+                    <Image
+                      source={{ uri: product.image.replace( 'https://shop2.isw', 'http://10.0.2.2:3030' ) }}
+                      style={styles.image}
+                    />
+                  </CardItem>
+                </Card>
+              ) )
+            }
+          </View>
+        </ScrollView>
+        <Footer style={styles.basket}>
+          <Text style={styles.total}>€{this.props.total.toFixed( 2 )}</Text>
+          <ClickableIcon
+            name='send'
+            onPress={this.order.bind( this )}
+            enabled={this.props.canOrder}
+          />
+        </Footer>
+      </Container>
     );
   }
 }
@@ -58,7 +79,8 @@ const styles = StyleSheet.create( {
     alignItems: 'center',
     flexGrow: 1,
   },
-  container: {
+  cardContainer: {
+    flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignContent: 'flex-start',
@@ -78,12 +100,24 @@ const styles = StyleSheet.create( {
     resizeMode: 'cover',
     flex: 1,
   },
+  basket: {
+    ...FOOTER,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  total: {
+    ...TEXT,
+    fontSize: 25,
+  },
 } );
 
 function mapStateToProps( state: State ) {
   return {
     products: state.shop.products,
     loadingProducts: state.shop.loadingProducts,
+    total: state.shop.total,
+    canOrder: state.shop.total > 0,
   };
 }
 
@@ -91,6 +125,9 @@ function mapDispatchToProps( dispatch: Dispatch ) {
   return {
     fetchProducts() {
       dispatch( fetchProducts() );
+    },
+    orderItem( productId: number, amount: 1 | -1 ) {
+      dispatch( orderItem( productId, amount ) );
     },
   };
 }
