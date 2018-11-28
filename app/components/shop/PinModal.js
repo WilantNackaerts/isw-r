@@ -13,13 +13,27 @@ type Props = {
   close: () => void,
 }
 
-export default class PinModal extends Component<Props> {
+type State = {
+  pin?: string,
+}
+
+export default class PinModal extends Component<Props, State> {
 
   async setPin() {
-    // AsyncStorage.setItem( 'pin' ,  );
+    await AsyncStorage.setItem( 'pin' , this.checkPin() );
+    console.log( await AsyncStorage.getItem( 'pin' ) );
     const username = await AsyncStorage.getItem( 'username' );
     this.props.navigation.navigate( PRODUCTS, { username } );
     this.props.close();
+  }
+
+  checkPin() {
+    const pin = this.state.pin;
+    if ( /^[0-9]{4}$/.test( pin ) ) {
+      return pin;
+    } else {
+      console.error();
+    }
   }
 
   render() {
@@ -41,7 +55,7 @@ export default class PinModal extends Component<Props> {
             <Item stackedLabel>
               <Label>Pin</Label>
               <Input
-                // secureTextEntry
+                onChangeText={( pin ) => this.setState( { pin } )}
               />
             </Item>
             <View style={styles.viewButton}>
