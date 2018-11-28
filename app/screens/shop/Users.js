@@ -2,10 +2,10 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, AsyncStorage } from 'react-native';
 import { Text, Spinner, ListItem, Container } from 'native-base';
-import { PRODUCTS } from '/navigation/shop/routes';
 import { fetchUsers } from '/store/actions/shop';
+import PinModal from '/components/shop/PinModal';
 import type { NavigationScreenProp } from 'react-navigation';
 import type { User } from '/types/shop';
 import FilterList from '/components/FilterList';
@@ -18,13 +18,25 @@ type Props = {
   fetchUsers(): void,
 };
 
-class Users extends Component<Props> {
+type LocalState = {
+  modalVisible: boolean,
+}
+
+class Users extends Component<Props, LocalState> {
+  state = {
+    modalVisible: false,
+  }
   componentDidMount() {
     this.props.fetchUsers();
   }
 
   selectUser( username: string ) {
-    this.props.navigation.navigate( PRODUCTS, { username } );
+    this.setState( { modalVisible: true } );
+    AsyncStorage.setItem( 'username', username );
+  }
+
+  closeModal() {
+    this.setState( { modalVisible: false } );
   }
 
   render() {
@@ -48,6 +60,7 @@ class Users extends Component<Props> {
             </ListItem>
           )}
         />
+        <PinModal close={this.closeModal.bind( this )} navigation={this.props.navigation} modalVisible={this.state.modalVisible} />
       </Container>
     );
   }
