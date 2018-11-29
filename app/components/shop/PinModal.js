@@ -14,10 +14,13 @@ type Props = {
 }
 
 type State = {
-  pin?: string,
+  pin: string,
 }
 
 export default class PinModal extends Component<Props, State> {
+  state = {
+    pin: '',
+  }
 
   async setPin() {
     await AsyncStorage.setItem( 'pin' , this.checkPin() );
