@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { StyleSheet, AsyncStorage } from 'react-native';
 import { Text, Container, List, ListItem, Button, Footer, Left, Right } from 'native-base';
 import { SHOP_API_ORDER_URL } from '/config';
+import { TEXT, FOOTER } from '/styles';
 import type { NavigationScreenProp } from 'react-navigation';
 import type { State, Dispatch } from '/types';
 import type { Product, Basket } from '/types/shop';
@@ -28,7 +29,7 @@ class Order extends Component<Props> {
         method: 'POST',
         headers: new Headers( {
           'Content-Type': 'application/json',
-          Accept: 'appliction/json',
+          Accept: 'application/json',
           Authorization: username + ':' + pin,
         } ),
         body: JSON.stringify( {
@@ -58,14 +59,14 @@ class Order extends Component<Props> {
               </Right>
             </ListItem>
           } />
-        <Footer>
+        <Footer style={styles.footer}>
           <Left>
-            <Button rounded success style={styles.payButton} onPress={this.order.bind( this )}>
-              <Text>Pay</Text>
-            </Button>
+            <Text style={styles.total}>€ {Math.round( this.props.total*100 )/100}</Text>
           </Left>
           <Right>
-            <Text>€ {Math.round( this.props.total*100 )/100}</Text>
+            <Button rounded success style={styles.payButton} onPress={this.order.bind( this )}>
+              <Text style={styles.payText}>Pay</Text>
+            </Button>
           </Right>
         </Footer>
       </Container>
@@ -75,7 +76,18 @@ class Order extends Component<Props> {
 
 const styles = StyleSheet.create( {
   payButton: {
-    marginLeft: 20,
+    padding: 5,
+  },
+  payText: {
+    ...TEXT,
+    fontSize: 20,
+  },
+  total: {
+    ...TEXT,
+    fontSize: 25,
+  },
+  footer: {
+    ...FOOTER,
   },
 } );
 
