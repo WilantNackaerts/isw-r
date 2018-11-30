@@ -14,3 +14,4 @@ export const MEDIA_STATUS_URL = MEDIA_API_URL + '/status';
 // export const SHOP_URL = 'https://shop2.isw';
 export const SHOP_URL = 'http://10.0.2.2:3050/shop';
 export const SHOP_API_URL = SHOP_URL + '/api/v1';
+export const SHOP_API_ORDER_URL = SHOP_API_URL + '/users/orders';

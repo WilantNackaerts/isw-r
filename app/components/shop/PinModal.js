@@ -24,7 +24,6 @@ export default class PinModal extends Component<Props, State> {
 
   async setPin() {
     await AsyncStorage.setItem( 'pin' , this.checkPin() );
-    console.log( await AsyncStorage.getItem( 'pin' ) );
     const username = await AsyncStorage.getItem( 'username' );
     this.props.navigation.navigate( PRODUCTS, { username } );
     this.props.close();
@@ -59,6 +58,7 @@ export default class PinModal extends Component<Props, State> {
               <Label>Pin</Label>
               <Input
                 onChangeText={( pin ) => this.setState( { pin } )}
+                secureTextEntry
               />
             </Item>
             <View style={styles.viewButton}>
