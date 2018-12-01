@@ -27,7 +27,6 @@ class Products extends Component<Props> {
   async componentWillMount() {
     const username = await AsyncStorage.getItem( 'username' );
     const pin = await AsyncStorage.getItem( 'pin' );
-    console.log( username, pin );
     if ( username == null && pin == null ) {
       this.props.navigation.navigate( USERS );
     }

@@ -6,6 +6,7 @@ import { StyleSheet, AsyncStorage } from 'react-native';
 import { Text, Container, List, ListItem, Button, Footer, Left, Right } from 'native-base';
 import { SHOP_API_ORDER_URL } from '/config';
 import { TEXT, FOOTER } from '/styles';
+import { PRODUCTS } from '/navigation/shop/routes';
 import type { NavigationScreenProp } from 'react-navigation';
 import type { State, Dispatch } from '/types';
 import type { Product, Basket } from '/types/shop';
@@ -23,7 +24,6 @@ class Order extends Component<Props> {
   async order() {
     const username = await AsyncStorage.getItem( 'username' );
     const pin = await AsyncStorage.getItem( 'pin' );
-    console.log( username, pin );
     for ( const [ item_id, amount ] of Object.entries( this.props.basket ) ) {
       fetch( SHOP_API_ORDER_URL, {
         method: 'POST',
@@ -38,9 +38,9 @@ class Order extends Component<Props> {
           amount,
         } ),
       } )
-        // .then( response => response.json() )
         .then( console.log );
     }
+    this.props.navigation.navigate( PRODUCTS, { username } );
   }
 
 
