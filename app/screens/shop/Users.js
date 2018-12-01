@@ -10,7 +10,6 @@ import type { NavigationScreenProp } from 'react-navigation';
 import type { User } from '/types/shop';
 import FilterList from '/components/FilterList';
 import type { State, Dispatch } from '/types';
-import { PRODUCTS } from '/navigation/shop/routes';
 
 type Props = {
   users: User[],
@@ -28,21 +27,13 @@ class Users extends Component<Props, LocalState> {
     modalVisible: false,
   }
 
-  async componentWillMount() {
-    const username = await AsyncStorage.getItem( 'username' );
-    const pin = await AsyncStorage.getItem( 'pin' );
-    if ( !!username && !!pin ) {
-      this.props.navigation.navigate( PRODUCTS, { username } );
-    }
-  }
-
   componentDidMount() {
     this.props.fetchUsers();
   }
 
-  selectUser( username: string ) {
+  async selectUser( username: string ) {
     this.setState( { modalVisible: true } );
-    AsyncStorage.setItem( 'username', username );
+    await AsyncStorage.setItem( 'username', username );
   }
 
   closeModal() {

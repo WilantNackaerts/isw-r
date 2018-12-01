@@ -4,7 +4,7 @@ import React, { Component, type Node, type Element } from 'react';
 import { Easing, Animated } from 'react-native';
 import { createStackNavigator, type HeaderProps } from 'react-navigation';
 import { Header, Title, Body, Left, Right } from 'native-base';
-import routes, { USERS } from './routes';
+import routes, { PRODUCTS } from './routes';
 
 function maybeRender( Container: Class<Component<any>>, elem: Node, props: HeaderProps ): ?Element<any> {
   if ( typeof elem === 'function' ) {
@@ -19,7 +19,7 @@ function maybeRender( Container: Class<Component<any>>, elem: Node, props: Heade
 }
 
 export default createStackNavigator( routes, {
-  initialRouteName: USERS,
+  initialRouteName: PRODUCTS,
   navigationOptions: {
     header: props => {
       const opts = props.scene.descriptor.options;

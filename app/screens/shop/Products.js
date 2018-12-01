@@ -2,12 +2,12 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, View, Image, ScrollView, AsyncStorage } from 'react-native';
 import { Card, CardItem, Spinner, Footer, Text, Container } from 'native-base';
 import ClickableIcon from '/components/ClickableIcon';
 import { fetchProducts, orderItem } from '/store/actions/shop';
 import { TEXT, FOOTER } from '/styles';
-import { ORDER } from '/navigation/shop/routes';
+import { ORDER, USERS } from '/navigation/shop/routes';
 import type { NavigationScreenProp } from 'react-navigation';
 import type { State, Dispatch } from '/types';
 import type { Product } from '/types/shop';
@@ -23,6 +23,16 @@ type Props = {
 };
 
 class Products extends Component<Props> {
+
+  async componentWillMount() {
+    const username = await AsyncStorage.getItem( 'username' );
+    const pin = await AsyncStorage.getItem( 'pin' );
+    console.log( username, pin );
+    if ( !!username && !!pin ) {
+      this.props.navigation.navigate( USERS );
+    }
+  }
+
   componentDidMount() {
     this.props.fetchProducts();
   }
