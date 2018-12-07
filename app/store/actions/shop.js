@@ -2,7 +2,7 @@
 
 import * as actions from '/types/shop/actions';
 import type { Dispatch, Thunk } from '/types';
-import { SHOP_API_URL } from '/config';
+import { SHOP_API_URL, SHOP_API_ORDER_URL } from '/config';
 import type {
   ApiUser,
   User,
@@ -15,6 +15,7 @@ import type {
   FetchProductsStartAction,
   FetchProductsEndAction,
   OrderItemAction,
+  Basket,
 } from '/types/shop';
 
 function sort( a: string, b: string ): number {
@@ -94,4 +95,23 @@ export function orderItem( productId: number, amount: number ): OrderItemAction 
     productId,
     amount,
   };
+}
+
+export function pay( username: string, pin: string, basket: Basket ) {
+  for ( const [ item_id, amount ] of Object.entries( basket ) ) {
+    fetch( SHOP_API_ORDER_URL, {
+      method: 'POST',
+      headers: new Headers( {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: username + ':' + pin,
+      } ),
+      body: JSON.stringify( {
+        subscription: false,
+        item_id,
+        amount,
+      } ),
+    } )
+      .catch( console.error );
+  }
 }
