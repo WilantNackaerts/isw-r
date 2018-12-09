@@ -10,7 +10,7 @@ import { TEXT, FOOTER } from '/styles';
 import { ORDER, USERS } from '/navigation/shop/routes';
 import type { NavigationScreenProp } from 'react-navigation';
 import type { State, Dispatch } from '/types';
-import type { Product } from '/types/shop';
+import type { Product, Basket } from '/types/shop';
 
 type Props = {
   products: Product[],
@@ -18,19 +18,33 @@ type Props = {
   total: number,
   canOrder: boolean,
   navigation: NavigationScreenProp,
+  basket: Basket,
   fetchProducts: () => void,
   orderItem: ( productId: number, amount: 1 | -1 ) => void,
 };
 
-class Products extends Component<Props> {
+type LocalState = {
+  username: string,
+  pin: string,
+}
+
+class Products extends Component<Props, LocalState> {
+
+  state = {
+    username: '',
+    pin: '',
+  }
 
   async componentWillMount() {
-    const username = await AsyncStorage.getItem( 'username' );
-    const pin = await AsyncStorage.getItem( 'pin' );
-    if ( username == null && pin == null ) {
+    this.setState( {
+      username: await AsyncStorage.getItem( 'username' ),
+      pin: await AsyncStorage.getItem( 'pin' ),
+    } );
+
+    if ( this.state.username == null && this.state.pin == null ) {
       this.props.navigation.navigate( USERS );
     }
-    this.props.navigation.setParams( { 'username': username } );
+    this.props.navigation.setParams( { 'username': this.state.username } );
   }
 
   componentDidMount() {
@@ -67,13 +81,17 @@ class Products extends Component<Props> {
                   </CardItem>
                   <CardItem footer >
                     <Left>
-                      <Icon name='remove' />
+                      <Icon name='remove' 
+                        onPress={() => this.props.orderItem( product.id, -1 )}
+                      />
                     </Left>
                     <Body>
-                      <Text>0</Text>
+                      <Text>{this.props.basket[ product.id ] || 0}</Text>
                     </Body>
                     <Right>
-                      <Icon name='add' />
+                      <Icon name='add' 
+                        onPress={() => this.props.orderItem( product.id, 1 )}
+                      />
                     </Right>
                   </CardItem>
                 </Card>
@@ -139,6 +157,7 @@ function mapStateToProps( state: State ) {
     loadingProducts: state.shop.loadingProducts,
     total: state.shop.total,
     canOrder: state.shop.total > 0,
+    basket: state.shop.basket,
   };
 }
 
