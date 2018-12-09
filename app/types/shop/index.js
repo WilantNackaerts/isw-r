@@ -72,8 +72,13 @@ export type OrderItemAction = {
   productId: number,
   amount: number,
 }
-export type Pay = {
-  type: typeof actions.PAY,
+
+export type FetchPayStartAction = {
+  type: typeof actions.FETCH_PAY_START,
+}
+
+export type FetchPayEndAction = {
+  type: typeof actions.FETCH_PAY_END,
 }
 
 export type Action =
@@ -81,6 +86,8 @@ export type Action =
   FetchUsersEndAction |
   FetchProductsStartAction |
   FetchProductsEndAction |
+  FetchPayStartAction |
+  FetchPayEndAction |
   OrderItemAction;
 
 export type State = {

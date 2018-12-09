@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View, Image, ScrollView, AsyncStorage } from 'react-native';
-import { Card, CardItem, Spinner, Footer, Text, Container, Left, Icon, Right, Body } from 'native-base';
-import ClickableIcon from '/components/ClickableIcon';
+import { Card, CardItem, Spinner, Footer, Text, Container, Left, Icon, Right, Body, Button } from 'native-base';
+// import ClickableIcon from '/components/ClickableIcon';
 import { fetchProducts, orderItem, pay } from '/store/actions/shop';
 import { TEXT, FOOTER } from '/styles';
 import { ORDER, USERS } from '/navigation/shop/routes';
@@ -102,11 +102,16 @@ class Products extends Component<Props, LocalState> {
         </ScrollView>
         <Footer style={styles.basket}>
           <Text style={styles.total}>€{this.props.total.toFixed( 2 )}</Text>
-          <ClickableIcon
+          {/* <ClickableIcon
             name='send'
             onPress={this.order.bind( this )}
             enabled={this.props.canOrder}
-          />
+          /> */}
+          <Button rounded succes
+            onPress={this.props.pay( this.state.username, this.state.pin, this.props.basket )}
+          >
+            <Text>PAY</Text>
+          </Button>
         </Footer>
       </Container>
     );
