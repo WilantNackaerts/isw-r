@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View, Image, ScrollView, AsyncStorage } from 'react-native';
-import { Card, CardItem, Spinner, Footer, Text, Container } from 'native-base';
+import { Card, CardItem, Spinner, Footer, Text, Container, Left, Icon, Right, Body } from 'native-base';
 import ClickableIcon from '/components/ClickableIcon';
 import { fetchProducts, orderItem } from '/store/actions/shop';
 import { TEXT, FOOTER } from '/styles';
@@ -64,6 +64,17 @@ class Products extends Component<Props> {
                       source={{ uri: product.image.replace( 'https://10.0.2.2:3050/storage', 'http://10.0.2.2:3050/shop/storage' ) }}
                       style={styles.image}
                     />
+                  </CardItem>
+                  <CardItem footer >
+                    <Left>
+                      <Icon name='remove' />
+                    </Left>
+                    <Body>
+                      <Text>0</Text>
+                    </Body>
+                    <Right>
+                      <Icon name='add' />
+                    </Right>
                   </CardItem>
                 </Card>
               ) )
