@@ -61,6 +61,8 @@ export default function shopReducer( state: State = defaultState(), action: Acti
           [ action.productId ]: ( state.basket[ action.productId ] || 0 ) + action.amount,
         },
       } );
+    case actions.PAY:
+      return { ...state, basket: {}, total: 0 };
     default:
       return state;
   }

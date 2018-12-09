@@ -7,3 +7,4 @@ export const FETCH_PRODUCTS_END: 'shop/fetch-products:end' = 'shop/fetch-product
 export const ORDER_ITEM: 'shop/order-item' = 'shop/order-item';
 export const ORDER_START: 'shop/order:start' = 'shop/order:start';
 export const ORDER_END: 'shop/order:end' = 'shop/order:end';
+export const PAY: 'shop/pay' = 'shop/pay';

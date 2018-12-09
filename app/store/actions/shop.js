@@ -16,6 +16,7 @@ import type {
   FetchProductsEndAction,
   OrderItemAction,
   Basket,
+  Pay,
 } from '/types/shop';
 
 function sort( a: string, b: string ): number {
@@ -97,7 +98,7 @@ export function orderItem( productId: number, amount: number ): OrderItemAction 
   };
 }
 
-export function pay( username: string, pin: string, basket: Basket ) {
+export function pay( username: string, pin: string, basket: Basket ): Pay {
   for ( const [ item_id, amount ] of Object.entries( basket ) ) {
     fetch( SHOP_API_ORDER_URL, {
       method: 'POST',
@@ -114,4 +115,7 @@ export function pay( username: string, pin: string, basket: Basket ) {
     } )
       .catch( console.error );
   }
+  return {
+    type: actions.PAY,
+  };
 }

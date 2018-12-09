@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { StyleSheet, View, Image, ScrollView, AsyncStorage } from 'react-native';
 import { Card, CardItem, Spinner, Footer, Text, Container, Left, Icon, Right, Body } from 'native-base';
 import ClickableIcon from '/components/ClickableIcon';
-import { fetchProducts, orderItem } from '/store/actions/shop';
+import { fetchProducts, orderItem, pay } from '/store/actions/shop';
 import { TEXT, FOOTER } from '/styles';
 import { ORDER, USERS } from '/navigation/shop/routes';
 import type { NavigationScreenProp } from 'react-navigation';
@@ -21,6 +21,7 @@ type Props = {
   basket: Basket,
   fetchProducts: () => void,
   orderItem: ( productId: number, amount: 1 | -1 ) => void,
+  pay: ( username: string, pin: string, basket: Basket ) => void,
 };
 
 type LocalState = {
@@ -168,6 +169,9 @@ function mapDispatchToProps( dispatch: Dispatch ) {
     },
     orderItem( productId: number, amount: 1 | -1 ) {
       dispatch( orderItem( productId, amount ) );
+    },
+    pay( username: string, pin: string, basket: Basket ) {
+      dispatch( pay( username, pin, basket ) );
     },
   };
 }

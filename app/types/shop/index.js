@@ -72,6 +72,9 @@ export type OrderItemAction = {
   productId: number,
   amount: number,
 }
+export type Pay = {
+  type: typeof actions.PAY,
+}
 
 export type Action =
   FetchUsersStartAction |
