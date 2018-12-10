@@ -65,7 +65,7 @@ export default function shopReducer( state: State = defaultState(), action: Acti
     case actions.FETCH_PAY_START:
       return { ...state };
     case actions.FETCH_PAY_END:
-      return { ...state, basket: {}, total: 0, toastVisible: true };
+      return { ...state, basket: {}, total: 0 };
     default:
       return state;
   }

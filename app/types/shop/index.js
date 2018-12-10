@@ -98,5 +98,4 @@ export type State = {
   loadingProducts: boolean,
   basket: Basket,
   total: number,
-  toastVisible: boolean,
 };

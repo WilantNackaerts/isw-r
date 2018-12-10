@@ -19,7 +19,6 @@ type Props = {
   canOrder: boolean,
   navigation: NavigationScreenProp,
   basket: Basket,
-  toastVisible: boolean,
   fetchProducts: () => void,
   orderItem: ( productId: number, amount: 1 | -1 ) => void,
   pay: ( username: string, pin: string, basket: Basket ) => void,
@@ -60,14 +59,6 @@ class Products extends Component<Props, LocalState> {
           <Spinner color='blue' />
         </View>
       );
-    }
-
-    if ( this.props.toastVisible ) {
-      () => Toast.show( {
-        text: 'payment succesful',
-        type: 'success',
-        duration: 2000,
-      } );
     }
 
     return (
@@ -111,8 +102,15 @@ class Products extends Component<Props, LocalState> {
             enabled={this.props.canOrder}
           /> */}
           <Button rounded success
-            onPress={() => this.props.pay( this.state.username, this.state.pin, this.props.basket )}
-            active={this.props.canOrder}
+            onPress={() => {
+              this.props.pay( this.state.username, this.state.pin, this.props.basket );
+              Toast.show( {
+                text: 'payment succesful',
+                type: 'success',
+                buttonText: 'Okay',
+              } );
+            }
+            }
           >
             <Text>PAY</Text>
           </Button>
@@ -168,7 +166,6 @@ function mapStateToProps( state: State ) {
     total: state.shop.total,
     canOrder: state.shop.total > 0,
     basket: state.shop.basket,
-    toastVisible: state.shop.toastVisible,
   };
 }
 
