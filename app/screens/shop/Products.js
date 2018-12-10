@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View, Image, ScrollView, AsyncStorage } from 'react-native';
-import { Card, CardItem, Spinner, Footer, Text, Container, Left, Icon, Right, Body, Button } from 'native-base';
+import { Card, CardItem, Spinner, Footer, Text, Container, Left, Icon, Right, Body, Button, Toast } from 'native-base';
 // import ClickableIcon from '/components/ClickableIcon';
 import { fetchProducts, orderItem, pay } from '/store/actions/shop';
 import { TEXT, FOOTER } from '/styles';
@@ -19,6 +19,7 @@ type Props = {
   canOrder: boolean,
   navigation: NavigationScreenProp,
   basket: Basket,
+  toastVisible: boolean,
   fetchProducts: () => void,
   orderItem: ( productId: number, amount: 1 | -1 ) => void,
   pay: ( username: string, pin: string, basket: Basket ) => void,
@@ -59,6 +60,14 @@ class Products extends Component<Props, LocalState> {
           <Spinner color='blue' />
         </View>
       );
+    }
+
+    if ( this.props.toastVisible ) {
+      () => Toast.show( {
+        text: 'payment succesful',
+        type: 'success',
+        duration: 2000,
+      } );
     }
 
     return (
@@ -159,6 +168,7 @@ function mapStateToProps( state: State ) {
     total: state.shop.total,
     canOrder: state.shop.total > 0,
     basket: state.shop.basket,
+    toastVisible: state.shop.toastVisible,
   };
 }
 

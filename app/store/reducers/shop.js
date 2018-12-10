@@ -12,6 +12,7 @@ function defaultState(): State {
     loadingProducts: true,
     basket: {},
     total: 0,
+    toastVisible: false,
   };
 }
 
@@ -64,7 +65,7 @@ export default function shopReducer( state: State = defaultState(), action: Acti
     case actions.FETCH_PAY_START:
       return { ...state };
     case actions.FETCH_PAY_END:
-      return { ...state, basket: {}, total: 0 };
+      return { ...state, basket: {}, total: 0, toastVisible: true };
     default:
       return state;
   }
