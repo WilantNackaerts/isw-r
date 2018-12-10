@@ -7,7 +7,6 @@ import type { NavigationNavigatorProps, HeaderProps } from 'react-navigation';
 
 import Users from '/screens/shop/Users';
 import Products from '/screens/shop/Products';
-import Order from '/screens/shop/Order';
 
 export const USERS: 'shop/users' = 'shop/users';
 export const PRODUCTS: 'shop/products' = 'shop/products';
@@ -27,12 +26,6 @@ export default {
       headerRight: ( props: HeaderProps ) => (
         <Icon name='create' style={styles.icon} onPress={() => props.navigation.navigate( USERS )} />
       ),
-    } ),
-  },
-  [ ORDER ]: {
-    screen: Order,
-    navigationOptions: ( props: NavigationNavigatorProps ) => ( {
-      headerTitle: 'Order - ' + props.navigation.getParam( 'username', '?' ),
     } ),
   },
 };

@@ -52,12 +52,6 @@ class Products extends Component<Props, LocalState> {
     this.props.fetchProducts();
   }
 
-  // order() {
-  //   this.props.navigation.navigate( ORDER, {
-  //     username: this.props.navigation.getParam( 'username', '' ),
-  //   } );
-  // }
-
   render() {
     if ( this.props.loadingProducts ) {
       return (
@@ -109,6 +103,7 @@ class Products extends Component<Props, LocalState> {
           /> */}
           <Button rounded success
             onPress={() => this.props.pay( this.state.username, this.state.pin, this.props.basket )}
+            active={this.props.canOrder}
           >
             <Text>PAY</Text>
           </Button>
