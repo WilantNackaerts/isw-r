@@ -7,7 +7,7 @@ import { Card, CardItem, Spinner, Footer, Text, Container, Left, Icon, Right, Bo
 // import ClickableIcon from '/components/ClickableIcon';
 import { fetchProducts, orderItem, pay } from '/store/actions/shop';
 import { TEXT, FOOTER } from '/styles';
-import { ORDER, USERS } from '/navigation/shop/routes';
+import { USERS } from '/navigation/shop/routes';
 import type { NavigationScreenProp } from 'react-navigation';
 import type { State, Dispatch } from '/types';
 import type { Product, Basket } from '/types/shop';
@@ -52,11 +52,11 @@ class Products extends Component<Props, LocalState> {
     this.props.fetchProducts();
   }
 
-  order() {
-    this.props.navigation.navigate( ORDER, {
-      username: this.props.navigation.getParam( 'username', '' ),
-    } );
-  }
+  // order() {
+  //   this.props.navigation.navigate( ORDER, {
+  //     username: this.props.navigation.getParam( 'username', '' ),
+  //   } );
+  // }
 
   render() {
     if ( this.props.loadingProducts ) {
@@ -108,7 +108,7 @@ class Products extends Component<Props, LocalState> {
             enabled={this.props.canOrder}
           /> */}
           <Button rounded succes
-            onPress={this.props.pay( this.state.username, this.state.pin, this.props.basket )}
+            onPress={() => this.props.pay( this.state.username, this.state.pin, this.props.basket )}
           >
             <Text>PAY</Text>
           </Button>

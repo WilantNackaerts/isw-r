@@ -129,6 +129,7 @@ export function pay( username: string, pin: string, basket: Basket ): Thunk {
           amount,
         } ),
       } )
+        .then( console.log )
         .then( dispatch( _fetchPayEnd() ) )
         .catch( console.error );
     }
