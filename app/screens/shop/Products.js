@@ -83,7 +83,7 @@ class Products extends Component<Props, LocalState> {
                   <CardItem footer >
                     <Left>
                       <Icon name='remove' 
-                        onPress={() => this.props.orderItem( product.id, -1 )}
+                        onPress={() => this.props.basket[ product.id ] > 0 && this.props.orderItem( product.id, -1 )}
                       />
                     </Left>
                     <Body>
@@ -107,7 +107,7 @@ class Products extends Component<Props, LocalState> {
             onPress={this.order.bind( this )}
             enabled={this.props.canOrder}
           /> */}
-          <Button rounded succes
+          <Button rounded success
             onPress={() => this.props.pay( this.state.username, this.state.pin, this.props.basket )}
           >
             <Text>PAY</Text>
