@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { StyleSheet, AsyncStorage } from 'react-native';
+import { StyleSheet, AsyncStorage, Dimensions, Platform } from 'react-native';
 import Modal from 'react-native-modal';
 import { View, Form, Item, Label, Button, Text, Input } from 'native-base';
 import type { NavigationScreenProp } from 'react-navigation';
@@ -39,18 +39,18 @@ export default class PinModal extends Component<Props, State> {
   }
 
   render() {
-    // const deviceWidth = Dimensions.get( 'window' ).width;
-    // const deviceHeight = Platform.OS === 'ios' 
-    //   ? Dimensions.get( 'window' ).height
-    //   : require( 'react-native-extra-dimensions-android' ).get( 'REAL_WINDOW_HEIGHT' );
+    const deviceWidth = Dimensions.get( 'window' ).width;
+    const deviceHeight = Platform.OS === 'ios' 
+      ? Dimensions.get( 'window' ).height
+      : require( 'react-native-extra-dimensions-android' ).get( 'REAL_WINDOW_HEIGHT' );
 
     return (
       <Modal
         style={styles.modal}
         visible={this.props.modalVisible}
         onRequestClose={this.props.close}
-        // deviceWidth={deviceWidth}
-        // deviceHeight={deviceHeight}
+        deviceWidth={deviceWidth}
+        deviceHeight={deviceHeight}
       >
         <View style={styles.view}>
           <Form>
