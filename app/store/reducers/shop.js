@@ -8,8 +8,8 @@ function defaultState(): State {
     users: [],
     products: [],
     productsById: {},
-    loadingUsers: true,
-    loadingProducts: true,
+    loadingUsers: false,
+    loadingProducts: false,
     basket: {},
     total: 0,
     toastVisible: false,
@@ -66,6 +66,8 @@ export default function shopReducer( state: State = defaultState(), action: Acti
       return { ...state };
     case actions.FETCH_PAY_END:
       return { ...state, basket: {}, total: 0 };
+    case actions.SET_USERNAME:
+      return { ...state, username: action.username };
     default:
       return state;
   }

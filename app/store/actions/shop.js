@@ -17,6 +17,7 @@ import type {
   FetchPayStartAction,
   FetchPayEndAction,
   OrderItemAction,
+  SetUsernameAction,
   Basket,
 } from '/types/shop';
 
@@ -132,5 +133,12 @@ export function pay( username: string, pin: string, basket: Basket ): Thunk {
         .then( dispatch( _fetchPayEnd() ) )
         .catch( console.error );
     }
+  };
+}
+
+export function setUsername( username: string ): SetUsernameAction {
+  return {
+    type: actions.SET_USERNAME,
+    username,
   };
 }

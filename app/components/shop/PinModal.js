@@ -1,9 +1,9 @@
 // @flow
 
 import React, { Component } from 'react';
-import { StyleSheet, AsyncStorage, Dimensions, Platform } from 'react-native';
-import Modal from 'react-native-modal';
-import { View, Form, Item, Label, Button, Text, Input } from 'native-base';
+import { StyleSheet, AsyncStorage, Modal } from 'react-native';
+import { View, Button, Text } from 'native-base';
+import PinInput from 'react-native-code-input';
 import type { NavigationScreenProp } from 'react-navigation';
 import { PRODUCTS } from '/navigation/shop/routes';
 
@@ -22,11 +22,13 @@ export default class PinModal extends Component<Props, State> {
     pin: '',
   }
 
-  async setPin() {
-    await AsyncStorage.setItem( 'pin' , this.checkPin() );
-    const username = await AsyncStorage.getItem( 'username' );
-    this.props.navigation.navigate( PRODUCTS, { username } );
-    this.props.close();
+  async setPin( pin: string ) {
+    if ( /^[0-9]{4}$/.test( pin ) ) {
+      await AsyncStorage.setItem( 'pin' , pin );
+      const username = await AsyncStorage.getItem( 'username' );
+      this.props.navigation.navigate( PRODUCTS, { username } );
+      this.props.close();
+    }
   }
 
   checkPin() {
@@ -39,37 +41,31 @@ export default class PinModal extends Component<Props, State> {
   }
 
   render() {
-    const deviceWidth = Dimensions.get( 'window' ).width;
-    const deviceHeight = Platform.OS === 'ios' 
-      ? Dimensions.get( 'window' ).height
-      : require( 'react-native-extra-dimensions-android' ).get( 'REAL_WINDOW_HEIGHT' );
-
     return (
       <Modal
-        style={styles.modal}
-        visible={this.props.modalVisible}
+        //visible={this.props.modalVisible}
+        visible
+        transparent
         onRequestClose={this.props.close}
-        deviceWidth={deviceWidth}
-        deviceHeight={deviceHeight}
       >
-        <View style={styles.view}>
-          <Form>
-            <Item stackedLabel>
-              <Label>Pin</Label>
-              <Input
-                onChangeText={( pin ) => this.setState( { pin } )}
-                secureTextEntry
-              />
-            </Item>
-            <View style={styles.viewButton}>
-              <Button style={styles.button} onPress={this.props.close}>
-                <Text>Cancel</Text>
-              </Button>
-              <Button style={styles.button} onPress={this.setPin.bind( this )}>
-                <Text>Ok</Text>
-              </Button>
-            </View>
-          </Form>
+        <View style={styles.container}>
+          <View style={styles.view}>
+            <PinInput
+              secureTextEntry
+              codeLength={4}
+              borderType={'underline'}
+              activeColor='rgba(0, 0, 0, 1)'
+              inactiveColor='rgba(0, 0, 0, 0.5)'
+              space={10}
+              size={50}
+              inputPosition='center'
+              onFulfill={this.setPin.bind( this )}
+              containerStyle={styles.input}
+            />
+            <Button small onPress={this.props.close} style={styles.button}>
+              <Text>Cancel</Text>
+            </Button>
+          </View>
         </View>
       </Modal>
     );
@@ -77,19 +73,22 @@ export default class PinModal extends Component<Props, State> {
 }
 
 const styles = StyleSheet.create( {
-  modal: {
+  container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   view: {
     color: 'black',
     backgroundColor: 'white',
+    padding: 20,
   },
-  viewButton: {
-    flexDirection: 'row',
+  input: {
+    flex: 0,
   },
   button: {
-    margin: 30,
+    marginTop: 30,
+    alignSelf: 'flex-end',
   },
 } );

@@ -24,7 +24,7 @@ export default {
     navigationOptions: ( props: NavigationNavigatorProps ) => ( {
       headerTitle: 'Products - ' + props.navigation.getParam( 'username', '?' ),
       headerRight: ( props: HeaderProps ) => (
-        <Icon name='create' style={styles.icon} onPress={() => props.navigation.navigate( USERS )} />
+        <Icon name='create' style={styles.icon} onPress={() => props.navigation.navigate( USERS, { force: true } )} />
       ),
     } ),
   },

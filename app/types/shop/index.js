@@ -81,6 +81,11 @@ export type FetchPayEndAction = {
   type: typeof actions.FETCH_PAY_END,
 }
 
+export type SetUsernameAction = {
+  type: typeof actions.SET_USERNAME,
+  username: string,
+}
+
 export type Action =
   FetchUsersStartAction |
   FetchUsersEndAction |
@@ -88,7 +93,8 @@ export type Action =
   FetchProductsEndAction |
   FetchPayStartAction |
   FetchPayEndAction |
-  OrderItemAction;
+  OrderItemAction |
+  SetUsernameAction;
 
 export type State = {
   users: User[],
@@ -98,4 +104,5 @@ export type State = {
   loadingProducts: boolean,
   basket: Basket,
   total: number,
+  username?: string,
 };
