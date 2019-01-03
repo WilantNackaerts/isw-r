@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
+import { Keyboard } from 'react-native';
 import { Tab, Tabs, TabHeading, Text, Container } from 'native-base';
 import Youtube from '/screens/media/Youtube';
 import Radio from '/screens/media/Radio';
@@ -12,7 +13,7 @@ export default class MediaTabs extends Component<Props> {
   render() {
     return (
       <Container>
-        <Tabs>
+        <Tabs onChangeTab={() => Keyboard.dismiss()}>
           <Tab heading={<TabHeading><Text>Youtube</Text></TabHeading>}>
             <Youtube />
           </Tab>
