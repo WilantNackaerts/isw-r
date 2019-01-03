@@ -73,13 +73,9 @@ export type OrderItemAction = {
   amount: number,
 }
 
-export type FetchPayStartAction = {
-  type: typeof actions.FETCH_PAY_START,
-}
-
-export type FetchPayEndAction = {
-  type: typeof actions.FETCH_PAY_END,
-}
+export type ResetBasketAction = {
+  type: typeof actions.RESET_BASKET,
+};
 
 export type SetUsernameAction = {
   type: typeof actions.SET_USERNAME,
@@ -91,8 +87,7 @@ export type Action =
   FetchUsersEndAction |
   FetchProductsStartAction |
   FetchProductsEndAction |
-  FetchPayStartAction |
-  FetchPayEndAction |
+  ResetBasketAction |
   OrderItemAction |
   SetUsernameAction;
 

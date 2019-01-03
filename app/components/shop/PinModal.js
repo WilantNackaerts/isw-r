@@ -10,6 +10,7 @@ import type { NavigationScreenProp } from 'react-navigation';
 
 type Props = {
   visible: boolean,
+  wrongPin: boolean,
   navigation: NavigationScreenProp,
   onCancel: () => void,
   onPin: ( pin: string ) => void,
@@ -53,10 +54,11 @@ class PinModal extends Component<Props, LocalState> {
       >
         <View style={styles.container}>
           <View style={styles.view}>
+            {this.props.wrongPin && <Text style={styles.wrongPin}>Wrong PIN! Try again.</Text>}
             <PinInput
               secureTextEntry
               codeLength={4}
-              borderType={'underline'}
+              borderType='underline'
               activeColor='rgba(0, 0, 0, 1)'
               inactiveColor='rgba(0, 0, 0, 0.5)'
               space={10}
@@ -64,6 +66,7 @@ class PinModal extends Component<Props, LocalState> {
               inputPosition='center'
               onFulfill={this.setPin.bind( this )}
               containerStyle={styles.input}
+              autoFocus
             />
             <View style={styles.controls}>
               <CheckBox
@@ -95,6 +98,9 @@ const styles = StyleSheet.create( {
     color: 'black',
     backgroundColor: 'white',
     padding: 20,
+  },
+  wrongPin: {
+    color: 'red',
   },
   input: {
     flex: 0,

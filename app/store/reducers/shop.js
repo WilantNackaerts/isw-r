@@ -66,9 +66,7 @@ export default function shopReducer( state: State = defaultState(), action: Acti
           [ action.productId ]: clamp( 0, 9, ( state.basket[ action.productId ] || 0 ) + action.amount ),
         },
       } );
-    case actions.FETCH_PAY_START:
-      return { ...state };
-    case actions.FETCH_PAY_END:
+    case actions.RESET_BASKET:
       return { ...state, basket: {}, total: 0 };
     case actions.SET_USERNAME:
       return { ...state, username: action.username };
