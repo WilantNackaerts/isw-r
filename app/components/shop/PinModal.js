@@ -1,75 +1,86 @@
 // @flow
 
 import React, { Component } from 'react';
-import { StyleSheet, AsyncStorage, Dimensions, Platform } from 'react-native';
-import Modal from 'react-native-modal';
-import { View, Form, Item, Label, Button, Text, Input } from 'native-base';
+import { StyleSheet, AsyncStorage, Modal } from 'react-native';
+import { View, Button, Text } from 'native-base';
+import CheckBox from 'react-native-check-box';
+import PinInput from 'react-native-code-input';
+import { withNavigation } from 'react-navigation';
 import type { NavigationScreenProp } from 'react-navigation';
-import { PRODUCTS } from '/navigation/shop/routes';
 
 type Props = {
-  modalVisible: boolean,
+  visible: boolean,
+  wrongPin: boolean,
   navigation: NavigationScreenProp,
-  close: () => void,
+  onCancel: () => void,
+  onPin: ( pin: string ) => void,
 }
 
-type State = {
-  pin: string,
-}
+type LocalState = {
+  rememberPin: boolean,
+};
 
-export default class PinModal extends Component<Props, State> {
+class PinModal extends Component<Props, LocalState> {
   state = {
-    pin: '',
-  }
-
-  async setPin() {
-    await AsyncStorage.setItem( 'pin' , this.checkPin() );
-    const username = await AsyncStorage.getItem( 'username' );
-    this.props.navigation.navigate( PRODUCTS, { username } );
-    this.props.close();
-  }
-
-  checkPin() {
-    const pin = this.state.pin;
+    rememberPin: false,
+  };
+  
+  setPin( pin: string ) {
     if ( /^[0-9]{4}$/.test( pin ) ) {
-      return pin;
-    } else {
-      console.error();
+      if ( this.state.rememberPin ) {
+        AsyncStorage.setItem( 'pin' , pin )
+          .then( () => {
+            this.props.onPin( pin );
+          } );
+      }
+      else {
+        this.props.onPin( pin );
+      }
     }
+  }
+  
+  toggleRememberPin( ...args ) {
+    this.setState( {
+      rememberPin: !this.state.rememberPin,
+    } );
   }
 
   render() {
-    const deviceWidth = Dimensions.get( 'window' ).width;
-    const deviceHeight = Platform.OS === 'ios' 
-      ? Dimensions.get( 'window' ).height
-      : require( 'react-native-extra-dimensions-android' ).get( 'REAL_WINDOW_HEIGHT' );
-
     return (
       <Modal
-        style={styles.modal}
-        visible={this.props.modalVisible}
-        onRequestClose={this.props.close}
-        deviceWidth={deviceWidth}
-        deviceHeight={deviceHeight}
+        visible={this.props.visible}
+        transparent
+        onRequestClose={this.props.onCancel}
       >
-        <View style={styles.view}>
-          <Form>
-            <Item stackedLabel>
-              <Label>Pin</Label>
-              <Input
-                onChangeText={( pin ) => this.setState( { pin } )}
-                secureTextEntry
+        <View style={styles.container}>
+          <View style={styles.view}>
+            {this.props.wrongPin && <Text style={styles.wrongPin}>Wrong PIN! Try again.</Text>}
+            <PinInput
+              secureTextEntry
+              codeLength={4}
+              borderType='underline'
+              activeColor='rgba(0, 0, 0, 1)'
+              inactiveColor='rgba(0, 0, 0, 0.5)'
+              space={10}
+              size={50}
+              inputPosition='center'
+              onFulfill={this.setPin.bind( this )}
+              containerStyle={styles.input}
+              autoFocus
+            />
+            <View style={styles.controls}>
+              <CheckBox
+                style={styles.checkbox}
+                rightText='Remember'
+                isChecked={this.state.rememberPin}
+                onClick={this.toggleRememberPin.bind( this )}
+                checkBoxColor='#3F51B5'
               />
-            </Item>
-            <View style={styles.viewButton}>
-              <Button style={styles.button} onPress={this.props.close}>
+              <Button small onPress={this.props.onCancel}>
                 <Text>Cancel</Text>
               </Button>
-              <Button style={styles.button} onPress={this.setPin.bind( this )}>
-                <Text>Ok</Text>
-              </Button>
             </View>
-          </Form>
+          </View>
         </View>
       </Modal>
     );
@@ -77,19 +88,31 @@ export default class PinModal extends Component<Props, State> {
 }
 
 const styles = StyleSheet.create( {
-  modal: {
+  container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   view: {
     color: 'black',
     backgroundColor: 'white',
+    padding: 20,
   },
-  viewButton: {
+  wrongPin: {
+    color: 'red',
+  },
+  input: {
+    flex: 0,
+  },
+  controls: {
+    marginTop: 30,
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  button: {
-    margin: 30,
+  checkbox: {
+    flex: 1,
   },
 } );
+
+export default withNavigation( PinModal );

@@ -2,7 +2,7 @@
 
 import * as actions from '/types/shop/actions';
 import type { Dispatch, Thunk } from '/types';
-import { SHOP_API_URL, SHOP_API_ORDER_URL } from '/config';
+import { SHOP_API_URL } from '/config';
 import type {
   ApiUser,
   User,
@@ -14,10 +14,9 @@ import type {
   FetchUsersEndAction,
   FetchProductsStartAction,
   FetchProductsEndAction,
-  FetchPayStartAction,
-  FetchPayEndAction,
+  ResetBasketAction,
   OrderItemAction,
-  Basket,
+  SetUsernameAction,
 } from '/types/shop';
 
 function sort( a: string, b: string ): number {
@@ -99,38 +98,15 @@ export function orderItem( productId: number, amount: number ): OrderItemAction 
   };
 }
 
-function _fetchPayStart(): FetchPayStartAction {
+export function resetBasket(): ResetBasketAction {
   return {
-    type: actions.FETCH_PAY_START,
+    type: actions.RESET_BASKET,
   };
 }
 
-function _fetchPayEnd(): FetchPayEndAction {
+export function setUsername( username: string ): SetUsernameAction {
   return {
-    type: actions.FETCH_PAY_END,
-  };
-}
-
-export function pay( username: string, pin: string, basket: Basket ): Thunk {
-  return function( dispatch: Dispatch ) {
-    dispatch( _fetchPayStart() );
-
-    for ( const [ item_id, amount ] of Object.entries( basket ) ) {
-      fetch( SHOP_API_ORDER_URL, {
-        method: 'POST',
-        headers: new Headers( {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: username + ':' + pin,
-        } ),
-        body: JSON.stringify( {
-          subscription: false,
-          item_id,
-          amount,
-        } ),
-      } )
-        .then( dispatch( _fetchPayEnd() ) )
-        .catch( console.error );
-    }
+    type: actions.SET_USERNAME,
+    username,
   };
 }

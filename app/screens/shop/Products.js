@@ -2,53 +2,27 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, View, Image, ScrollView, AsyncStorage } from 'react-native';
-import { Card, CardItem, Spinner, Footer, Text, Container, Left, Icon, Right, Body, Button, Toast } from 'native-base';
-// import ClickableIcon from '/components/ClickableIcon';
-import { fetchProducts, orderItem, pay } from '/store/actions/shop';
-import { TEXT, FOOTER } from '/styles';
-import { USERS } from '/navigation/shop/routes';
+import { StyleSheet, View, Image, ScrollView } from 'react-native';
+import { Card, CardItem, Spinner, Text, Container } from 'native-base';
+import Order from '/components/shop/Order.js';
+import ClickableIcon from '/components/ClickableIcon.js';
+import { fetchProducts, orderItem } from '/store/actions/shop';
 import type { NavigationScreenProp } from 'react-navigation';
 import type { State, Dispatch } from '/types';
 import type { Product, Basket } from '/types/shop';
 
 type Props = {
+  username: string,
   products: Product[],
   loadingProducts: boolean,
-  total: number,
-  canOrder: boolean,
   navigation: NavigationScreenProp,
   basket: Basket,
   fetchProducts: () => void,
   orderItem: ( productId: number, amount: 1 | -1 ) => void,
-  pay: ( username: string, pin: string, basket: Basket ) => void,
 };
 
-type LocalState = {
-  username: string,
-  pin: string,
-}
-
-class Products extends Component<Props, LocalState> {
-
-  state = {
-    username: '',
-    pin: '',
-  }
-
-  async componentWillMount() {
-    this.setState( {
-      username: await AsyncStorage.getItem( 'username' ),
-      pin: await AsyncStorage.getItem( 'pin' ),
-    } );
-
-    if ( this.state.username == null && this.state.pin == null ) {
-      this.props.navigation.navigate( USERS );
-    }
-    this.props.navigation.setParams( { 'username': this.state.username } );
-  }
-
-  componentDidMount() {
+class Products extends Component<Props> {
+  componentWillMount() {
     this.props.fetchProducts();
   }
 
@@ -74,47 +48,28 @@ class Products extends Component<Props, LocalState> {
                       style={styles.image}
                     />
                   </CardItem>
-                  <CardItem footer >
-                    <Left>
-                      <Icon name='remove' 
-                        onPress={() => this.props.basket[ product.id ] > 0 && this.props.orderItem( product.id, -1 )}
-                      />
-                    </Left>
-                    <Body>
-                      <Text>{this.props.basket[ product.id ] || 0}</Text>
-                    </Body>
-                    <Right>
-                      <Icon name='add' 
-                        onPress={() => this.props.orderItem( product.id, 1 )}
-                      />
-                    </Right>
+                  <CardItem footer style={styles.footer}>
+                    <ClickableIcon name='remove'
+                      onPress={() => this.props.orderItem( product.id, -1 )}
+                      enabled={( this.props.basket[ product.id ] || 0 ) > 0}
+                      enabledStyle={styles.iconEnabled}
+                      disabledStyle={styles.iconDisabled}
+                    />
+                    <Text style={styles.amount}>{this.props.basket[ product.id ] || 0}</Text>
+                    <ClickableIcon name='add'
+                      onPress={() => this.props.orderItem( product.id, 1 )}
+                      enabled={( this.props.basket[ product.id ] || 0 ) < 10}
+                      style={styles.iconRight}
+                      enabledStyle={styles.iconEnabled}
+                      disabledStyle={styles.iconDisabled}
+                    />
                   </CardItem>
                 </Card>
               ) )
             }
           </View>
         </ScrollView>
-        <Footer style={styles.basket}>
-          <Text style={styles.total}>€{this.props.total.toFixed( 2 )}</Text>
-          {/* <ClickableIcon
-            name='send'
-            onPress={this.order.bind( this )}
-            enabled={this.props.canOrder}
-          /> */}
-          <Button rounded success
-            onPress={() => {
-              this.props.pay( this.state.username, this.state.pin, this.props.basket );
-              Toast.show( {
-                text: 'payment succesful',
-                type: 'success',
-                buttonText: 'Okay',
-              } );
-            }
-            }
-          >
-            <Text>PAY</Text>
-          </Button>
-        </Footer>
+        <Order />
       </Container>
     );
   }
@@ -147,15 +102,23 @@ const styles = StyleSheet.create( {
     resizeMode: 'cover',
     flex: 1,
   },
-  basket: {
-    ...FOOTER,
+  footer: {
+    alignSelf: 'stretch',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
-  total: {
-    ...TEXT,
-    fontSize: 25,
+  amount: {
+    flex: 1,
+    textAlign: 'center',
+  },
+  iconEnabled: {
+    color: 'black',
+  },
+  iconDisabled: {
+    color: '#bbb',
+  },
+  iconRight: {
+    textAlign: 'right',
   },
 } );
 
@@ -176,9 +139,6 @@ function mapDispatchToProps( dispatch: Dispatch ) {
     },
     orderItem( productId: number, amount: 1 | -1 ) {
       dispatch( orderItem( productId, amount ) );
-    },
-    pay( username: string, pin: string, basket: Basket ) {
-      dispatch( pay( username, pin, basket ) );
     },
   };
 }
