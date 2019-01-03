@@ -16,6 +16,7 @@
     "native-base": "^2.8.1",
     "react": "16.5.0",
     "react-native": "0.57.1",
+    "react-native-check-box": "^2.1.7",
     "react-native-code-input": "^1.0.6",
     "react-native-extra-dimensions-android": "^0.22.0",
     "react-native-modal": "^7.0.1",

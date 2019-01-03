@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, AsyncStorage, Modal } from 'react-native';
 import { View, Button, Text } from 'native-base';
+import CheckBox from 'react-native-check-box';
 import PinInput from 'react-native-code-input';
 import { withNavigation } from 'react-navigation';
 import type { NavigationScreenProp } from 'react-navigation';
@@ -14,14 +15,33 @@ type Props = {
   onPin: ( pin: string ) => void,
 }
 
-class PinModal extends Component<Props> {
+type LocalState = {
+  rememberPin: boolean,
+};
+
+class PinModal extends Component<Props, LocalState> {
+  state = {
+    rememberPin: false,
+  };
+  
   setPin( pin: string ) {
     if ( /^[0-9]{4}$/.test( pin ) ) {
-      AsyncStorage.setItem( 'pin' , pin )
-        .then( () => {
-          this.props.onPin( pin );
-        } );
+      if ( this.state.rememberPin ) {
+        AsyncStorage.setItem( 'pin' , pin )
+          .then( () => {
+            this.props.onPin( pin );
+          } );
+      }
+      else {
+        this.props.onPin( pin );
+      }
     }
+  }
+  
+  toggleRememberPin( ...args ) {
+    this.setState( {
+      rememberPin: !this.state.rememberPin,
+    } );
   }
 
   render() {
@@ -45,9 +65,18 @@ class PinModal extends Component<Props> {
               onFulfill={this.setPin.bind( this )}
               containerStyle={styles.input}
             />
-            <Button small onPress={this.props.onCancel} style={styles.button}>
-              <Text>Cancel</Text>
-            </Button>
+            <View style={styles.controls}>
+              <CheckBox
+                style={styles.checkbox}
+                rightText='Remember'
+                isChecked={this.state.rememberPin}
+                onClick={this.toggleRememberPin.bind( this )}
+                checkBoxColor='#3F51B5'
+              />
+              <Button small onPress={this.props.onCancel}>
+                <Text>Cancel</Text>
+              </Button>
+            </View>
           </View>
         </View>
       </Modal>
@@ -70,9 +99,13 @@ const styles = StyleSheet.create( {
   input: {
     flex: 0,
   },
-  button: {
+  controls: {
     marginTop: 30,
-    alignSelf: 'flex-end',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  checkbox: {
+    flex: 1,
   },
 } );
 
