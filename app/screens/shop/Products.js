@@ -44,7 +44,7 @@ class Products extends Component<Props> {
                 <Card key={product.id} style={styles.product}>
                   <CardItem button cardBody style={styles.cardContent} onPress={() => this.props.orderItem( product.id, 1 )}>
                     <Image
-                      source={{ uri: product.image.replace( 'https://10.0.2.2:3050/storage', 'http://10.0.2.2:3050/shop/storage' ) }}
+                      source={{ uri: product.image }}
                       style={styles.image}
                     />
                   </CardItem>
