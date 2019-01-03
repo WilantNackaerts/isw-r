@@ -1,11 +1,10 @@
 // @flow
 
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, FlatList } from 'react-native';
 import Search from './Search';
-import { List } from 'native-base';
 
-type Props<T> = $Shape<$PropertyType<List<T>, 'props'>> & {
+type Props<T> = $Shape<$PropertyType<FlatList<T>, 'props'>> & {
   onChange: ( term: string ) => void
 };
 
@@ -14,7 +13,7 @@ export default class ListWithSearch<T> extends Component<Props<T>> {
     return (
       <View>
         <Search onChange={this.props.onChange} />
-        <List {...this.props} />
+        <FlatList {...this.props} />
       </View>
     );
   }
