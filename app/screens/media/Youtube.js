@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Container, Item, Icon, Input, List, ListItem, Text, Left, Thumbnail, Body } from 'native-base';
+import { Container, List, ListItem, Text, Left, Thumbnail, Body } from 'native-base';
 import { connect } from 'react-redux';
 import Search from '/components/Search';
 import { fetchSongs } from '/store/actions/media/youtube';
