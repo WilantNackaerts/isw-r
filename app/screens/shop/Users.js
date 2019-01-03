@@ -4,40 +4,60 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, StyleSheet, AsyncStorage } from 'react-native';
 import { Text, Spinner, ListItem, Container } from 'native-base';
-import { fetchUsers } from '/store/actions/shop';
-import PinModal from '/components/shop/PinModal';
+import FilterList from '/components/FilterList';
+import { fetchUsers, setUsername } from '/store/actions/shop';
+import * as routes from '/navigation/shop/routes.js';
 import type { NavigationScreenProp } from 'react-navigation';
 import type { User } from '/types/shop';
-import FilterList from '/components/FilterList';
 import type { State, Dispatch } from '/types';
 
+
 type Props = {
+  username: string,
   users: User[],
   loading: boolean,
   navigation: NavigationScreenProp,
   fetchUsers(): void,
+  setUsername: ( username: string ) => void,
 };
 
-type LocalState = {
-  modalVisible: boolean,
-}
-
-class Users extends Component<Props, LocalState> {
-  state = {
-    modalVisible: false,
-  }
-
+class Users extends Component<Props> {
   componentDidMount() {
-    this.props.fetchUsers();
+    if ( this.props.navigation.getParam( 'force', false ) ) {
+      this.props.fetchUsers();
+      return;
+    }
+    
+    if ( this.props.username ) {
+      this.done();
+      return;
+    }
+    
+    AsyncStorage.getItem( 'username' )
+      .then( username => {
+        if ( username ) {
+          this.props.setUsername( username );
+          this.done();
+        }
+        else {
+          this.props.fetchUsers();
+        }
+      } );
   }
 
-  async selectUser( username: string ) {
-    this.setState( { modalVisible: true } );
-    await AsyncStorage.setItem( 'username', username );
+  selectUser( username: string ) {
+    AsyncStorage.setItem( 'username', username )
+      .then( () => this.props.setUsername( username ) )
+      .then( () => this.done( false ) );
   }
-
-  closeModal() {
-    this.setState( { modalVisible: false } );
+  
+  done( replace: boolean = true ) {
+    if ( replace ) {
+      this.props.navigation.replace( routes.PRODUCTS );
+    }
+    else {
+      this.props.navigation.navigate( routes.PRODUCTS );
+    }
   }
 
   render() {
@@ -61,7 +81,6 @@ class Users extends Component<Props, LocalState> {
             </ListItem>
           )}
         />
-        <PinModal close={this.closeModal.bind( this )} navigation={this.props.navigation} modalVisible={this.state.modalVisible} />
       </Container>
     );
   }
@@ -79,6 +98,7 @@ function mapStateToProps( state: State ) {
   return {
     loading: state.shop.loadingUsers,
     users: state.shop.users,
+    username: state.shop.username,
   };
 }
 
@@ -86,6 +106,9 @@ function mapDispatchToProps( dispatch: Dispatch ) {
   return {
     fetchUsers() {
       dispatch( fetchUsers() );
+    },
+    setUsername( username: string ) {
+      dispatch( setUsername( username ) );
     },
   };
 }
