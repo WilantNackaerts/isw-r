@@ -2,8 +2,9 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, AsyncStorage } from 'react-native';
 import { Footer, Text, Button, Toast } from 'native-base';
+import PinModal from './PinModal.js';
 import { TEXT, FOOTER } from '/styles';
 import { pay } from '/store/actions/shop';
 import type { Basket } from '/types/shop';
@@ -17,24 +18,57 @@ type Props = {
   pay: ( username: string, pin: string, basket: Basket ) => void
 };
 
-class Order extends Component<Props> {
+type LocalState = {
+  modalVisible: boolean,
+};
+
+class Order extends Component<Props, LocalState> {
+  state = {
+    modalVisible: false,
+  };
+  
+  performOrder( pin: string ) {
+    this.props.pay( this.props.username, pin, this.props.basket );
+    Toast.show( {
+      text: 'payment succesful',
+      type: 'success',
+      buttonText: 'Okay',
+    } );
+  }
+  
+  order() {
+    AsyncStorage.getItem( 'pin' )
+      .then( pin => {
+        if ( pin ) {
+          this.performOrder( pin );
+        }
+        else {
+          this.openModal();
+        }
+      } );
+  }
+  
+  onPin( pin: string ) {
+    this.closeModal();
+    this.performOrder( pin );
+  }
+  
+  openModal() {
+    this.setState( { modalVisible: true } );
+  }
+  
+  closeModal() {
+    this.setState( { modalVisible: false } );
+  }
+  
   render() {
     return (
       <Footer style={styles.basket}>
         <Text style={styles.total}>€{this.props.total.toFixed( 2 )}</Text>
-        <Button rounded success
-          onPress={() => {
-            this.props.pay( this.props.username, this.props.pin, this.props.basket );
-            Toast.show( {
-              text: 'payment succesful',
-              type: 'success',
-              buttonText: 'Okay',
-            } );
-          }
-          }
-        >
+        <Button rounded success onPress={this.order.bind( this )}>
           <Text>PAY</Text>
         </Button>
+        <PinModal visible={this.state.modalVisible} onCancel={this.closeModal.bind( this )} onPin={this.onPin.bind( this )} />
       </Footer>
     );
   }
@@ -55,6 +89,7 @@ const styles = StyleSheet.create( {
 
 function mapStateToProps( state: State ) {
   return {
+    username: state.shop.username,
     total: state.shop.total,
     canOrder: state.shop.total > 0,
     basket: state.shop.basket,

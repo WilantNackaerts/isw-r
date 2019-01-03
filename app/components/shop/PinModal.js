@@ -4,49 +4,32 @@ import React, { Component } from 'react';
 import { StyleSheet, AsyncStorage, Modal } from 'react-native';
 import { View, Button, Text } from 'native-base';
 import PinInput from 'react-native-code-input';
+import { withNavigation } from 'react-navigation';
 import type { NavigationScreenProp } from 'react-navigation';
-import { PRODUCTS } from '/navigation/shop/routes';
 
 type Props = {
-  modalVisible: boolean,
+  visible: boolean,
   navigation: NavigationScreenProp,
-  close: () => void,
+  onCancel: () => void,
+  onPin: ( pin: string ) => void,
 }
 
-type State = {
-  pin: string,
-}
-
-export default class PinModal extends Component<Props, State> {
-  state = {
-    pin: '',
-  }
-
-  async setPin( pin: string ) {
+class PinModal extends Component<Props> {
+  setPin( pin: string ) {
     if ( /^[0-9]{4}$/.test( pin ) ) {
-      await AsyncStorage.setItem( 'pin' , pin );
-      const username = await AsyncStorage.getItem( 'username' );
-      this.props.navigation.navigate( PRODUCTS, { username } );
-      this.props.close();
-    }
-  }
-
-  checkPin() {
-    const pin = this.state.pin;
-    if ( /^[0-9]{4}$/.test( pin ) ) {
-      return pin;
-    } else {
-      console.error();
+      AsyncStorage.setItem( 'pin' , pin )
+        .then( () => {
+          this.props.onPin( pin );
+        } );
     }
   }
 
   render() {
     return (
       <Modal
-        //visible={this.props.modalVisible}
-        visible
+        visible={this.props.visible}
         transparent
-        onRequestClose={this.props.close}
+        onRequestClose={this.props.onCancel}
       >
         <View style={styles.container}>
           <View style={styles.view}>
@@ -62,7 +45,7 @@ export default class PinModal extends Component<Props, State> {
               onFulfill={this.setPin.bind( this )}
               containerStyle={styles.input}
             />
-            <Button small onPress={this.props.close} style={styles.button}>
+            <Button small onPress={this.props.onCancel} style={styles.button}>
               <Text>Cancel</Text>
             </Button>
           </View>
@@ -92,3 +75,5 @@ const styles = StyleSheet.create( {
     alignSelf: 'flex-end',
   },
 } );
+
+export default withNavigation( PinModal );

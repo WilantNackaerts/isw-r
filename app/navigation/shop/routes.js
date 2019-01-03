@@ -3,7 +3,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
-import ProductsTitle from './ProductsTitle.js';
+import ProductsTitle from '/components/shop/ProductsTitle.js';
 import type { NavigationNavigatorProps, HeaderProps } from 'react-navigation';
 
 import Users from '/screens/shop/Users';
