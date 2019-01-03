@@ -3,6 +3,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
+import ProductsTitle from './ProductsTitle.js';
 import type { NavigationNavigatorProps, HeaderProps } from 'react-navigation';
 
 import Users from '/screens/shop/Users';
@@ -22,7 +23,7 @@ export default {
   [ PRODUCTS ]: {
     screen: Products,
     navigationOptions: ( props: NavigationNavigatorProps ) => ( {
-      headerTitle: 'Products - ' + props.navigation.getParam( 'username', '?' ),
+      headerTitle: <ProductsTitle />,
       headerRight: ( props: HeaderProps ) => (
         <Icon name='create' style={styles.icon} onPress={() => props.navigation.navigate( USERS, { force: true } )} />
       ),
