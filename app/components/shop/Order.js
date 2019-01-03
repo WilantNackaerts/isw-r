@@ -11,10 +11,11 @@ import type { Basket } from '/types/shop';
 import type { State, Dispatch } from '/types';
 
 type Props = {
-  total: number,
   username: string,
   pin: string,
+  total: number,
   basket: Basket,
+  canOrder: boolean,
   pay: ( username: string, pin: string, basket: Basket ) => void
 };
 
@@ -65,7 +66,10 @@ class Order extends Component<Props, LocalState> {
     return (
       <Footer style={styles.basket}>
         <Text style={styles.total}>€{this.props.total.toFixed( 2 )}</Text>
-        <Button rounded success onPress={this.order.bind( this )}>
+        <Button rounded success
+          onPress={this.order.bind( this )}
+          disabled={!this.props.canOrder}
+        >
           <Text>PAY</Text>
         </Button>
         <PinModal visible={this.state.modalVisible} onCancel={this.closeModal.bind( this )} onPin={this.onPin.bind( this )} />
