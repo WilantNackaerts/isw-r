@@ -1,7 +1,8 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Image, StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+import { NoFlickerImage } from 'react-native-no-flicker-image';
 import { Container, Content, List, ListItem } from 'native-base';
 import type { NavigationScreenProp } from 'react-navigation';
 import { CAMS_URL } from '/config';
@@ -58,7 +59,7 @@ export default class Cams extends Component<Props, State> {
           <List dataArray={this.state.cams}
             renderRow={( cam ) =>
               <ListItem>
-                <Image style={styles.image} fadeDuration={0} source={{ 
+                <NoFlickerImage style={styles.image} fadeDuration={0} source={{ 
                   uri: cam,
                   headers: {
                     Authorization: 'Basic ' + CAMS_LOGIN,
