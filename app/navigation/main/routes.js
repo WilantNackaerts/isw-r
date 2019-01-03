@@ -1,6 +1,6 @@
 // @flow
 
-import Shop from '/screens/Shop';
+import Shop from '/navigation/shop/Navigator';
 import Media from '/screens/Media';
 import Airco from '/screens/Airco';
 import Cams from '/screens/Cams';

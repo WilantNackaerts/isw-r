@@ -1,9 +1,8 @@
 // @flow
 
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import { List } from 'native-base';
 import Sound from '/components/media/soundboard/Sound';
 import Folder from '/components/media/soundboard/Folder';
 import type { State } from '/types';
@@ -41,10 +40,14 @@ class Soundboard extends Component<Props> {
     const items = this.getItems();
 
     return (
-      <List dataArray={items} style={styles.list}
-        renderRow={( item ) => 
+      <FlatList
+        style={styles.list}
+        data={items}
+        keyExtractor={item => item.path}
+        renderItem={( { item } ) => 
           item.isFolder ? <Folder folder={item} /> : <Sound sound={item} />
-        } />
+        }
+      />
     );
   }
 }
