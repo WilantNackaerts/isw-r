@@ -50,9 +50,7 @@ function fetchStart(): FetchStartAction {
   };
 }
 
-function fetchEnd( songs: Song[] ): FetchEndAction {
-  console.log( 'YouTube fetch:end', songs );
-  
+function fetchEnd( songs: Song[] ): FetchEndAction { 
   return {
     type: actions.FETCH_END,
     songs,
@@ -75,7 +73,6 @@ export function fetchSongs( searchTerm: string ): Thunk {
     fetch( YOUTUBE_URL + searchTerm )
       .then( res => res.json() )
       .then( ( res: ApiSearchResponse ) => {
-        console.log( 'YouTube search cb', res );
         dispatch( fetchEnd( res.items.map( searchResultToSong ) ) );
       } )
       .catch( console.error );
