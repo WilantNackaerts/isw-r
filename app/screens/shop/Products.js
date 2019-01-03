@@ -3,8 +3,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View, Image, ScrollView } from 'react-native';
-import { Card, CardItem, Spinner, Text, Container, Left, Icon, Right, Body } from 'native-base';
+import { Card, CardItem, Spinner, Text, Container } from 'native-base';
 import Order from '/components/shop/Order.js';
+import ClickableIcon from '/components/ClickableIcon.js';
 import { fetchProducts, orderItem } from '/store/actions/shop';
 import type { NavigationScreenProp } from 'react-navigation';
 import type { State, Dispatch } from '/types';
@@ -47,20 +48,21 @@ class Products extends Component<Props> {
                       style={styles.image}
                     />
                   </CardItem>
-                  <CardItem footer >
-                    <Left>
-                      <Icon name='remove' 
-                        onPress={() => this.props.basket[ product.id ] > 0 && this.props.orderItem( product.id, -1 )}
-                      />
-                    </Left>
-                    <Body>
-                      <Text>{this.props.basket[ product.id ] || 0}</Text>
-                    </Body>
-                    <Right>
-                      <Icon name='add' 
-                        onPress={() => this.props.orderItem( product.id, 1 )}
-                      />
-                    </Right>
+                  <CardItem footer style={styles.footer}>
+                    <ClickableIcon name='remove'
+                      onPress={() => this.props.orderItem( product.id, -1 )}
+                      enabled={( this.props.basket[ product.id ] || 0 ) > 0}
+                      enabledStyle={styles.iconEnabled}
+                      disabledStyle={styles.iconDisabled}
+                    />
+                    <Text style={styles.amount}>{this.props.basket[ product.id ] || 0}</Text>
+                    <ClickableIcon name='add'
+                      onPress={() => this.props.orderItem( product.id, 1 )}
+                      enabled={( this.props.basket[ product.id ] || 0 ) < 10}
+                      style={styles.iconRight}
+                      enabledStyle={styles.iconEnabled}
+                      disabledStyle={styles.iconDisabled}
+                    />
                   </CardItem>
                 </Card>
               ) )
@@ -99,6 +101,24 @@ const styles = StyleSheet.create( {
   image: {
     resizeMode: 'cover',
     flex: 1,
+  },
+  footer: {
+    alignSelf: 'stretch',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  amount: {
+    flex: 1,
+    textAlign: 'center',
+  },
+  iconEnabled: {
+    color: 'black',
+  },
+  iconDisabled: {
+    color: '#bbb',
+  },
+  iconRight: {
+    textAlign: 'right',
   },
 } );
 

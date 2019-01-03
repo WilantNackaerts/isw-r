@@ -39,6 +39,10 @@ function addTotal( state: State ): State {
   return state;
 }
 
+function clamp( min: number, max: number, value: number ): number {
+  return Math.max( min, Math.min( max, value ) );
+}
+
 export default function shopReducer( state: State = defaultState(), action: Action ) {
   switch ( action.type ) {
     case actions.FETCH_USERS_START:
@@ -59,7 +63,7 @@ export default function shopReducer( state: State = defaultState(), action: Acti
         ...state,
         basket: {
           ...state.basket,
-          [ action.productId ]: ( state.basket[ action.productId ] || 0 ) + action.amount,
+          [ action.productId ]: clamp( 0, 9, ( state.basket[ action.productId ] || 0 ) + action.amount ),
         },
       } );
     case actions.FETCH_PAY_START:
