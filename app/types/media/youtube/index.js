@@ -3,6 +3,7 @@
 import * as actions from './actions';
 
 export type Song = {
+  id: string,
   title: string,
   description: string,
   thumbnail: {

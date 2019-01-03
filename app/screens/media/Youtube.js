@@ -30,14 +30,15 @@ class Youtube extends Component<Props> {
         <ListWithSearch
           onChange={this.onChange.bind( this )}
           data={this.props.songs}
-          renderItem={( song ) =>
-            <ListItem thumbnail button onPress={()=>this.onPress( song.id.videoId )} key={song.id.videoId}>
+          keyExtractor={( song: Song ) => song.id}
+          renderItem={( { item: song } ) =>
+            <ListItem thumbnail button onPress={()=>this.onPress( song.id )} key={song.id}>
               <Left>
-                <Thumbnail square source={{ uri: song.snippet.thumbnails.default.url }} />
+                <Thumbnail square source={{ uri: song.thumbnail.default.url }} />
               </Left>
               <Body>
                 <Text>
-                  {song.snippet.title}
+                  {song.title}
                 </Text>
               </Body>
             </ListItem>
