@@ -3,10 +3,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native';
-import { Text, ListItem, Container } from 'native-base';
+import { Text, ListItem } from 'native-base';
 import FilterList from '/components/FilterList';
 import Loading from '/components/Loading.js';
-import { fetchUsers, setUsername } from '/store/actions/shop';
+import PullToRefresh from '/components/PullToRefresh.js';
+import { fetchUsers, reloadUsers, setUsername } from '/store/actions/shop';
 import * as routes from '/navigation/shop/routes.js';
 import { catcher } from '/util/error.js';
 import type { NavigationScreenProp } from 'react-navigation';
@@ -19,8 +20,10 @@ type Props = {
   users: User[],
   loading: boolean,
   failed: boolean,
+  reloading: boolean,
   navigation: NavigationScreenProp,
-  fetchUsers(): void,
+  fetchUsers: () => void,
+  reloadUsers: () => void,
   setUsername: ( username: string ) => void,
 };
 
@@ -78,7 +81,7 @@ class Users extends Component<Props> {
     }
 
     return (
-      <Container>
+      <PullToRefresh onRefresh={this.props.reloadUsers} refreshing={this.props.reloading}>
         <FilterList
           data={this.props.users}
           filterProp='username'
@@ -89,7 +92,7 @@ class Users extends Component<Props> {
             </ListItem>
           )}
         />
-      </Container>
+      </PullToRefresh>
     );
   }
 }
@@ -98,6 +101,7 @@ function mapStateToProps( state: State ) {
   return {
     loading: state.shop.loadingUsers,
     failed: state.shop.loadUsersFailed,
+    reloading: state.shop.reloadingUsers,
     users: state.shop.users,
     username: state.shop.username,
   };
@@ -107,6 +111,9 @@ function mapDispatchToProps( dispatch: Dispatch ) {
   return {
     fetchUsers() {
       dispatch( fetchUsers() );
+    },
+    reloadUsers() {
+      dispatch( reloadUsers() );
     },
     setUsername( username: string ) {
       dispatch( setUsername( username ) );

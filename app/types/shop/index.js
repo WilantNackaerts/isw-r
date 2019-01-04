@@ -60,6 +60,11 @@ export type FetchUsersEndAction = {
 
 export type FetchUsersFailAction = {
   type: typeof actions.FETCH_USERS_FAIL,
+  soft: boolean,
+};
+
+export type ReloadUsersAction = {
+  type: typeof actions.RELOAD_USERS,
 };
 
 export type FetchProductsStartAction = {
@@ -73,6 +78,11 @@ export type FetchProductsEndAction = {
 
 export type FetchProductsFailAction = {
   type: typeof actions.FETCH_PRODUCTS_FAIL,
+  soft: boolean,
+};
+
+export type ReloadProductsAction = {
+  type: typeof actions.RELOAD_PRODUCTS,
 };
 
 export type OrderItemAction = {
@@ -94,9 +104,11 @@ export type Action =
   FetchUsersStartAction |
   FetchUsersEndAction |
   FetchUsersFailAction |
+  ReloadUsersAction |
   FetchProductsStartAction |
   FetchProductsEndAction |
   FetchProductsFailAction |
+  ReloadProductsAction |
   ResetBasketAction |
   OrderItemAction |
   SetUsernameAction;
@@ -107,8 +119,10 @@ export type State = {|
   productsById: ProductMap,
   loadingUsers: boolean,
   loadUsersFailed: boolean,
+  reloadingUsers: boolean,
   loadingProducts: boolean,
   loadProductsFailed: boolean,
+  reloadingProducts: boolean,
   basket: Basket,
   total: number,
   username?: string,

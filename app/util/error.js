@@ -1,6 +1,6 @@
 // @flow
 
-import { Toast } from 'native-base';
+import toast from './toast.js';
 
 export default function error( msg?: string | Error, err?: Error ) {
   if ( !err && typeof msg === 'object' ) {
@@ -13,12 +13,7 @@ export default function error( msg?: string | Error, err?: Error ) {
   
   console.log( 'ERROR:', err );
   
-  Toast.show( {
-    text: msg,
-    type: 'danger',
-    buttonText: 'Dismiss',
-    duration: 3000,
-  } );
+  toast.error( msg );
 }
 
 function catcher( msg?: string, cb?: ( err?: Error ) => void ) {

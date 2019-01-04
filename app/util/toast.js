@@ -8,7 +8,7 @@ export default function toast( options: Toast | string, extraOptions?: Toast ) {
   }
   
   Toast.show( {
-    duration: 3000,
+    duration: 4000,
     buttonText: options.type === 'success' ? 'Okay' : 'Dismiss',
     ...options,
     ...extraOptions,
