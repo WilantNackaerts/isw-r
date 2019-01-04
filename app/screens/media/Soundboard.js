@@ -10,10 +10,10 @@ import Loading from '/components/Loading.js';
 import { fetchSounds, setSearch } from '/store/actions/media/soundboard';
 import type { Item as SoundboardItem } from '/types/media/soundboard';
 import type { State, Dispatch } from '/types';
-import type { TabNavigation } from '/components/MediaTabs.js';
+import type { TabNavigator } from '/components/MediaTabs.js';
 
 type AutoPassedProps = {|
-  navigation: TabNavigation,
+  navigation: TabNavigator,
 |};
 
 type StoreProps = {|

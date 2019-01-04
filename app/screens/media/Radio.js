@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 import RadioRegion from '/components/media/radio/RadioRegion';
 import PullToRefresh from '/components/PullToRefresh.js';
 import { fetchAllStations, fetchFailedStations, reloadAllStations } from '/store/actions/media/radio.js';
-import type { TabNavigation } from '/components/MediaTabs';
+import type { TabNavigator } from '/components/MediaTabs';
 import type { Region } from '/types/media/radio/index';
 import type { State, Dispatch } from '/types';
 
 type AutoPassedProps = {|
-  navigation: TabNavigation,
+  navigation: TabNavigator,
 |};
 
 type StoreProps = {|
