@@ -3,10 +3,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, AsyncStorage } from 'react-native';
-import { Footer, Text, Button, Toast } from 'native-base';
+import { Footer, Text, Button, Spinner } from 'native-base';
 import PinModal from './PinModal.js';
 import { TEXT, FOOTER } from '/styles';
 import { resetBasket } from '/store/actions/shop.js';
+import error from '/util/error.js';
+import { progress } from '/util/timeout.js';
+import toast from '/util/toast.js';
 import type { Basket } from '/types/shop';
 import type { State, Dispatch } from '/types';
 import { SHOP_API_ORDER_URL } from '/config';
@@ -23,37 +26,40 @@ type Props = {
 type LocalState = {
   modalVisible: boolean,
   wrongPin: boolean,
+  loading: boolean,
 };
 
 class Order extends Component<Props, LocalState> {
   state = {
     modalVisible: false,
     wrongPin: false,
+    loading: false,
   };
   
   performOrder( pin: string ) {
-    pay( this.props.username, pin, this.props.basket )
+    this.setState( { loading: true } );
+    
+    const promise = pay( this.props.username, pin, this.props.basket )
       .then( () => {
         this.props.resetBasket();
-        Toast.show( {
-          text: 'Payment successful!',
-          type: 'success',
-          buttonText: 'Okay',
-        } );
+        toast.success( 'Payment successful!' );
       } )
       .catch( e => {
         if ( e === 403 ) {
           this.openModal( true );
         }
         else {
-          Toast.show( {
-            text: 'Oops! Something went wrong.',
-            type: 'danger',
-            buttonText: 'Okay',
-          } );
+          error();
         }
+      } )
+      .finally( () => {
+        this.setState( { loading: false } );
       } );
     
+    progress( promise )
+      .after( 2000, () => {
+        toast.warning( 'This is taking longer than usual... Hang tight!' );
+      } );
   }
   
   order() {
@@ -85,12 +91,17 @@ class Order extends Component<Props, LocalState> {
     return (
       <Footer style={styles.basket}>
         <Text style={styles.total}>€{this.props.total.toFixed( 2 )}</Text>
-        <Button rounded success
-          onPress={this.order.bind( this )}
-          disabled={!this.props.canOrder}
-        >
-          <Text>PAY</Text>
-        </Button>
+        {
+          this.state.loading ?
+            <Spinner color='white' />
+            :
+            <Button rounded success
+              onPress={this.order.bind( this )}
+              disabled={!this.props.canOrder}
+            >
+              <Text>PAY</Text>
+            </Button>
+        }
         <PinModal
           visible={this.state.modalVisible}
           wrongPin={this.state.wrongPin}
