@@ -1,8 +1,14 @@
 // @flow
 import * as actions from '/types/media/soundboard/actions';
 import { SOUNDBOARD_URL } from '/config';
-import { catcher } from '/util/error.js';
-import type { Item, ApiSound, FetchStartAction, FetchEndAction, SetSearchAction } from '/types/media/soundboard';
+import type {
+  Item,
+  ApiSound,
+  FetchStartAction,
+  FetchEndAction,
+  FetchFailAction,
+  SetSearchAction,
+} from '/types/media/soundboard';
 import type { Thunk, Dispatch } from '/types';
 
 function compare( { name: a }: Item, { name: b }: Item ): number {
@@ -57,6 +63,12 @@ function fetchEnd( items: Item[] ): FetchEndAction {
   };
 }
 
+function fetchFail(): FetchFailAction {
+  return {
+    type: actions.FETCH_FAIL,
+  };
+}
+
 export function setSearch( term: string ): SetSearchAction {
   return {
     type: actions.SET_SEARCH,
@@ -80,6 +92,6 @@ export function fetchSounds(): Thunk {
       .then( res => {
         dispatch( fetchEnd( process( res ) ) );
       } )
-      .catch( catcher( 'Oops! Failed to fetch sound effects.' ) );
+      .catch( () => dispatch( fetchFail() ) );
   };
 }

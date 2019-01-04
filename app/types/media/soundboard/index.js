@@ -27,15 +27,20 @@ export type FetchEndAction = {
   items: Item[],
 };
 
+export type FetchFailAction = {
+  type: typeof actions.FETCH_FAIL,
+};
+
 export type SetSearchAction = {
   type: typeof actions.SET_SEARCH,
   searchterm: string,
 };
 
-export type Action = FetchStartAction | FetchEndAction | SetSearchAction;
+export type Action = FetchStartAction | FetchEndAction | FetchFailAction | SetSearchAction;
 
 export type State = {|
-  isLoading: boolean,
+  loading: boolean,
+  failed: boolean,
   items: Item[],
   searchterm: string,
 |};
