@@ -12,6 +12,7 @@ export type Region = {
   name: string,
   apiName: string,
   loading: boolean,
+  failed: boolean,
   stations: Station[],
 };
 
@@ -30,17 +31,26 @@ export type StationsResponse = {
 // ACTIONS
 //
 
-export type FetchStartAction = {
-  type: typeof actions.FETCH_START,
+export type ActionBase = {
   region: string,
+};
+
+export type FetchStartAction = {
+  ...ActionBase,
+  type: typeof actions.FETCH_START,
 };
 
 export type FetchEndAction = {
+  ...ActionBase,
   type: typeof actions.FETCH_END,
-  region: string,
   stations: Station[],
 };
 
-export type Action = FetchStartAction | FetchEndAction;
+export type FetchFailAction = {
+  ...ActionBase,
+  type: typeof actions.FETCH_FAIL,
+};
+
+export type Action = FetchStartAction | FetchEndAction | FetchFailAction;
 
 export type State = Region[];

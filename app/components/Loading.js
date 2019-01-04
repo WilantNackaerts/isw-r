@@ -9,12 +9,14 @@ type Props = {
   failed: boolean,
   failedMessage: string,
   retryMessage: string,
+  small: boolean,
   onRetry: () => void,
 };
 
 export default class Loading extends Component<Props> {
   static defaultProps = {
     retryMessage: 'Retry',
+    small: false,
   };
   
   render() {
@@ -29,7 +31,7 @@ export default class Loading extends Component<Props> {
     return (
       <View style={styles.container}>
         <Text>{this.props.failedMessage}</Text>
-        <Button rounded onPress={this.props.onRetry} style={styles.button}>
+        <Button rounded small={this.props.small} onPress={this.props.onRetry} style={styles.button}>
           <Text>{this.props.retryMessage}</Text>
         </Button>
       </View>

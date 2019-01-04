@@ -9,12 +9,14 @@ const defaultState = (): State => ( [
     name: 'VRT',
     apiName: 'vrt',
     loading: true,
+    failed: false,
     stations: [],
   },
   {
     name: 'Belgium',
     apiName: 'be',
     loading: true,
+    failed: false,
     stations: [],
   },
 ] );
@@ -25,7 +27,9 @@ function regionReducer( state: Region, action: Action ): Region {
       case actions.FETCH_START:
         return { ...state, loading: true };
       case actions.FETCH_END:
-        return { ...state, loading: false, stations: action.stations };
+        return { ...state, loading: false, failed: false, stations: action.stations };
+      case actions.FETCH_FAIL:
+        return { ...state, loading: false, failed: true };
       default:
         return state;
     }
@@ -38,6 +42,7 @@ export default function radioReducer( state: State = defaultState(), action: Act
   switch ( action.type ) {
     case actions.FETCH_START:
     case actions.FETCH_END:
+    case actions.FETCH_FAIL:
       return state.map( region => regionReducer( region, action ) );
     default:
       return state;

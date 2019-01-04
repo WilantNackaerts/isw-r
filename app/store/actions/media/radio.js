@@ -2,18 +2,17 @@
 
 import * as actions from '/types/media/radio/actions';
 import { MEDIA_API_URL } from '/config';
-import { catcher } from '/util/error.js';
 import type { Thunk, Dispatch, GetState } from '/types';
-import type { Station, StationsResponse, FetchStartAction, FetchEndAction } from '/types/media/radio';
+import type { Station, StationsResponse, FetchStartAction, FetchEndAction, FetchFailAction } from '/types/media/radio';
 
-export function startFetchStations( region: string ): FetchStartAction {
+function _fetchStationsStart( region: string ): FetchStartAction {
   return {
     type: actions.FETCH_START,
     region,
   };
 }
 
-export function endFetchStations( region: string, stations: Station[] ): FetchEndAction {
+function _fetchStationsEnd( region: string, stations: Station[] ): FetchEndAction {
   return {
     type: actions.FETCH_END,
     region,
@@ -21,11 +20,19 @@ export function endFetchStations( region: string, stations: Station[] ): FetchEn
   };
 }
 
+export function _fetchStationsFail( region: string ): FetchFailAction {
+  console.log( 'Creating fetch stations fail action' );
+  return {
+    type: actions.FETCH_FAIL,
+    region,
+  };
+}
+
 export function fetchStationsForRegion( region: string ): Thunk {
   return function( dispatch: Dispatch ) {
-    dispatch( startFetchStations( region ) );
+    dispatch( _fetchStationsStart( region ) );
 
-    fetch( `${MEDIA_API_URL}/${region}/list` )
+    fetch( `${MEDIA_API_URL}/${region}/list`, { timeout: 2000 } )
       .then( response => response.json() )
       .then( ( response: StationsResponse ) => {
         const stations = response.stations.map( station => ( {
@@ -34,9 +41,9 @@ export function fetchStationsForRegion( region: string ): Thunk {
           logo: station.logo,
         } ) );
 
-        dispatch( endFetchStations( region, stations ) );
+        dispatch( _fetchStationsEnd( region, stations ) );
       } )
-      .catch( catcher( 'Oops! Failed to fetch radio stations.' ) );
+      .catch( () => dispatch( _fetchStationsFail( region ) ) );
   };
 }
 
