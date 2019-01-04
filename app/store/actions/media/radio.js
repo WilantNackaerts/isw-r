@@ -2,6 +2,7 @@
 
 import * as actions from '/types/media/radio/actions';
 import { MEDIA_API_URL } from '/config';
+import { catcher } from '/util/error.js';
 import type { Thunk, Dispatch, GetState } from '/types';
 import type { Station, StationsResponse, FetchStartAction, FetchEndAction } from '/types/media/radio';
 
@@ -34,7 +35,8 @@ export function fetchStationsForRegion( region: string ): Thunk {
         } ) );
 
         dispatch( endFetchStations( region, stations ) );
-      } );
+      } )
+      .catch( catcher( 'Oops! Failed to fetch radio stations.' ) );
   };
 }
 

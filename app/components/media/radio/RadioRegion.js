@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { View, ListItem, Text, Spinner, Separator, Thumbnail } from 'native-base';
 import { MEDIA_URL, MEDIA_API_URL } from '/config.js';
+import { catcher } from '/util/error.js';
 import type { Region, Station } from '/types/media/radio';
 
 type Props = {
@@ -15,7 +16,7 @@ type Props = {
 export default class RadioRegion extends Component<Props> {
   onPress( station: Station ) {
     fetch( `${MEDIA_API_URL}/${station.url}` )
-      .catch( console.error );
+      .catch( catcher( 'Oops! Failed to start radio station.' ) );
     if ( this.props.paused ) this.props.next();
   }
 

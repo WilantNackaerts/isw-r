@@ -1,6 +1,7 @@
 // @flow
 import * as actions from '/types/media/soundboard/actions';
 import { SOUNDBOARD_URL } from '/config';
+import { catcher } from '/util/error.js';
 import type { Item, ApiSound, FetchStartAction, FetchEndAction, SetSearchAction } from '/types/media/soundboard';
 import type { Thunk, Dispatch } from '/types';
 
@@ -79,6 +80,6 @@ export function fetchSounds(): Thunk {
       .then( res => {
         dispatch( fetchEnd( process( res ) ) );
       } )
-      .catch( console.error );
+      .catch( catcher( 'Oops! Failed to fetch sound effects.' ) );
   };
 }

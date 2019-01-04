@@ -1,6 +1,7 @@
 // @flow
 
 import * as actions from '/types/media/player/actions';
+import { catcher } from '/util/error.js';
 import type {
   FetchStartAction,
   FetchEndAction,
@@ -81,6 +82,7 @@ function convertSong( song: ApiSong ): Song {
   };
 }
 
+let previousFetchStatusFailed = false;
 export function fetchPlayer(): Thunk {
   return function( dispatch: Dispatch ) {
     dispatch( fetchStart() );
@@ -88,10 +90,16 @@ export function fetchPlayer(): Thunk {
     fetch( MEDIA_STATUS_URL )
       .then( res => res.json() )
       .then( ( res: ApiStatus ) => {
+        previousFetchStatusFailed = false;
         const queue = res.playlist.map( convertSong );
         dispatch( fetchEnd( queue, res.current, res.muted, res.paused, res.volume, res.plp ) );
       } )
-      .catch( console.error );
+      .catch( err => {
+        if ( !previousFetchStatusFailed ) {
+          catcher( 'Oops! Failed to fetch player state.' );
+        }
+        previousFetchStatusFailed = true;
+      } );
   };
 }
 
@@ -100,7 +108,7 @@ export function play(): Thunk {
     dispatch( _play() );
 
     fetch( MEDIA_API_URL + '/play' )
-      .catch( err => console.error );
+      .catch( catcher( 'Oops! Failed to start music.' ) );
   };
 }
 
@@ -109,7 +117,7 @@ export function pause(): Thunk {
     dispatch( _pause() );
 
     fetch( MEDIA_API_URL + '/pause' )
-      .catch( err => console.error );
+      .catch( catcher( 'Oops! Failed to pause music.' ) );
   };
 }
 
@@ -118,7 +126,7 @@ export function volume( value: number ): Thunk {
     dispatch( _volume( value ) );
 
     fetch( MEDIA_API_URL + '/volume/' + value )
-      .catch( console.error );
+      .catch( catcher( 'Oops! Failed to set volume.' ) );
   };
 }
 
@@ -127,7 +135,7 @@ export function toggleMuted(): Thunk {
     dispatch( _toggleMuted() );
 
     fetch( MEDIA_API_URL + '/mute' )
-      .catch( console.error );
+      .catch( catcher( 'Oops! Failed to (un)mute music.' ) );
   };
 }
 
@@ -136,7 +144,7 @@ export function next(): Thunk {
     dispatch( _next() );
 
     fetch( MEDIA_API_URL + '/next' )
-      .catch( console.error );
+      .catch( catcher( 'Oops! Failed to play next song.' ) );
   };
 }
 
@@ -145,6 +153,6 @@ export function previous(): Thunk {
     dispatch( _previous() );
 
     fetch( MEDIA_API_URL + '/previous' )
-      .catch( console.error );
+      .catch( catcher( 'Oops! Failed to play previous song.' ) );
   };
 }

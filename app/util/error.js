@@ -20,3 +20,11 @@ export default function error( msg?: string | Error, err?: Error ) {
     duration: 3000,
   } );
 }
+
+function catcher( msg?: string ) {
+  return function( err?: Error ) {
+    error( msg, err );
+  };
+}
+
+export { catcher, error };

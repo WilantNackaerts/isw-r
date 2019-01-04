@@ -7,6 +7,7 @@ import { Text, Spinner, ListItem, Container } from 'native-base';
 import FilterList from '/components/FilterList';
 import { fetchUsers, setUsername } from '/store/actions/shop';
 import * as routes from '/navigation/shop/routes.js';
+import { catcher } from '/util/error.js';
 import type { NavigationScreenProp } from 'react-navigation';
 import type { User } from '/types/shop';
 import type { State, Dispatch } from '/types';
@@ -42,13 +43,15 @@ class Users extends Component<Props> {
         else {
           this.props.fetchUsers();
         }
-      } );
+      } )
+      .catch( () => this.props.fetchUsers() );
   }
 
   selectUser( username: string ) {
     AsyncStorage.setItem( 'username', username )
       .then( () => this.props.setUsername( username ) )
-      .then( () => this.done( false ) );
+      .then( () => this.done( false ) )
+      .catch( catcher( 'Oops! Failed to save username.' ) );
   }
   
   done( replace: boolean = true ) {

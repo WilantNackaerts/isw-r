@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import ListWithSearch from '/components/ListWithSearch';
 import { fetchSongs } from '/store/actions/media/youtube';
 import { next } from '/store/actions/media/player';
+import { catcher } from '/util/error.js';
 import type { Song } from '/types/media/youtube'; 
 import type { State, Dispatch } from '/types';
 import { YOUTUBE_API_URL } from '/config';
@@ -25,7 +26,7 @@ class Youtube extends Component<Props> {
 
   onPress( song ) {
     fetch( YOUTUBE_API_URL + '/' + song )
-      .catch( console.error );
+      .catch( catcher( 'Oops! Failed to play song from YouTube.' ) );
     if ( this.props.paused ) this.props.next();
   }
 

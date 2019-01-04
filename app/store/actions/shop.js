@@ -3,6 +3,7 @@
 import * as actions from '/types/shop/actions';
 import type { Dispatch, Thunk } from '/types';
 import { SHOP_API_URL } from '/config';
+import { catcher } from '/util/error.js';
 import type {
   ApiUser,
   User,
@@ -75,7 +76,7 @@ export function fetchUsers(): Thunk {
     fetch( SHOP_API_URL + '/users' )
       .then( res => res.json() )
       .then( ( res: FetchUsersResponse ) => dispatch( _fetchUsersEnd( res ) ) )
-      .catch( console.error );
+      .catch( catcher( 'Oops! Failed to fetch users.' ) );
   };
 }
 
@@ -86,7 +87,7 @@ export function fetchProducts(): Thunk {
     fetch( SHOP_API_URL + '/items' )
       .then( res => res.json() )
       .then( ( res: FetchProductsResponse ) => dispatch( _fetchProductsEnd( res ) ) )
-      .catch( console.error );
+      .catch( catcher( 'Oops! Failed to fetch products.' ) );
   };
 }
 

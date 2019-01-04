@@ -2,6 +2,7 @@
 
 import * as actions from '/types/media/youtube/actions';
 import { YOUTUBE_URL } from '/config';
+import { catcher } from '/util/error.js';
 import type { Thunk, Dispatch } from '/types';
 import type { Song, FetchStartAction, FetchEndAction } from '/types/media/youtube';
 
@@ -75,6 +76,6 @@ export function fetchSongs( searchTerm: string ): Thunk {
       .then( ( res: ApiSearchResponse ) => {
         dispatch( fetchEnd( res.items.map( searchResultToSong ) ) );
       } )
-      .catch( console.error );
+      .catch( catcher( 'Oops! Failed to fetch search results.' ) );
   };
 }
