@@ -1,28 +1,47 @@
 // @flow
 
 import React, { Component } from 'react';
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, AsyncStorage } from 'react-native';
 import { NoFlickerImage } from 'react-native-no-flicker-image';
 import { Container, Content, List, ListItem } from 'native-base';
 import type { NavigationScreenProp } from 'react-navigation';
+import CamModal from '/components/cams/CamModal';
 import { CAMS_URL } from '/config';
-import { CAMS_LOGIN } from '/secret';
 
 type Props = {
   navigation: NavigationScreenProp,
 }
 
 type State = {
-  cams: string[]
+  cams: string[],
+  wrongCre: boolean,
+  modalVisible: boolean,
+  credentials: string
 }
 
 export default class Cams extends Component<Props, State> {
   interval: ?IntervalID;
   state = {
     cams: [],
+    wrongCre: false,
+    modalVisible: false,
+    credentials: '',
   }
 
   componentDidMount() {
+    AsyncStorage.getItem( 'credentials' )
+      .then( credentials => {
+        console.log( credentials );
+        if ( !credentials ) {
+          this.openModal();
+        } else {
+          this.setState( { credentials: credentials } );
+          this.startCams();
+        }
+      } );
+  }
+
+  startCams() {
     this.startPoll();
     this.props.navigation.addListener( 'didFocus', this.startPoll.bind( this ) );
     this.props.navigation.addListener( 'willBlur', this.stopPoll.bind( this ) );
@@ -42,6 +61,20 @@ export default class Cams extends Component<Props, State> {
     }
   }
 
+  openModal( wrongCre: boolean = false ) {
+    this.setState( { modalVisible: true, wrongCre } );
+  }
+
+  closeModal() {
+    this.setState( { modalVisible: false } );
+  }
+
+  onCredentials( credentials: string ) {
+    this.setState( { credentials: credentials } );
+    this.closeModal();
+    this.startCams();
+  }
+
 
   getCams() {
     let cams = [];
@@ -58,15 +91,25 @@ export default class Cams extends Component<Props, State> {
           <List dataArray={this.state.cams}
             renderRow={( cam ) =>
               <ListItem>
-                <NoFlickerImage style={styles.image} fadeDuration={0} source={{ 
-                  uri: cam,
-                  headers: {
-                    Authorization: 'Basic ' + CAMS_LOGIN,
-                  },
-                }}
+                <NoFlickerImage 
+                  style={styles.image} 
+                  fadeDuration={0} 
+                  onError={( error ) => console.log( error )}
+                  source={{ 
+                    uri: cam,
+                    headers: {
+                      Authorization: 'Basic ' + this.state.credentials,
+                    },
+                  }}
                 />
               </ListItem>
             } />
+          <CamModal
+            visible={this.state.modalVisible}
+            wrongCre={this.state.wrongCre}
+            onCancel={this.closeModal.bind( this )}
+            onCredentials={this.onCredentials.bind( this )}
+          />
         </Content>
       </Container>
     );
