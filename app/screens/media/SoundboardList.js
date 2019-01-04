@@ -5,7 +5,8 @@ import { StyleSheet, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import Sound from '/components/media/soundboard/Sound';
 import Folder from '/components/media/soundboard/Folder';
-import type { State } from '/types';
+import { reloadSounds } from '/store/actions/media/soundboard.js';
+import type { State, Dispatch } from '/types';
 import type { Item as SoundboardItem } from '/types/media/soundboard';
 import type { NavigationScreenProp } from 'react-navigation';
 
@@ -18,6 +19,8 @@ type NavigationState = {
 type Props = {
   items: SoundboardItem[],
   searchterm: string,
+  reloading: boolean,
+  reloadSounds: () => void,
   navigation: NavigationScreenProp<NavigationState>,
 }
 
@@ -47,6 +50,8 @@ class Soundboard extends Component<Props> {
         renderItem={( { item } ) => 
           item.isFolder ? <Folder folder={item} /> : <Sound sound={item} />
         }
+        onRefresh={this.props.reloadSounds}
+        refreshing={this.props.reloading}
       />
     );
   }
@@ -62,9 +67,18 @@ function mapStateToProps( state: State ) {
   return {
     items: state.media.soundboard.items,
     searchterm: state.media.soundboard.searchterm,
+    reloading: state.media.soundboard.reloading,
   };
 }
 
-export default connect( mapStateToProps )( Soundboard );
+function mapDispatchToProps( dispatch: Dispatch ) {
+  return {
+    reloadSounds() {
+      dispatch( reloadSounds() );
+    },
+  };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( Soundboard );
 
 

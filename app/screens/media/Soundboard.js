@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { connect } from 'react-redux';
 import { Container } from 'native-base';
+import { connect } from 'react-redux';
 import Search from '/components/Search';
 import SoundboardNavigator from '/navigation/soundboard/Navigator';
 import Loading from '/components/Loading.js';
@@ -14,9 +14,11 @@ import type { State, Dispatch } from '/types';
 type Props = {
   loading: boolean,
   failed: boolean,
+  reloading: boolean,
   items: SoundboardItem[],
   searchterm: string,
   fetchSounds: () => void,
+  reloadSounds: () => void,
   setSearch: ( term: string ) => void
 };
 
@@ -55,6 +57,7 @@ class Soundboard extends Component<Props> {
 const styles = StyleSheet.create( {
   listWrapper: {
     flexGrow: 1,
+    backgroundColor: 'red',
   },
 } );
 
