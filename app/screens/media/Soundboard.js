@@ -12,17 +12,27 @@ import type { Item as SoundboardItem } from '/types/media/soundboard';
 import type { State, Dispatch } from '/types';
 import type { TabNavigation } from '/components/MediaTabs.js';
 
-type Props = {
+type AutoPassedProps = {|
+  navigation: TabNavigation,
+|};
+
+type StoreProps = {|
   loading: boolean,
   failed: boolean,
-  reloading: boolean,
   items: SoundboardItem[],
   searchterm: string,
-  navigation: TabNavigation,
+|};
+
+type DispatchProps = {|
   fetchSounds: () => void,
-  reloadSounds: () => void,
   setSearch: ( term: string ) => void
-};
+|};
+
+type Props = {|
+  ...AutoPassedProps,
+  ...StoreProps,
+  ...DispatchProps,
+|};
 
 class Soundboard extends Component<Props> {
   componentWillMount() {
@@ -70,7 +80,7 @@ const styles = StyleSheet.create( {
   },
 } );
 
-function mapStateToProps( state: State ) {
+function mapStateToProps( state: State ): StoreProps {
   return {
     loading: state.media.soundboard.loading,
     failed: state.media.soundboard.failed,
@@ -79,7 +89,7 @@ function mapStateToProps( state: State ) {
   };
 }
 
-function mapDispatchToProps( dispatch: Dispatch ) {
+function mapDispatchToProps( dispatch: Dispatch ): DispatchProps {
   return {
     fetchSounds() {
       dispatch( fetchSounds() );

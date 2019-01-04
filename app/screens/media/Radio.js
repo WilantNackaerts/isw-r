@@ -9,14 +9,26 @@ import type { TabNavigation } from '/components/MediaTabs';
 import type { Region } from '/types/media/radio/index';
 import type { State, Dispatch } from '/types';
 
-type Props = {
+type AutoPassedProps = {|
+  navigation: TabNavigation,
+|};
+
+type StoreProps = {|
   regions: Region[],
   reloading: boolean,
   failed: boolean,
+|};
+
+type DispatchProps = {|
   fetchAllStations: () => void,
   fetchFailedStations: () => void,
   reloadAllStations: () => void,
-  navigation: TabNavigation,
+|};
+
+type Props = {
+  ...AutoPassedProps,
+  ...StoreProps,
+  ...DispatchProps,
 }
 
 class Radio extends Component<Props> {
@@ -51,7 +63,7 @@ class Radio extends Component<Props> {
   }
 }
 
-function mapStateToProps( state: State ) {
+function mapStateToProps( state: State ): StoreProps {
   return {
     regions: state.media.radio,
     reloading: state.media.radio.some( region => region.reloading ),
@@ -59,7 +71,7 @@ function mapStateToProps( state: State ) {
   };
 }
 
-function mapDispatchToProps( dispatch: Dispatch ) {
+function mapDispatchToProps( dispatch: Dispatch ): DispatchProps {
   return {
     fetchAllStations() {
       dispatch( fetchAllStations() );

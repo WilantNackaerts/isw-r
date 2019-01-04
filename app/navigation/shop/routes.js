@@ -11,7 +11,6 @@ import Products from '/screens/shop/Products';
 
 export const USERS: 'shop/users' = 'shop/users';
 export const PRODUCTS: 'shop/products' = 'shop/products';
-export const ORDER: 'shop/order' = 'shop/order';
 
 export default {
   [ USERS ]: {

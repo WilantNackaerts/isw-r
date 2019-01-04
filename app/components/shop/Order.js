@@ -4,24 +4,38 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, AsyncStorage } from 'react-native';
 import { Footer, Text, Button, Spinner } from 'native-base';
+import { withNavigation, type NavigationScreenProp } from 'react-navigation';
 import PinModal from './PinModal.js';
 import { TEXT, FOOTER } from '/styles';
 import { resetBasket } from '/store/actions/shop.js';
 import error from '/util/error.js';
 import { progress } from '/util/timeout.js';
 import toast from '/util/toast.js';
+import * as routes from '/navigation/shop/routes.js';
 import type { Basket } from '/types/shop';
 import type { State, Dispatch } from '/types';
 import { SHOP_API_ORDER_URL } from '/config';
 
-type Props = {
-  username: string,
-  pin: string,
+type AutoPassedProps = {|
+  navigation: NavigationScreenProp,
+|};
+
+type StoreProps = {|
+  username?: string,
   total: number,
   basket: Basket,
   canOrder: boolean,
+|};
+
+type DispatchProps = {|
   resetBasket: () => void,
-};
+|};
+
+type Props = {|
+  ...AutoPassedProps,
+  ...StoreProps,
+  ...DispatchProps,
+|};
 
 type LocalState = {
   modalVisible: boolean,
@@ -38,6 +52,13 @@ class Order extends Component<Props, LocalState> {
   
   performOrder( pin: string, fromStorage: boolean ) {
     this.setState( { loading: true } );
+    
+    if ( !this.props.username ) {
+      // This should never happen, but you never know
+      toast.warning( 'Please choose your username' );
+      this.props.navigation.navigate( routes.USERS );
+      return;
+    }
     
     const promise = pay( this.props.username, pin, this.props.basket )
       .then( () => {
@@ -152,7 +173,7 @@ function pay( username: string, pin: string, basket: Basket ): Promise<void> {
   } );
 }
 
-function mapStateToProps( state: State ) {
+function mapStateToProps( state: State ): StoreProps {
   return {
     username: state.shop.username,
     total: state.shop.total,
@@ -169,4 +190,4 @@ function mapDispatchToProps( dispatch: Dispatch ) {
   };
 }
 
-export default connect( mapStateToProps, mapDispatchToProps )( Order );
+export default withNavigation( connect( mapStateToProps, mapDispatchToProps )( Order ) );

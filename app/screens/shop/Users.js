@@ -14,18 +14,29 @@ import type { NavigationScreenProp } from 'react-navigation';
 import type { User } from '/types/shop';
 import type { State, Dispatch } from '/types';
 
+type AutoPassedProps = {|
+  navigation: NavigationScreenProp,
+|};
 
-type Props = {
-  username: string,
+type StoreProps = {|
+  username?: string,
   users: User[],
   loading: boolean,
   failed: boolean,
   reloading: boolean,
-  navigation: NavigationScreenProp,
+|};
+
+type DispatchProps = {|
   fetchUsers: () => void,
   reloadUsers: () => void,
   setUsername: ( username: string ) => void,
-};
+|};
+
+type Props = {|
+  ...AutoPassedProps,
+  ...StoreProps,
+  ...DispatchProps,
+|};
 
 class Users extends Component<Props> {
   componentDidMount() {
@@ -105,7 +116,7 @@ class Users extends Component<Props> {
   }
 }
 
-function mapStateToProps( state: State ) {
+function mapStateToProps( state: State ): StoreProps {
   return {
     loading: state.shop.loadingUsers,
     failed: state.shop.loadUsersFailed,
@@ -115,7 +126,7 @@ function mapStateToProps( state: State ) {
   };
 }
 
-function mapDispatchToProps( dispatch: Dispatch ) {
+function mapDispatchToProps( dispatch: Dispatch ): DispatchProps {
   return {
     fetchUsers() {
       dispatch( fetchUsers() );

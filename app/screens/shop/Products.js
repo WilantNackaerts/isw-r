@@ -13,18 +13,29 @@ import type { NavigationScreenProp } from 'react-navigation';
 import type { State, Dispatch } from '/types';
 import type { Product, Basket } from '/types/shop';
 
-type Props = {
-  username: string,
+type AutoPassedProps = {|
+  navigation: NavigationScreenProp,
+|};
+
+type StoreProps = {|
   products: Product[],
   loading: boolean,
   failed: boolean,
   reloading: boolean,
-  navigation: NavigationScreenProp,
   basket: Basket,
+|};
+
+type DispatchProps = {|
   fetchProducts: () => void,
   reloadProducts: () => void,
   orderItem: ( productId: number, amount: 1 | -1 ) => void,
-};
+|}
+
+type Props = {|
+  ...AutoPassedProps,
+  ...StoreProps,
+  ...DispatchProps,
+|};
 
 class Products extends Component<Props> {
   componentWillMount() {
@@ -132,19 +143,17 @@ const styles = StyleSheet.create( {
   },
 } );
 
-function mapStateToProps( state: State ) {
+function mapStateToProps( state: State ): StoreProps {
   return {
     products: state.shop.products,
     loading: state.shop.loadingProducts,
     failed: state.shop.loadProductsFailed,
     reloading: state.shop.reloadingProducts,
-    total: state.shop.total,
-    canOrder: state.shop.total > 0,
     basket: state.shop.basket,
   };
 }
 
-function mapDispatchToProps( dispatch: Dispatch ) {
+function mapDispatchToProps( dispatch: Dispatch ): DispatchProps {
   return {
     fetchProducts() {
       dispatch( fetchProducts() );

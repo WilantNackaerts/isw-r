@@ -8,13 +8,13 @@ import PinInput from 'react-native-code-input';
 import { withNavigation } from 'react-navigation';
 import type { NavigationScreenProp } from 'react-navigation';
 
-type Props = {
+type Props = {|
   visible: boolean,
   wrongPin: boolean,
   navigation: NavigationScreenProp,
   onCancel: () => void,
   onPin: ( pin: string ) => void,
-}
+|};
 
 type LocalState = {
   rememberPin: boolean,

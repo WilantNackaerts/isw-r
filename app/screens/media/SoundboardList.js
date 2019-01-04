@@ -10,19 +10,31 @@ import type { State, Dispatch } from '/types';
 import type { Item as SoundboardItem } from '/types/media/soundboard';
 import type { NavigationScreenProp } from 'react-navigation';
 
+type AutoPassedProps = {|
+  navigation: NavigationScreenProp<NavigationState>,
+|};
+
+type StoreProps = {|
+  items: SoundboardItem[],
+  searchterm: string,
+  reloading: boolean,
+|};
+
+type DispatchProps = {|
+  reloadSounds: () => void,
+|};
+
+type Props = {|
+  ...AutoPassedProps,
+  ...StoreProps,
+  ...DispatchProps,
+|};
+
 type NavigationState = {
   params: {
     prefix: string,
   },
 };
-
-type Props = {
-  items: SoundboardItem[],
-  searchterm: string,
-  reloading: boolean,
-  reloadSounds: () => void,
-  navigation: NavigationScreenProp<NavigationState>,
-}
 
 class Soundboard extends Component<Props> {
   getItems(): SoundboardItem[] {
@@ -63,7 +75,7 @@ const styles = StyleSheet.create( {
   },
 } );
 
-function mapStateToProps( state: State ) {
+function mapStateToProps( state: State ): StoreProps {
   return {
     items: state.media.soundboard.items,
     searchterm: state.media.soundboard.searchterm,
@@ -71,7 +83,7 @@ function mapStateToProps( state: State ) {
   };
 }
 
-function mapDispatchToProps( dispatch: Dispatch ) {
+function mapDispatchToProps( dispatch: Dispatch ): DispatchProps {
   return {
     reloadSounds() {
       dispatch( reloadSounds() );

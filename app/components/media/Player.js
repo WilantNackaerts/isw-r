@@ -10,7 +10,11 @@ import { fetchPlayer, play, pause, volume, toggleMuted, next, previous } from '/
 import { withNavigation, type NavigationScreenProp } from 'react-navigation';
 import baseStyles, { FOOTER, TEXT, ICON_DISABLED } from '/styles';
 
-type Props = {
+type AutoPassedProps = {|
+  navigation: NavigationScreenProp,
+|};
+
+type StoreProps = {|
   hasSongs: boolean,
   currentSong: Song,
   muted: boolean,
@@ -18,7 +22,9 @@ type Props = {
   volume: number,
   canGoForward: boolean,
   canGoBackward: boolean,
-  navigation: NavigationScreenProp,
+|};
+
+type DispatchProps = {|
   fetchPlayer: () => void,
   play: () => void,
   pause: () => void,
@@ -26,7 +32,13 @@ type Props = {
   toggleMuted: () => void,
   next: () => void,
   previous: () => void,
-};
+|};
+
+type Props = {|
+  ...AutoPassedProps,
+  ...StoreProps,
+  ...DispatchProps,
+|};
 
 class Player extends Component<Props> {
   interval: ?IntervalID;
@@ -143,7 +155,7 @@ const styles = StyleSheet.create( {
   },
 } );
 
-function mapStateToProps( state: State ) {
+function mapStateToProps( state: State ): StoreProps {
   return {
     hasSongs: state.media.player.queue && state.media.player.queue.length > 0,
     currentSong: state.media.player.currentSong,
@@ -155,7 +167,7 @@ function mapStateToProps( state: State ) {
   };
 }
 
-function mapDispatchToProps( dispatch: Dispatch, getState: GetState ) {
+function mapDispatchToProps( dispatch: Dispatch, getState: GetState ): DispatchProps {
   return {
     fetchPlayer() {
       dispatch( fetchPlayer() );
