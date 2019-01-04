@@ -10,6 +10,7 @@ import Loading from '/components/Loading.js';
 import { fetchSounds, setSearch } from '/store/actions/media/soundboard';
 import type { Item as SoundboardItem } from '/types/media/soundboard';
 import type { State, Dispatch } from '/types';
+import type { TabNavigation } from '/components/MediaTabs.js';
 
 type Props = {
   loading: boolean,
@@ -17,14 +18,22 @@ type Props = {
   reloading: boolean,
   items: SoundboardItem[],
   searchterm: string,
+  navigation: TabNavigation,
   fetchSounds: () => void,
   reloadSounds: () => void,
   setSearch: ( term: string ) => void
 };
 
 class Soundboard extends Component<Props> {
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchSounds();
+    this.props.navigation.onFocus( this.onFocus.bind( this ) );
+  }
+  
+  onFocus() {
+    if ( this.props.failed ) {
+      this.props.fetchSounds();
+    }
   }
 
   onChange( term ) {
