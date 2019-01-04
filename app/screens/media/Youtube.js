@@ -5,12 +5,15 @@ import { Container, ListItem, Text, Left, Thumbnail, Body } from 'native-base';
 import { connect } from 'react-redux';
 import ListWithSearch from '/components/ListWithSearch';
 import { fetchSongs } from '/store/actions/media/youtube';
+import { next } from '/store/actions/media/player';
 import type { Song } from '/types/media/youtube'; 
 import type { State, Dispatch } from '/types';
 import { YOUTUBE_API_URL } from '/config';
 
 type Props = {
   songs: Song[],
+  paused: boolean,
+  next: () => void,
   fetchSongs: ( searchTerm: string ) => void,
 }
 
@@ -21,7 +24,9 @@ class Youtube extends Component<Props> {
   }
 
   onPress( song ) {
-    fetch( YOUTUBE_API_URL + '/' + song );
+    fetch( YOUTUBE_API_URL + '/' + song )
+      .catch( console.error );
+    if ( this.props.paused ) this.props.next();
   }
 
   render() {
@@ -51,6 +56,7 @@ class Youtube extends Component<Props> {
 function mapStateToProps( state: State ) {
   return {
     songs: state.media.youtube.songs,
+    paused: state.media.player.paused,
   };
 }
 
@@ -58,6 +64,9 @@ function mapDispatchToProps( dispatch: Dispatch ) {
   return {
     fetchSongs( searchTerm ) {
       dispatch( fetchSongs( searchTerm ) );
+    },
+    next() {
+      dispatch( next() );
     },
   };
 }

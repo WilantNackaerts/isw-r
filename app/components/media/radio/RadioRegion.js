@@ -8,12 +8,15 @@ import type { Region, Station } from '/types/media/radio';
 
 type Props = {
   region: Region,
+  paused: boolean,
+  next: () => void,
 };
 
 export default class RadioRegion extends Component<Props> {
   onPress( station: Station ) {
     fetch( `${MEDIA_API_URL}/${station.url}` )
       .catch( console.error );
+    if ( this.props.paused ) this.props.next();
   }
 
   render() {
