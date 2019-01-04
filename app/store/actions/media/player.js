@@ -1,7 +1,7 @@
 // @flow
 
 import * as actions from '/types/media/player/actions';
-import { catcher } from '/util/error.js';
+import { catcher, error } from '/util/error.js';
 import type {
   FetchStartAction,
   FetchEndAction,
@@ -96,7 +96,7 @@ export function fetchPlayer(): Thunk {
       } )
       .catch( err => {
         if ( !previousFetchStatusFailed ) {
-          catcher( 'Oops! Failed to fetch player state.' );
+          error( 'Oops! Failed to fetch player state.' );
         }
         previousFetchStatusFailed = true;
       } );
