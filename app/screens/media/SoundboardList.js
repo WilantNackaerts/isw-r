@@ -10,7 +10,7 @@ import type { State, Dispatch } from '/types';
 import type { Item as SoundboardItem } from '/types/media/soundboard';
 import type { NavigationScreenProp } from 'react-navigation';
 
-type AutoPassedProps = {|
+type PassedProps = {|
   navigation: NavigationScreenProp<NavigationState>,
 |};
 
@@ -25,7 +25,7 @@ type DispatchProps = {|
 |};
 
 type Props = {|
-  ...AutoPassedProps,
+  ...PassedProps,
   ...StoreProps,
   ...DispatchProps,
 |};

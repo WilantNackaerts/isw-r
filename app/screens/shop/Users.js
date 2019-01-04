@@ -14,7 +14,7 @@ import type { NavigationScreenProp } from 'react-navigation';
 import type { User } from '/types/shop';
 import type { State, Dispatch } from '/types';
 
-type AutoPassedProps = {|
+type PassedProps = {|
   navigation: NavigationScreenProp,
 |};
 
@@ -33,7 +33,7 @@ type DispatchProps = {|
 |};
 
 type Props = {|
-  ...AutoPassedProps,
+  ...PassedProps,
   ...StoreProps,
   ...DispatchProps,
 |};

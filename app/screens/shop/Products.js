@@ -13,7 +13,7 @@ import type { NavigationScreenProp } from 'react-navigation';
 import type { State, Dispatch } from '/types';
 import type { Product, Basket } from '/types/shop';
 
-type AutoPassedProps = {|
+type PassedProps = {|
   navigation: NavigationScreenProp,
 |};
 
@@ -32,7 +32,7 @@ type DispatchProps = {|
 |}
 
 type Props = {|
-  ...AutoPassedProps,
+  ...PassedProps,
   ...StoreProps,
   ...DispatchProps,
 |};

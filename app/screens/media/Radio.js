@@ -9,7 +9,7 @@ import type { TabNavigator } from '/components/MediaTabs';
 import type { Region } from '/types/media/radio/index';
 import type { State, Dispatch } from '/types';
 
-type AutoPassedProps = {|
+type PassedProps = {|
   navigation: TabNavigator,
 |};
 
@@ -26,7 +26,7 @@ type DispatchProps = {|
 |};
 
 type Props = {
-  ...AutoPassedProps,
+  ...PassedProps,
   ...StoreProps,
   ...DispatchProps,
 }

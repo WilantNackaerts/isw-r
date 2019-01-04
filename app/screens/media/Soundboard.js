@@ -12,7 +12,7 @@ import type { Item as SoundboardItem } from '/types/media/soundboard';
 import type { State, Dispatch } from '/types';
 import type { TabNavigator } from '/components/MediaTabs.js';
 
-type AutoPassedProps = {|
+type PassedProps = {|
   navigation: TabNavigator,
 |};
 
@@ -29,7 +29,7 @@ type DispatchProps = {|
 |};
 
 type Props = {|
-  ...AutoPassedProps,
+  ...PassedProps,
   ...StoreProps,
   ...DispatchProps,
 |};
