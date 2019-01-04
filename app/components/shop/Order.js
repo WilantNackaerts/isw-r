@@ -36,7 +36,7 @@ class Order extends Component<Props, LocalState> {
     loading: false,
   };
   
-  performOrder( pin: string ) {
+  performOrder( pin: string, fromStorage: boolean ) {
     this.setState( { loading: true } );
     
     const promise = pay( this.props.username, pin, this.props.basket )
@@ -46,10 +46,10 @@ class Order extends Component<Props, LocalState> {
       } )
       .catch( e => {
         if ( e === 403 ) {
-          this.openModal( true );
+          this.openModal( !fromStorage );
         }
         else {
-          error();
+          error( 'Oops! Failed to order your products.' );
         }
       } )
       .finally( () => {
@@ -57,8 +57,8 @@ class Order extends Component<Props, LocalState> {
       } );
     
     progress( promise )
-      .after( 2000, () => {
-        toast.warning( 'This is taking longer than usual... Hang tight!' );
+      .after( 3000, () => {
+        toast.warning( 'This is taking longer than usual. Hang tight!' );
       } );
   }
   
@@ -66,7 +66,7 @@ class Order extends Component<Props, LocalState> {
     AsyncStorage.getItem( 'pin' )
       .then( pin => {
         if ( pin ) {
-          this.performOrder( pin );
+          this.performOrder( pin, true );
         }
         else {
           this.openModal();
@@ -76,7 +76,7 @@ class Order extends Component<Props, LocalState> {
   
   onPin( pin: string ) {
     this.closeModal();
-    this.performOrder( pin );
+    this.performOrder( pin, false );
   }
   
   openModal( wrongPin: boolean = false ) {
@@ -147,7 +147,7 @@ function pay( username: string, pin: string, basket: Basket ): Promise<void> {
         } ),
       } )
         .then( res => res.ok ? resolve() : reject( res.status ) )
-        .catch( reject );
+        .catch( () => reject );
     }
   } );
 }
