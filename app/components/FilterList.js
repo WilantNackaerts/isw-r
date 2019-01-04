@@ -32,7 +32,7 @@ export default class FilterList<T> extends Component<Props<T>, State> {
     }
 
     if ( this.state.term ) {
-      const rsearch = new RegExp( this.state.term.split( '' ).join( '.*' ) );
+      const rsearch = new RegExp( this.state.term.split( '' ).join( '.*' ), 'i' );
       items = items.filter( item => {
         // $FlowFixMe https://stackoverflow.com/questions/53230604/flowtype-generic-type-with-type-annotation-for-dynamic-key
         return rsearch.test( item[ this.props.filterProp ] );
