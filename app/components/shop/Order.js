@@ -95,9 +95,10 @@ class Order extends Component<Props, LocalState> {
           this.state.loading ?
             <Spinner color='white' />
             :
-            <Button rounded success
+            <Button rounded light small
               onPress={this.order.bind( this )}
               disabled={!this.props.canOrder}
+              style={styles.payButton}
             >
               <Text>PAY</Text>
             </Button>
@@ -123,6 +124,9 @@ const styles = StyleSheet.create( {
   total: {
     ...TEXT,
     fontSize: 25,
+  },
+  payButton: {
+    alignSelf: 'center',
   },
 } );
 
