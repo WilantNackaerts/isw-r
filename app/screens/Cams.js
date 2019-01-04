@@ -47,7 +47,6 @@ export default class Cams extends Component<Props, State> {
     let cams = [];
     for ( let i = 0; i < 4; i++ ) {
       cams.push( CAMS_URL + i + '?rand=' + Math.random() );
-      console.log( cams[ i ] );
     }
     this.setState( { cams } );
   }
