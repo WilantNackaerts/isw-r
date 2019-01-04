@@ -31,7 +31,7 @@ function regionReducer( state: Region, action: Action ): Region {
       case actions.FETCH_END:
         return { ...state, loading: false, failed: false, reloading: false, stations: action.stations };
       case actions.FETCH_FAIL:
-        return { ...state, loading: false, failed: !action.soft, reloading: false };
+        return { ...state, loading: false, failed: action.soft ? state.failed : true, reloading: false };
       case actions.RELOAD:
         return { ...state, reloading: true };
       default:

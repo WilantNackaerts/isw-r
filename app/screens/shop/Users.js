@@ -50,6 +50,14 @@ class Users extends Component<Props> {
         }
       } )
       .catch( () => this.props.fetchUsers() );
+    
+    this.props.navigation.addListener( 'didFocus', this.onFocus.bind( this ) );
+  }
+  
+  onFocus() {
+    if ( this.props.failed ) {
+      this.props.fetchUsers();
+    }
   }
 
   selectUser( username: string ) {

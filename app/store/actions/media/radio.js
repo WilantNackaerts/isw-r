@@ -81,8 +81,23 @@ export function fetchAllStations(): Thunk {
   };
 }
 
+export function fetchFailedStations(): Thunk {
+  return function( dispatch: Dispatch, getState: GetState ) {
+    getState().media.radio
+      .filter( region => region.failed )
+      .forEach( region => fetchStationsForRegion( region.apiName )( dispatch, getState ) );
+  };
+}
+
 export function reloadAllStations(): Thunk {
   return function( dispatch: Dispatch, getState: GetState ) {
-    getState().media.radio.forEach( region => reloadStationsForRegion( region.apiName )( dispatch, getState ) );
+    getState().media.radio.forEach( region => {
+      if ( region.failed ) {
+        fetchStationsForRegion( region.apiName )( dispatch, getState );
+      }
+      else {
+        reloadStationsForRegion( region.apiName )( dispatch, getState );
+      }
+    } );
   };
 }

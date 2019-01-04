@@ -29,7 +29,7 @@ type Props = {
 
 class RadioRegion extends Component<Props> {
   componentDidMount() {
-    this.props.fetchStations();
+    //this.props.fetchStations();
   }
   
   onPress( station: Station ) {

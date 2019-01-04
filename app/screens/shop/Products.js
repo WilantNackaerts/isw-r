@@ -29,6 +29,13 @@ type Props = {
 class Products extends Component<Props> {
   componentWillMount() {
     this.props.fetchProducts();
+    this.props.navigation.addListener( 'didFocus', this.onFocus.bind( this ) );
+  }
+  
+  onFocus() {
+    if ( this.props.failed ) {
+      this.props.fetchProducts();
+    }
   }
 
   render() {
