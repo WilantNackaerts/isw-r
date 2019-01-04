@@ -58,6 +58,10 @@ export type FetchUsersEndAction = {
   users: User[],
 };
 
+export type FetchUsersFailAction = {
+  type: typeof actions.FETCH_USERS_FAIL,
+};
+
 export type FetchProductsStartAction = {
   type: typeof actions.FETCH_PRODUCTS_START,
 };
@@ -65,6 +69,10 @@ export type FetchProductsStartAction = {
 export type FetchProductsEndAction = {
   type: typeof actions.FETCH_PRODUCTS_END,
   products: Product[],
+};
+
+export type FetchProductsFailAction = {
+  type: typeof actions.FETCH_PRODUCTS_FAIL,
 };
 
 export type OrderItemAction = {
@@ -85,19 +93,23 @@ export type SetUsernameAction = {
 export type Action =
   FetchUsersStartAction |
   FetchUsersEndAction |
+  FetchUsersFailAction |
   FetchProductsStartAction |
   FetchProductsEndAction |
+  FetchProductsFailAction |
   ResetBasketAction |
   OrderItemAction |
   SetUsernameAction;
 
-export type State = {
+export type State = {|
   users: User[],
   products: Product[],
   productsById: ProductMap,
   loadingUsers: boolean,
+  loadUsersFailed: boolean,
   loadingProducts: boolean,
+  loadProductsFailed: boolean,
   basket: Basket,
   total: number,
   username?: string,
-};
+|};

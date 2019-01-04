@@ -2,9 +2,10 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, StyleSheet, AsyncStorage } from 'react-native';
-import { Text, Spinner, ListItem, Container } from 'native-base';
+import { AsyncStorage } from 'react-native';
+import { Text, ListItem, Container } from 'native-base';
 import FilterList from '/components/FilterList';
+import Loading from '/components/Loading.js';
 import { fetchUsers, setUsername } from '/store/actions/shop';
 import * as routes from '/navigation/shop/routes.js';
 import { catcher } from '/util/error.js';
@@ -17,6 +18,7 @@ type Props = {
   username: string,
   users: User[],
   loading: boolean,
+  failed: boolean,
   navigation: NavigationScreenProp,
   fetchUsers(): void,
   setUsername: ( username: string ) => void,
@@ -64,11 +66,14 @@ class Users extends Component<Props> {
   }
 
   render() {
-    if ( this.props.loading ) {
+    if ( this.props.loading || this.props.failed ) {
       return (
-        <View style={styles.spinner}>
-          <Spinner color='blue' />
-        </View>
+        <Loading
+          loading={this.props.loading}
+          failed={this.props.failed}
+          onRetry={this.props.fetchUsers}
+          failedMessage='Failed to load users.'
+        />
       );
     }
 
@@ -89,17 +94,10 @@ class Users extends Component<Props> {
   }
 }
 
-const styles = StyleSheet.create( {
-  spinner: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-} );
-
 function mapStateToProps( state: State ) {
   return {
     loading: state.shop.loadingUsers,
+    failed: state.shop.loadUsersFailed,
     users: state.shop.users,
     username: state.shop.username,
   };

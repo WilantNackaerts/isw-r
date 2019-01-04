@@ -21,9 +21,13 @@ export default function error( msg?: string | Error, err?: Error ) {
   } );
 }
 
-function catcher( msg?: string ) {
+function catcher( msg?: string, cb?: ( err?: Error ) => void ) {
   return function( err?: Error ) {
     error( msg, err );
+    
+    if ( cb ) {
+      cb( err );
+    }
   };
 }
 

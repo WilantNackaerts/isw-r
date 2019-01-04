@@ -89,11 +89,11 @@ export type Action =
   NextAction |
   PreviousAction;
 
-export type State = {
+export type State = {|
   queue: Song[],
   currentSong: Song,
   muted: boolean,
   paused: boolean,
   volume: number,
   queuePosition: number,
-}
+|};

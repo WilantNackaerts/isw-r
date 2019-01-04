@@ -34,8 +34,8 @@ export type SetSearchAction = {
 
 export type Action = FetchStartAction | FetchEndAction | SetSearchAction;
 
-export type State = {
+export type State = {|
   isLoading: boolean,
   items: Item[],
   searchterm: string,
-};
+|};

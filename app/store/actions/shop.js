@@ -3,7 +3,6 @@
 import * as actions from '/types/shop/actions';
 import type { Dispatch, Thunk } from '/types';
 import { SHOP_API_URL } from '/config';
-import { catcher } from '/util/error.js';
 import type {
   ApiUser,
   User,
@@ -13,8 +12,10 @@ import type {
   FetchProductsResponse,
   FetchUsersStartAction,
   FetchUsersEndAction,
+  FetchUsersFailAction,
   FetchProductsStartAction,
   FetchProductsEndAction,
+  FetchProductsFailAction,
   ResetBasketAction,
   OrderItemAction,
   SetUsernameAction,
@@ -56,6 +57,12 @@ function _fetchUsersEnd( res: FetchUsersResponse ): FetchUsersEndAction {
   };
 }
 
+function _fetchUsersFail(): FetchUsersFailAction {
+  return {
+    type: actions.FETCH_USERS_FAIL,
+  };
+}
+
 function _fetchProductsStart(): FetchProductsStartAction {
   return {
     type: actions.FETCH_PRODUCTS_START,
@@ -69,6 +76,12 @@ function _fetchProductsEnd( res: FetchProductsResponse ): FetchProductsEndAction
   };
 }
 
+function _fetchProductsFail(): FetchProductsFailAction {
+  return {
+    type: actions.FETCH_PRODUCTS_FAIL,
+  };
+}
+
 export function fetchUsers(): Thunk {
   return function( dispatch: Dispatch ) {
     dispatch( _fetchUsersStart() );
@@ -76,7 +89,7 @@ export function fetchUsers(): Thunk {
     fetch( SHOP_API_URL + '/users' )
       .then( res => res.json() )
       .then( ( res: FetchUsersResponse ) => dispatch( _fetchUsersEnd( res ) ) )
-      .catch( catcher( 'Oops! Failed to fetch users.' ) );
+      .catch( () => dispatch( _fetchUsersFail() ) );
   };
 }
 
@@ -87,7 +100,7 @@ export function fetchProducts(): Thunk {
     fetch( SHOP_API_URL + '/items' )
       .then( res => res.json() )
       .then( ( res: FetchProductsResponse ) => dispatch( _fetchProductsEnd( res ) ) )
-      .catch( catcher( 'Oops! Failed to fetch products.' ) );
+      .catch( () => dispatch( _fetchProductsFail() ) );
   };
 }
 

@@ -3,9 +3,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View, Image, ScrollView } from 'react-native';
-import { Card, CardItem, Spinner, Text, Container } from 'native-base';
+import { Card, CardItem, Text, Container } from 'native-base';
 import Order from '/components/shop/Order.js';
 import ClickableIcon from '/components/ClickableIcon.js';
+import Loading from '/components/Loading.js';
 import { fetchProducts, orderItem } from '/store/actions/shop';
 import type { NavigationScreenProp } from 'react-navigation';
 import type { State, Dispatch } from '/types';
@@ -14,7 +15,8 @@ import type { Product, Basket } from '/types/shop';
 type Props = {
   username: string,
   products: Product[],
-  loadingProducts: boolean,
+  loading: boolean,
+  failed: boolean,
   navigation: NavigationScreenProp,
   basket: Basket,
   fetchProducts: () => void,
@@ -27,11 +29,14 @@ class Products extends Component<Props> {
   }
 
   render() {
-    if ( this.props.loadingProducts ) {
+    if ( this.props.loading || this.props.failed ) {
       return (
-        <View style={styles.loading}>
-          <Spinner color='blue' />
-        </View>
+        <Loading
+          loading={this.props.loading}
+          failed={this.props.failed}
+          onRetry={this.props.fetchProducts}
+          failedMessage='Failed to load products.'
+        />
       );
     }
 
@@ -76,11 +81,6 @@ class Products extends Component<Props> {
 }
 
 const styles = StyleSheet.create( {
-  loading: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexGrow: 1,
-  },
   cardContainer: {
     flex: 1,
     flexDirection: 'row',
@@ -125,7 +125,8 @@ const styles = StyleSheet.create( {
 function mapStateToProps( state: State ) {
   return {
     products: state.shop.products,
-    loadingProducts: state.shop.loadingProducts,
+    loading: state.shop.loadingProducts,
+    failed: state.shop.loadProductsFailed,
     total: state.shop.total,
     canOrder: state.shop.total > 0,
     basket: state.shop.basket,

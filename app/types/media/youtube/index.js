@@ -26,6 +26,6 @@ export type FetchEndAction = {
 
 export type Action = FetchStartAction | FetchEndAction;
 
-export type State = {
+export type State = {|
   songs: Song[],
-};
+|};

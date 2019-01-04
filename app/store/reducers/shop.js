@@ -9,10 +9,11 @@ function defaultState(): State {
     products: [],
     productsById: {},
     loadingUsers: false,
+    loadUsersFailed: false,
     loadingProducts: false,
+    loadProductsFailed: false,
     basket: {},
     total: 0,
-    toastVisible: false,
   };
 }
 
@@ -48,16 +49,21 @@ export default function shopReducer( state: State = defaultState(), action: Acti
     case actions.FETCH_USERS_START:
       return { ...state, loadingUsers: true };
     case actions.FETCH_USERS_END:
-      return { ...state, loadingUsers: false, users: action.users };
+      return { ...state, loadingUsers: false, loadUsersFailed: false, users: action.users };
+    case actions.FETCH_USERS_FAIL:
+      return { ...state, loadingUsers: false, loadUsersFailed: true };
     case actions.FETCH_PRODUCTS_START:
       return { ...state, loadingProducts: true };
     case actions.FETCH_PRODUCTS_END:
       return addTotal( {
         ...state,
         loadingProducts: false,
+        loadProductsFailed: false,
         products: action.products,
         productsById: prodsById( action.products ),
       } );
+    case actions.FETCH_PRODUCTS_FAIL:
+      return { ...state, loadingProducts: false, loadProductsFailed: true };
     case actions.ORDER_ITEM:
       return addTotal( {
         ...state,

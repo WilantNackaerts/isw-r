@@ -9,7 +9,7 @@ export type GetState = () => State;
 
 export type Action = MediaAction | ShopAction;
 
-export type State = {
+export type State = {|
   media: MediaState,
   shop: ShopState
-};
+|};
