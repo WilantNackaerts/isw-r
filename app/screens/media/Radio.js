@@ -1,20 +1,23 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Content } from 'native-base';
 import { connect } from 'react-redux';
 import RadioRegion from '/components/media/radio/RadioRegion';
+import PullToRefresh from '/components/PullToRefresh.js';
+import { reloadAllStations } from '/store/actions/media/radio.js';
 import type { Region } from '/types/media/radio/index';
-import type { State } from '/types';
+import type { State, Dispatch } from '/types';
 
 type Props = {
   regions: Region[],
+  reloading: boolean,
+  reloadAllStations: () => void,
 }
 
 class Radio extends Component<Props> {
   render() {
     return (
-      <Content>
+      <PullToRefresh refreshing={this.props.reloading} onRefresh={this.props.reloadAllStations}>
         {
           this.props.regions.map( region => (
             <RadioRegion
@@ -23,7 +26,7 @@ class Radio extends Component<Props> {
             />
           ) )
         }
-      </Content>
+      </PullToRefresh>
     );
   }
 }
@@ -31,7 +34,16 @@ class Radio extends Component<Props> {
 function mapStateToProps( state: State ) {
   return {
     regions: state.media.radio,
+    reloading: state.media.radio.some( region => region.reloading ),
   };
 }
 
-export default connect( mapStateToProps )( Radio );
+function mapDispatchToProps( dispatch: Dispatch ) {
+  return {
+    reloadAllStations() {
+      dispatch( reloadAllStations() );
+    },
+  };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( Radio );
