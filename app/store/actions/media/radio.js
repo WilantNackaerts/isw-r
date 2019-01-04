@@ -2,8 +2,16 @@
 
 import * as actions from '/types/media/radio/actions';
 import { MEDIA_API_URL } from '/config';
+import { catcher } from '/util/error.js';
 import type { Thunk, Dispatch, GetState } from '/types';
-import type { Station, StationsResponse, FetchStartAction, FetchEndAction, FetchFailAction } from '/types/media/radio';
+import type {
+  Station,
+  StationsResponse,
+  FetchStartAction,
+  FetchEndAction,
+  FetchFailAction,
+  ReloadAction,
+} from '/types/media/radio';
 
 function _fetchStationsStart( region: string ): FetchStartAction {
   return {
@@ -20,35 +28,76 @@ function _fetchStationsEnd( region: string, stations: Station[] ): FetchEndActio
   };
 }
 
-export function _fetchStationsFail( region: string ): FetchFailAction {
-  console.log( 'Creating fetch stations fail action' );
+function _fetchStationsFail( region: string, soft?: boolean = false ): FetchFailAction {
   return {
     type: actions.FETCH_FAIL,
     region,
+    soft,
   };
+}
+
+function _reloadStationsForRegion( region: string ): ReloadAction {
+  return {
+    type: actions.RELOAD,
+    region,
+  };
+}
+
+function _fetchStationsForRegion( region: string, dispatch: Dispatch ): Promise<StationsResponse> {
+  return fetch( `${MEDIA_API_URL}/${region}/list` )
+    .then( response => response.json() )
+    .then( ( response: StationsResponse ) => {
+      const stations = response.stations.map( station => ( {
+        name: station.TITLE,
+        url: `${station.command}/${station.params}`,
+        logo: station.logo,
+      } ) );
+
+      dispatch( _fetchStationsEnd( region, stations ) );
+    } );
 }
 
 export function fetchStationsForRegion( region: string ): Thunk {
   return function( dispatch: Dispatch ) {
     dispatch( _fetchStationsStart( region ) );
 
-    fetch( `${MEDIA_API_URL}/${region}/list`, { timeout: 2000 } )
-      .then( response => response.json() )
-      .then( ( response: StationsResponse ) => {
-        const stations = response.stations.map( station => ( {
-          name: station.TITLE,
-          url: `${station.command}/${station.params}`,
-          logo: station.logo,
-        } ) );
-
-        dispatch( _fetchStationsEnd( region, stations ) );
-      } )
+    _fetchStationsForRegion( region, dispatch )
       .catch( () => dispatch( _fetchStationsFail( region ) ) );
+  };
+}
+
+export function reloadStationsForRegion( region: string ): Thunk {
+  return function( dispatch: Dispatch ) {
+    dispatch( _reloadStationsForRegion( region ) );
+
+    _fetchStationsForRegion( region, dispatch )
+      .catch( catcher( 'Oops! Failed to load stations in: ' + region, () => dispatch( _fetchStationsFail( region, true ) ) ) );
   };
 }
 
 export function fetchAllStations(): Thunk {
   return function( dispatch: Dispatch, getState: GetState ) {
     getState().media.radio.forEach( region => fetchStationsForRegion( region.apiName )( dispatch, getState ) );
+  };
+}
+
+export function fetchFailedStations(): Thunk {
+  return function( dispatch: Dispatch, getState: GetState ) {
+    getState().media.radio
+      .filter( region => region.failed )
+      .forEach( region => fetchStationsForRegion( region.apiName )( dispatch, getState ) );
+  };
+}
+
+export function reloadAllStations(): Thunk {
+  return function( dispatch: Dispatch, getState: GetState ) {
+    getState().media.radio.forEach( region => {
+      if ( region.failed ) {
+        fetchStationsForRegion( region.apiName )( dispatch, getState );
+      }
+      else {
+        reloadStationsForRegion( region.apiName )( dispatch, getState );
+      }
+    } );
   };
 }

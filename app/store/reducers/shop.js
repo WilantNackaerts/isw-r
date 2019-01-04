@@ -10,8 +10,10 @@ function defaultState(): State {
     productsById: {},
     loadingUsers: false,
     loadUsersFailed: false,
+    reloadingUsers: false,
     loadingProducts: false,
     loadProductsFailed: false,
+    reloadingProducts: false,
     basket: {},
     total: 0,
   };
@@ -49,9 +51,11 @@ export default function shopReducer( state: State = defaultState(), action: Acti
     case actions.FETCH_USERS_START:
       return { ...state, loadingUsers: true };
     case actions.FETCH_USERS_END:
-      return { ...state, loadingUsers: false, loadUsersFailed: false, users: action.users };
+      return { ...state, loadingUsers: false, loadUsersFailed: false, reloadingUsers: false, users: action.users };
     case actions.FETCH_USERS_FAIL:
-      return { ...state, loadingUsers: false, loadUsersFailed: true };
+      return { ...state, loadingUsers: false, loadUsersFailed: !action.soft, reloadingUsers: false };
+    case actions.RELOAD_USERS:
+      return { ...state, reloadingUsers: true };
     case actions.FETCH_PRODUCTS_START:
       return { ...state, loadingProducts: true };
     case actions.FETCH_PRODUCTS_END:
@@ -59,11 +63,14 @@ export default function shopReducer( state: State = defaultState(), action: Acti
         ...state,
         loadingProducts: false,
         loadProductsFailed: false,
+        reloadingProducts: false,
         products: action.products,
         productsById: prodsById( action.products ),
       } );
     case actions.FETCH_PRODUCTS_FAIL:
-      return { ...state, loadingProducts: false, loadProductsFailed: true };
+      return { ...state, loadingProducts: false, loadProductsFailed: !action.soft, reloadingProducts: false };
+    case actions.RELOAD_PRODUCTS:
+      return { ...state, reloadingProducts: true };
     case actions.ORDER_ITEM:
       return addTotal( {
         ...state,

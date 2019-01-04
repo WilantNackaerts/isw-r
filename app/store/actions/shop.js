@@ -3,6 +3,7 @@
 import * as actions from '/types/shop/actions';
 import type { Dispatch, Thunk } from '/types';
 import { SHOP_API_URL } from '/config';
+import { catcher } from '/util/error.js';
 import type {
   ApiUser,
   User,
@@ -13,9 +14,11 @@ import type {
   FetchUsersStartAction,
   FetchUsersEndAction,
   FetchUsersFailAction,
+  ReloadUsersAction,
   FetchProductsStartAction,
   FetchProductsEndAction,
   FetchProductsFailAction,
+  ReloadProductsAction,
   ResetBasketAction,
   OrderItemAction,
   SetUsernameAction,
@@ -57,9 +60,16 @@ function _fetchUsersEnd( res: FetchUsersResponse ): FetchUsersEndAction {
   };
 }
 
-function _fetchUsersFail(): FetchUsersFailAction {
+function _fetchUsersFail( soft?: boolean = false ): FetchUsersFailAction {
   return {
     type: actions.FETCH_USERS_FAIL,
+    soft,
+  };
+}
+
+function _reloadUsers(): ReloadUsersAction {
+  return {
+    type: actions.RELOAD_USERS,
   };
 }
 
@@ -76,31 +86,64 @@ function _fetchProductsEnd( res: FetchProductsResponse ): FetchProductsEndAction
   };
 }
 
-function _fetchProductsFail(): FetchProductsFailAction {
+function _fetchProductsFail( soft?: boolean = false ): FetchProductsFailAction {
   return {
     type: actions.FETCH_PRODUCTS_FAIL,
+    soft,
   };
+}
+
+function _reloadProducts(): ReloadProductsAction {
+  return {
+    type: actions.RELOAD_PRODUCTS,
+  };
+}
+
+function _fetchUsers( dispatch: Dispatch ): Promise<FetchUsersResponse> {
+  return fetch( SHOP_API_URL + '/users' )
+    .then( res => res.json() )
+    .then( ( res: FetchUsersResponse ) => dispatch( _fetchUsersEnd( res ) ) );
 }
 
 export function fetchUsers(): Thunk {
   return function( dispatch: Dispatch ) {
     dispatch( _fetchUsersStart() );
-
-    fetch( SHOP_API_URL + '/users' )
-      .then( res => res.json() )
-      .then( ( res: FetchUsersResponse ) => dispatch( _fetchUsersEnd( res ) ) )
+    
+    _fetchUsers( dispatch )
       .catch( () => dispatch( _fetchUsersFail() ) );
   };
+}
+
+export function reloadUsers(): Thunk {
+  return function( dispatch: Dispatch ) {
+    dispatch( _reloadUsers() );
+    
+    _fetchUsers( dispatch )
+      .catch( catcher( 'Oops! Failed to load users.', () => dispatch( _fetchUsersFail( true ) ) ) );
+  };
+}
+
+function _fetchProducts( dispatch: Dispatch, soft?: boolean ): Promise<FetchProductsResponse> {
+  return fetch( SHOP_API_URL + '/items' )
+    .then( res => res.json() )
+    .then( ( res: FetchProductsResponse ) => dispatch( _fetchProductsEnd( res ) ) );
 }
 
 export function fetchProducts(): Thunk {
   return function( dispatch: Dispatch ) {
     dispatch( _fetchProductsStart() );
-
-    fetch( SHOP_API_URL + '/items' )
-      .then( res => res.json() )
-      .then( ( res: FetchProductsResponse ) => dispatch( _fetchProductsEnd( res ) ) )
+    
+    _fetchProducts( dispatch )
       .catch( () => dispatch( _fetchProductsFail() ) );
+  };
+}
+
+export function reloadProducts(): Thunk {
+  return function( dispatch: Dispatch ) {
+    dispatch( _reloadProducts() );
+    
+    _fetchProducts( dispatch )
+      .catch( catcher( 'Oops! Failed to load products.', () => dispatch( _fetchProductsFail( true ) ) ) );
   };
 }
 

@@ -2,27 +2,48 @@
 
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { connect } from 'react-redux';
 import { Container } from 'native-base';
+import { connect } from 'react-redux';
 import Search from '/components/Search';
 import SoundboardNavigator from '/navigation/soundboard/Navigator';
 import Loading from '/components/Loading.js';
 import { fetchSounds, setSearch } from '/store/actions/media/soundboard';
 import type { Item as SoundboardItem } from '/types/media/soundboard';
 import type { State, Dispatch } from '/types';
+import type { TabNavigator } from '/components/MediaTabs.js';
 
-type Props = {
+type PassedProps = {|
+  navigation: TabNavigator,
+|};
+
+type StoreProps = {|
   loading: boolean,
   failed: boolean,
   items: SoundboardItem[],
   searchterm: string,
+|};
+
+type DispatchProps = {|
   fetchSounds: () => void,
   setSearch: ( term: string ) => void
-};
+|};
+
+type Props = {|
+  ...PassedProps,
+  ...StoreProps,
+  ...DispatchProps,
+|};
 
 class Soundboard extends Component<Props> {
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchSounds();
+    this.props.navigation.onFocus( this.onFocus.bind( this ) );
+  }
+  
+  onFocus() {
+    if ( this.props.failed ) {
+      this.props.fetchSounds();
+    }
   }
 
   onChange( term ) {
@@ -55,10 +76,11 @@ class Soundboard extends Component<Props> {
 const styles = StyleSheet.create( {
   listWrapper: {
     flexGrow: 1,
+    backgroundColor: 'red',
   },
 } );
 
-function mapStateToProps( state: State ) {
+function mapStateToProps( state: State ): StoreProps {
   return {
     loading: state.media.soundboard.loading,
     failed: state.media.soundboard.failed,
@@ -67,7 +89,7 @@ function mapStateToProps( state: State ) {
   };
 }
 
-function mapDispatchToProps( dispatch: Dispatch ) {
+function mapDispatchToProps( dispatch: Dispatch ): DispatchProps {
   return {
     fetchSounds() {
       dispatch( fetchSounds() );

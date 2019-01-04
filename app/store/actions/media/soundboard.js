@@ -1,5 +1,6 @@
 // @flow
 import * as actions from '/types/media/soundboard/actions';
+import { catcher } from '/util/error.js';
 import { SOUNDBOARD_URL } from '/config';
 import type {
   Item,
@@ -7,6 +8,7 @@ import type {
   FetchStartAction,
   FetchEndAction,
   FetchFailAction,
+  ReloadAction,
   SetSearchAction,
 } from '/types/media/soundboard';
 import type { Thunk, Dispatch } from '/types';
@@ -63,9 +65,16 @@ function fetchEnd( items: Item[] ): FetchEndAction {
   };
 }
 
-function fetchFail(): FetchFailAction {
+function fetchFail( soft?: boolean = false ): FetchFailAction {
   return {
     type: actions.FETCH_FAIL,
+    soft,
+  };
+}
+
+function _reload(): ReloadAction {
+  return {
+    type: actions.RELOAD,
   };
 }
 
@@ -83,15 +92,28 @@ export function clearSearch(): SetSearchAction {
   };
 }
 
+function _fetchSounds( dispatch: Dispatch ): Promise<ApiSound[]> {
+  return fetch( SOUNDBOARD_URL )
+    .then( res => res.json() )
+    .then( res => {
+      dispatch( fetchEnd( process( res ) ) );
+    } );
+}
+
 export function fetchSounds(): Thunk {
   return function( dispatch: Dispatch ) {
     dispatch( fetchStart() );
 
-    fetch( SOUNDBOARD_URL )
-      .then( res => res.json() )
-      .then( res => {
-        dispatch( fetchEnd( process( res ) ) );
-      } )
+    _fetchSounds( dispatch )
       .catch( () => dispatch( fetchFail() ) );
+  };
+}
+
+export function reloadSounds(): Thunk {
+  return function( dispatch: Dispatch ) {
+    dispatch( _reload() );
+
+    _fetchSounds( dispatch )
+      .catch( catcher( 'Oops! Failed to load sound effects.', () => dispatch( fetchFail( true ) ) ) );
   };
 }

@@ -12,26 +12,30 @@ import { catcher } from '/util/error.js';
 import type { Station } from '/types/media/radio';
 import type { State, Dispatch } from '/types/index.js';
 
-type PassedProps = {
+type PassedProps = {|
   regionName: string,
-};
+|};
 
-type Props = {
-  ...PassedProps,
+type StoreProps = {|
   name: string,
   stations: Station[],
   loading: boolean,
   failed: boolean,
   paused: boolean,
+|};
+
+type DispatchProps = {|
   next: () => void,
   fetchStations: () => void
-};
+|};
+
+type Props = {|
+  ...PassedProps,
+  ...StoreProps,
+  ...DispatchProps,
+|};
 
 class RadioRegion extends Component<Props> {
-  componentDidMount() {
-    this.props.fetchStations();
-  }
-  
   onPress( station: Station ) {
     fetch( `${MEDIA_API_URL}/${station.url}` )
       .catch( catcher( 'Oops! Failed to start radio station.' ) );
@@ -85,7 +89,7 @@ const styles = StyleSheet.create( {
   },
 } );
 
-function mapStateToProps( state: State, props: PassedProps ) {
+function mapStateToProps( state: State, props: PassedProps ): StoreProps {
   const region = state.media.radio.find( region => region.apiName === props.regionName );
 
   if ( !region ) {
@@ -107,7 +111,7 @@ function mapStateToProps( state: State, props: PassedProps ) {
   };
 }
 
-function mapDispatchToProps( dispatch: Dispatch, props: PassedProps ) {
+function mapDispatchToProps( dispatch: Dispatch, props: PassedProps ): DispatchProps {
   return {
     next() {
       dispatch( next() );

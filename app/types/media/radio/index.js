@@ -13,6 +13,7 @@ export type Region = {
   apiName: string,
   loading: boolean,
   failed: boolean,
+  reloading: boolean,
   stations: Station[],
 };
 
@@ -36,21 +37,27 @@ export type ActionBase = {
 };
 
 export type FetchStartAction = {
-  ...ActionBase,
   type: typeof actions.FETCH_START,
+  region: string,
 };
 
 export type FetchEndAction = {
-  ...ActionBase,
   type: typeof actions.FETCH_END,
+  region: string,
   stations: Station[],
 };
 
 export type FetchFailAction = {
-  ...ActionBase,
   type: typeof actions.FETCH_FAIL,
+  region: string,
+  soft: boolean,
 };
 
-export type Action = FetchStartAction | FetchEndAction | FetchFailAction;
+export type ReloadAction = {
+  type: typeof actions.RELOAD,
+  region: string,
+};
+
+export type Action = FetchStartAction | FetchEndAction | FetchFailAction | ReloadAction;
 
 export type State = Region[];

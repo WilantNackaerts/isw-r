@@ -29,6 +29,11 @@ export type FetchEndAction = {
 
 export type FetchFailAction = {
   type: typeof actions.FETCH_FAIL,
+  soft: boolean,
+};
+
+export type ReloadAction = {
+  type: typeof actions.RELOAD,
 };
 
 export type SetSearchAction = {
@@ -36,11 +41,17 @@ export type SetSearchAction = {
   searchterm: string,
 };
 
-export type Action = FetchStartAction | FetchEndAction | FetchFailAction | SetSearchAction;
+export type Action =
+  FetchStartAction |
+  FetchEndAction |
+  FetchFailAction |
+  ReloadAction |
+  SetSearchAction;
 
 export type State = {|
   loading: boolean,
   failed: boolean,
+  reloading: boolean,
   items: Item[],
   searchterm: string,
 |};

@@ -2,30 +2,51 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import { Card, CardItem, Text, Container } from 'native-base';
 import Order from '/components/shop/Order.js';
 import ClickableIcon from '/components/ClickableIcon.js';
 import Loading from '/components/Loading.js';
-import { fetchProducts, orderItem } from '/store/actions/shop';
+import PullToRefresh from '/components/PullToRefresh.js';
+import { fetchProducts, reloadProducts, orderItem } from '/store/actions/shop';
 import type { NavigationScreenProp } from 'react-navigation';
 import type { State, Dispatch } from '/types';
 import type { Product, Basket } from '/types/shop';
 
-type Props = {
-  username: string,
+type PassedProps = {|
+  navigation: NavigationScreenProp,
+|};
+
+type StoreProps = {|
   products: Product[],
   loading: boolean,
   failed: boolean,
-  navigation: NavigationScreenProp,
+  reloading: boolean,
   basket: Basket,
+|};
+
+type DispatchProps = {|
   fetchProducts: () => void,
+  reloadProducts: () => void,
   orderItem: ( productId: number, amount: 1 | -1 ) => void,
-};
+|}
+
+type Props = {|
+  ...PassedProps,
+  ...StoreProps,
+  ...DispatchProps,
+|};
 
 class Products extends Component<Props> {
   componentWillMount() {
     this.props.fetchProducts();
+    this.props.navigation.addListener( 'didFocus', this.onFocus.bind( this ) );
+  }
+  
+  onFocus() {
+    if ( this.props.failed ) {
+      this.props.fetchProducts();
+    }
   }
 
   render() {
@@ -42,7 +63,7 @@ class Products extends Component<Props> {
 
     return (
       <Container>
-        <ScrollView>
+        <PullToRefresh onRefresh={this.props.reloadProducts} refreshing={this.props.reloading}>
           <View style={styles.cardContainer}>
             {
               this.props.products.map( product => (
@@ -73,7 +94,7 @@ class Products extends Component<Props> {
               ) )
             }
           </View>
-        </ScrollView>
+        </PullToRefresh>
         <Order />
       </Container>
     );
@@ -122,21 +143,23 @@ const styles = StyleSheet.create( {
   },
 } );
 
-function mapStateToProps( state: State ) {
+function mapStateToProps( state: State ): StoreProps {
   return {
     products: state.shop.products,
     loading: state.shop.loadingProducts,
     failed: state.shop.loadProductsFailed,
-    total: state.shop.total,
-    canOrder: state.shop.total > 0,
+    reloading: state.shop.reloadingProducts,
     basket: state.shop.basket,
   };
 }
 
-function mapDispatchToProps( dispatch: Dispatch ) {
+function mapDispatchToProps( dispatch: Dispatch ): DispatchProps {
   return {
     fetchProducts() {
       dispatch( fetchProducts() );
+    },
+    reloadProducts() {
+      dispatch( reloadProducts() );
     },
     orderItem( productId: number, amount: 1 | -1 ) {
       dispatch( orderItem( productId, amount ) );

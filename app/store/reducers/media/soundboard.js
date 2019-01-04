@@ -7,6 +7,7 @@ import type { Action } from '/types';
 const defaultState = (): State => ( {
   loading: true,
   failed: false,
+  reloading: false,
   items: [],
   searchterm: '',
 } );
@@ -18,9 +19,11 @@ export default function soundboardReducer( state: State = defaultState(), action
     case actions.FETCH_START:
       return { ...state, loading: true };
     case actions.FETCH_END:
-      return { ...state, loading: false, failed: false, items: action.items };
+      return { ...state, loading: false, failed: false, reloading: false, items: action.items };
     case actions.FETCH_FAIL:
-      return { ...state, loading: false, failed: true };
+      return { ...state, loading: false, failed: !action.soft, reloading: false };
+    case actions.RELOAD:
+      return { ...state, reloading: true };
     case actions.SET_SEARCH:
       return { ...state, searchterm: action.searchterm.replace( rfilterSearch, '' ) };
     default:

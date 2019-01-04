@@ -1,20 +1,55 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Content } from 'native-base';
 import { connect } from 'react-redux';
 import RadioRegion from '/components/media/radio/RadioRegion';
+import PullToRefresh from '/components/PullToRefresh.js';
+import { fetchAllStations, fetchFailedStations, reloadAllStations } from '/store/actions/media/radio.js';
+import type { TabNavigator } from '/components/MediaTabs';
 import type { Region } from '/types/media/radio/index';
-import type { State } from '/types';
+import type { State, Dispatch } from '/types';
+
+type PassedProps = {|
+  navigation: TabNavigator,
+|};
+
+type StoreProps = {|
+  regions: Region[],
+  reloading: boolean,
+  failed: boolean,
+|};
+
+type DispatchProps = {|
+  fetchAllStations: () => void,
+  fetchFailedStations: () => void,
+  reloadAllStations: () => void,
+|};
 
 type Props = {
-  regions: Region[],
+  ...PassedProps,
+  ...StoreProps,
+  ...DispatchProps,
 }
 
 class Radio extends Component<Props> {
+  componentWillMount() {
+    this.props.fetchAllStations();
+    this.props.navigation.onFocus( this.onFocus.bind( this ) );
+  }
+  
+  onFocus() {
+    if ( this.props.failed ) {
+      this.props.fetchFailedStations();
+    }
+  }
+  
+  reload() {
+    this.props.reloadAllStations();
+  }
+ 
   render() {
     return (
-      <Content>
+      <PullToRefresh refreshing={this.props.reloading} onRefresh={this.reload.bind( this )}>
         {
           this.props.regions.map( region => (
             <RadioRegion
@@ -23,15 +58,31 @@ class Radio extends Component<Props> {
             />
           ) )
         }
-      </Content>
+      </PullToRefresh>
     );
   }
 }
 
-function mapStateToProps( state: State ) {
+function mapStateToProps( state: State ): StoreProps {
   return {
     regions: state.media.radio,
+    reloading: state.media.radio.some( region => region.reloading ),
+    failed: state.media.radio.some( region => region.failed ),
   };
 }
 
-export default connect( mapStateToProps )( Radio );
+function mapDispatchToProps( dispatch: Dispatch ): DispatchProps {
+  return {
+    fetchAllStations() {
+      dispatch( fetchAllStations() );
+    },
+    fetchFailedStations() {
+      dispatch( fetchFailedStations() );
+    },
+    reloadAllStations() {
+      dispatch( reloadAllStations() );
+    },
+  };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( Radio );

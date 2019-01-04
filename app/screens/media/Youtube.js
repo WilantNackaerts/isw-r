@@ -11,15 +11,22 @@ import type { Song } from '/types/media/youtube';
 import type { State, Dispatch } from '/types';
 import { YOUTUBE_API_URL } from '/config';
 
-type Props = {
+type StoreProps = {|
   songs: Song[],
   paused: boolean,
+|};
+
+type DispatchProps = {|
   next: () => void,
   fetchSongs: ( searchTerm: string ) => void,
-}
+|};
+
+type Props = {|
+  ...StoreProps,
+  ...DispatchProps,
+|};
 
 class Youtube extends Component<Props> {
-
   onChange( searchTerm ) {
     this.props.fetchSongs( searchTerm );
   }
@@ -54,14 +61,14 @@ class Youtube extends Component<Props> {
   }
 }
 
-function mapStateToProps( state: State ) {
+function mapStateToProps( state: State ): StoreProps {
   return {
     songs: state.media.youtube.songs,
     paused: state.media.player.paused,
   };
 }
 
-function mapDispatchToProps( dispatch: Dispatch ) {
+function mapDispatchToProps( dispatch: Dispatch ): DispatchProps {
   return {
     fetchSongs( searchTerm ) {
       dispatch( fetchSongs( searchTerm ) );
