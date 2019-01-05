@@ -1,34 +1,38 @@
 // @flow
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 import { View, Text, Icon, Button } from 'native-base';
+import { togglePower } from '/store/actions/airco.js';
+import type { State, Dispatch } from '/types';
 
-type Props = {|
-  
-|};
-
-type LocalState = {|
+type StoreProps = {|
   poweredOn: boolean,
 |};
 
-export default class Power extends Component<Props, LocalState> {
-  state = {
-    poweredOn: false,
-  }
-  
+type DispatchProps = {|
+  togglePower: () => void,
+|};
+
+type Props = {|
+  ...StoreProps,
+  ...DispatchProps,
+|};
+
+class Power extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
         <Button
           vertical rounded danger
-          bordered={!this.state.poweredOn}
-          onPress={()=>this.setState( { poweredOn: !this.state.poweredOn } )}
+          bordered={!this.props.poweredOn}
+          onPress={this.props.togglePower}
           style={styles.button}
         >
           <Icon name='power' />
         </Button>
-        <Text style={styles.label}>{this.state.poweredOn ? 'On' : 'Off'}</Text>
+        <Text style={styles.label}>{this.props.poweredOn ? 'On' : 'Off'}</Text>
       </View>
     );
   }
@@ -52,3 +56,19 @@ const styles = StyleSheet.create( {
     marginTop: 5,
   },
 } );
+
+function mapStateToProps( state: State ): StoreProps {
+  return {
+    poweredOn: state.airco.poweredOn,
+  };
+}
+
+function mapDispatchToProps( dispatch: Dispatch ): DispatchProps {
+  return {
+    togglePower() {
+      dispatch( togglePower() );
+    },
+  };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( Power );

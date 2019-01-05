@@ -17,6 +17,7 @@ type PassedProps = {|
 type DefaultProps = {|
   step: number,
   first: boolean,
+  disabled: boolean,
 |};
 
 type Props = {|
@@ -28,6 +29,7 @@ export default class Temperature extends Component<Props> {
   static defaultProps: DefaultProps = {
     step: 1,
     first: false,
+    disabled: false,
   }
   
   render() {
@@ -44,6 +46,7 @@ export default class Temperature extends Component<Props> {
               maximumValue={this.props.max}
               value={this.props.value}
               step={this.props.step}
+              disabled={this.props.disabled}
               thumbTintColor='#3F51B5'
               minimumTrackTintColor='#3F51B5'
               onValueChange={this.props.onChange}

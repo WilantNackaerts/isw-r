@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { View, Container } from 'native-base';
+import { View, Container, Icon } from 'native-base';
 import Power from '/components/airco/Power.js';
 import Temperature from '/components/airco/Temperature.js';
 import Fan from '/components/airco/Fan.js';
@@ -15,6 +15,7 @@ export default class Airco extends Component<Props> {
   render() {
     return (
       <Container style={styles.container}>
+        <Icon name='snow' style={styles.image} />
         <View style={styles.sliders}>
           <Temperature />
           <Fan />
@@ -30,6 +31,12 @@ const styles = StyleSheet.create( {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'stretch',
+  },
+  image: {
+    alignSelf: 'center',
+    marginTop: 30,
+    fontSize: 120,
+    color: '#ddd',
   },
   sliders: {
     flex: 1,

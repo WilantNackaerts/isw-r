@@ -1,32 +1,28 @@
 // @flow
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Text } from 'native-base';
 import Slider from './Slider.js';
+import { toggleFanAuto, setFanPower } from '/store/actions/airco.js';
+import type { State, Dispatch } from '/types';
 
-type LocalState = {|
+type StoreProps = {|
   auto: boolean,
   power: number,
 |};
 
-type Props = {|
-  
+type DispatchProps = {|
+  toggleAuto: () => void,
+  setPower: ( power: number ) => void,
 |};
 
-export default class Fan extends Component<Props, LocalState> {
-  state = {
-    auto: false,
-    power: 2,
-  };
-  
-  setPower( power: number ) {
-    this.setState( { power } );
-  }
-  
-  toggleAuto() {
-    this.setState( { auto: !this.state.auto } );
-  }
-  
+type Props = {|
+  ...StoreProps,
+  ...DispatchProps,
+|};
+
+class Fan extends Component<Props> {
   render() {
     return (
       <Slider
@@ -34,14 +30,35 @@ export default class Fan extends Component<Props, LocalState> {
         iconType='MaterialCommunityIcons'
         min={1}
         max={4}
-        value={this.state.power}
+        value={this.props.power}
+        disabled={this.props.auto}
         control={
-          <Button small block bordered={!this.state.auto} onPress={this.toggleAuto.bind( this )}>
+          <Button small block bordered={!this.props.auto} onPress={this.props.toggleAuto}>
             <Text uppercase>Auto</Text>
           </Button>
         }
-        onChange={this.setPower.bind( this )}
+        onChange={this.props.setPower}
       />
     );
   }
 }
+
+function mapStateToProps( state: State ): StoreProps {
+  return {
+    auto: state.airco.fanAuto,
+    power: state.airco.fanPower,
+  };
+}
+
+function mapDispatchToProps( dispatch: Dispatch ): DispatchProps {
+  return {
+    toggleAuto() {
+      dispatch( toggleFanAuto() );
+    },
+    setPower( temp: number ) {
+      dispatch( setFanPower( temp ) );
+    },
+  };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( Fan );
