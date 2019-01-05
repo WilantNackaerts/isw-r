@@ -2,19 +2,24 @@
 
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { Container, Button, Icon } from 'native-base';
-import Temperature from '../components/airco/Temperature.js';
-import Fan from '../components/airco/Fan.js';
+import { View, Container } from 'native-base';
+import Power from '/components/airco/Power.js';
+import Temperature from '/components/airco/Temperature.js';
+import Fan from '/components/airco/Fan.js';
 
-export default class Airco extends Component<{}> {
+type Props = {|
+  
+|};
+
+export default class Airco extends Component<Props> {
   render() {
     return (
       <Container style={styles.container}>
-        <Temperature extraStyles={styles.temp} />
-        <Fan />
-        <Button vertical style={styles.powerButton}>
-          <Icon name='power' />
-        </Button>
+        <View style={styles.sliders}>
+          <Temperature />
+          <Fan />
+        </View>
+        <Power />
       </Container>
     );
   }
@@ -22,16 +27,15 @@ export default class Airco extends Component<{}> {
 
 const styles = StyleSheet.create( {
   container: {
+    flex: 1,
+    flexDirection: 'column',
     alignItems: 'stretch',
   },
-  temp: {
-    flexGrow: 2,
-  },
-  powerButton: {
-    backgroundColor: '#D50000',
-    alignSelf: 'stretch',
-    paddingTop: 15,
-    paddingBottom: 15,
-    marginTop: 15,
+  sliders: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    paddingLeft: 15,
+    paddingRight: 15,
   },
 } );

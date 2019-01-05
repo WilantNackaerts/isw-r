@@ -1,54 +1,47 @@
 // @flow
 
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button, Icon, Text } from 'native-base';
+import { Button, Text } from 'native-base';
+import Slider from './Slider.js';
 
-export default class Fan extends Component<{}> {
+type LocalState = {|
+  auto: boolean,
+  power: number,
+|};
+
+type Props = {|
+  
+|};
+
+export default class Fan extends Component<Props, LocalState> {
+  state = {
+    auto: false,
+    power: 2,
+  };
+  
+  setPower( power: number ) {
+    this.setState( { power } );
+  }
+  
+  toggleAuto() {
+    this.setState( { auto: !this.state.auto } );
+  }
+  
   render() {
     return (
-      <View style={styles.container}>
-        <View>
-          <Button transparent>
-            <Text>Auto</Text>
+      <Slider
+        iconName='fan'
+        iconType='MaterialCommunityIcons'
+        min={1}
+        max={4}
+        value={this.state.power}
+        control={
+          <Button small block bordered={!this.state.auto} onPress={this.toggleAuto.bind( this )}>
+            <Text uppercase>Auto</Text>
           </Button>
-        </View>
-        <View>
-          <Button transparent>
-            <Icon name='fan' type='MaterialCommunityIcons' />
-          </Button>
-        </View>
-        <View>
-          <Button transparent>
-            <Icon name='fan' type='MaterialCommunityIcons' style={styles.icon_lg} />
-          </Button>
-        </View>
-        <View>
-          <Button transparent>
-            <Icon name='fan' type='MaterialCommunityIcons' style={styles.icon_xlg} />
-          </Button>
-        </View>
-        <View>
-          <Button transparent>
-            <Icon name='jet' style={styles.icon_xlg} />
-          </Button>
-        </View>
-      </View>
+        }
+        onChange={this.setPower.bind( this )}
+      />
     );
   }
 }
-
-
-const styles = StyleSheet.create( {
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  icon_lg: {
-    fontSize: 33,
-  },
-  icon_xlg: {
-    fontSize: 39,
-  },
-} );

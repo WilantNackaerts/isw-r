@@ -1,5 +1,6 @@
 {
     "javascript.validate.enable": false,
     "flow.pathToFlow": "${workspaceRoot}/node_modules/.bin/flow",
-    "eslint.nodePath": "/Users/tuur/Documents/school/mobile/r/node_modules"
+    "eslint.nodePath": "/Users/tuur/Documents/school/mobile/r/node_modules",
+    "java.configuration.updateBuildConfiguration": "interactive"
   }

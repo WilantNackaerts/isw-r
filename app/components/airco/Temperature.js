@@ -1,42 +1,39 @@
 // @flow
 
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button, Text } from 'native-base';
+import { Text } from 'native-base';
+import Slider from './Slider.js';
 
-type Props = {
-  extraStyles: {}
-}
+type State = {|
+  temp: number,
+|};
 
-export default class Temperature extends Component<Props> {
+type Props = {|
+  
+|};
+
+export default class Temperature extends Component<Props, State> {
+  state = {
+    temp: 21,
+  };
+  
+  setTemp( temp: number ) {
+    this.setState( { temp } );
+  }
+  
   render() {
     return (
-      <View style={[ styles.container, this.props.extraStyles ]}>
-        <View>
-          <Button transparent>
-            <Text style={styles.temp}>-</Text>
-          </Button>
-        </View>
-        <Text style={styles.temp}>21°C</Text>
-        <View>
-          <Button transparent>
-            <Text style={styles.temp}>+</Text>
-          </Button>
-        </View>
-      </View>
+      <Slider
+        first
+        iconName='thermometer'
+        min={18}
+        max={32}
+        value={this.state.temp}
+        control={
+          <Text>{this.state.temp}°C</Text>
+        }
+        onChange={this.setTemp.bind( this )}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create( {
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  temp: {
-    color: 'green',
-    fontSize: 70,
-    marginBottom: 30,
-  },
-} );
