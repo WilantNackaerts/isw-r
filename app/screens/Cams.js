@@ -94,7 +94,7 @@ export default class Cams extends Component<Props, State> {
                 <NoFlickerImage 
                   style={styles.image} 
                   fadeDuration={0} 
-                  onError={( error ) => console.log( error )}
+                  onError={() => this.openModal( true )}
                   source={{ 
                     uri: cam,
                     headers: {
