@@ -52,20 +52,20 @@ function process( res: ApiSound[] ): Item[] {
   return folders.concat( sounds );
 }
 
-function fetchStart(): FetchStartAction {
+function _fetchStart(): FetchStartAction {
   return {
     type: actions.FETCH_START,
   };
 }
 
-function fetchEnd( items: Item[] ): FetchEndAction {
+function _fetchEnd( items: Item[] ): FetchEndAction {
   return {
     type: actions.FETCH_END,
     items,
   };
 }
 
-function fetchFail( soft?: boolean = false ): FetchFailAction {
+function _fetchFail( soft?: boolean = false ): FetchFailAction {
   return {
     type: actions.FETCH_FAIL,
     soft,
@@ -96,16 +96,16 @@ function _fetchSounds( dispatch: Dispatch ): Promise<ApiSound[]> {
   return fetch( SOUNDBOARD_URL )
     .then( res => res.json() )
     .then( res => {
-      dispatch( fetchEnd( process( res ) ) );
+      dispatch( _fetchEnd( process( res ) ) );
     } );
 }
 
 export function fetchSounds(): Thunk {
   return function( dispatch: Dispatch ) {
-    dispatch( fetchStart() );
+    dispatch( _fetchStart() );
 
     _fetchSounds( dispatch )
-      .catch( () => dispatch( fetchFail() ) );
+      .catch( () => dispatch( _fetchFail() ) );
   };
 }
 
@@ -114,6 +114,6 @@ export function reloadSounds(): Thunk {
     dispatch( _reload() );
 
     _fetchSounds( dispatch )
-      .catch( catcher( 'Oops! Failed to load sound effects.', () => dispatch( fetchFail( true ) ) ) );
+      .catch( catcher( 'Oops! Failed to load sound effects.', () => dispatch( _fetchFail( true ) ) ) );
   };
 }

@@ -18,13 +18,11 @@ import type {
 import type { Thunk, Dispatch } from '/types';
 import { MEDIA_STATUS_URL, MEDIA_API_URL } from '/config';
 
-function fetchStart(): FetchStartAction {
-  return {
-    type: actions.FETCH_START,
-  };
+function _fetchStart(): FetchStartAction {
+  return { type: actions.FETCH_START };
 }
 
-function fetchEnd( queue: Song[], currentSong: Song, muted: boolean, paused: boolean, volume: number, queuePosition: number ): FetchEndAction {
+function _fetchEnd( queue: Song[], currentSong: Song, muted: boolean, paused: boolean, volume: number, queuePosition: number ): FetchEndAction {
   return {
     type: actions.FETCH_END,
     queue,
@@ -83,23 +81,34 @@ function convertSong( song: ApiSong ): Song {
 }
 
 let previousFetchStatusFailed = false;
+
 export function fetchPlayer(): Thunk {
   return function( dispatch: Dispatch ) {
-    dispatch( fetchStart() );
+    dispatch( _fetchStart() );
     
-    fetch( MEDIA_STATUS_URL )
-      .then( res => res.json() )
-      .then( ( res: ApiStatus ) => {
+    fetch( MEDIA_STATUS_URL ).then( res => res.json() ).then(
+      ( res: ApiStatus ) => {
         previousFetchStatusFailed = false;
         const queue = res.playlist.map( convertSong );
-        dispatch( fetchEnd( queue, res.current, res.muted, res.paused, res.volume, res.plp ) );
-      } )
-      .catch( err => {
+        dispatch(
+          _fetchEnd(
+            queue,
+            res.current,
+            res.muted,
+            res.paused,
+            res.volume,
+            res.plp,
+          ),
+        );
+      },
+    ).catch(
+      err => {
         if ( !previousFetchStatusFailed ) {
           error( 'Oops! Failed to fetch player state.' );
         }
         previousFetchStatusFailed = true;
-      } );
+      },
+    );
   };
 }
 

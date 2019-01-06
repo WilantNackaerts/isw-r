@@ -45,13 +45,13 @@ type ApiThumbnail = {
   url: string,
 };
 
-function fetchStart(): FetchStartAction {
+function _fetchStart(): FetchStartAction {
   return {
     type: actions.FETCH_START,
   };
 }
 
-function fetchEnd( songs: Song[] ): FetchEndAction { 
+function _fetchEnd( songs: Song[] ): FetchEndAction { 
   return {
     type: actions.FETCH_END,
     songs,
@@ -69,12 +69,12 @@ function searchResultToSong( res: ApiSearchResult ): Song {
 
 export function fetchSongs( searchTerm: string ): Thunk {
   return function( dispatch: Dispatch ) {
-    dispatch( fetchStart() );
+    dispatch( _fetchStart() );
 
     fetch( YOUTUBE_URL + searchTerm )
       .then( res => res.json() )
       .then( ( res: ApiSearchResponse ) => {
-        dispatch( fetchEnd( res.items.map( searchResultToSong ) ) );
+        dispatch( _fetchEnd( res.items.map( searchResultToSong ) ) );
       } )
       .catch( catcher( 'Oops! Failed to fetch search results.' ) );
   };
