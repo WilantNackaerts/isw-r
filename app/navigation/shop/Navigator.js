@@ -1,10 +1,11 @@
 // @flow
 
 import React, { Component, type Node, type Element } from 'react';
-import { Easing, Animated } from 'react-native';
+import { StyleSheet, Easing, Animated } from 'react-native';
 import { createStackNavigator, type HeaderProps } from 'react-navigation';
 import { Header, Title, Body, Left, Right } from 'native-base';
 import routes, { USERS } from './routes';
+import styles from '/styles';
 
 function maybeRender( Container: Class<Component<any>>, elem: Node, props: HeaderProps ): ?Element<any> {
   if ( typeof elem === 'function' ) {
@@ -26,7 +27,7 @@ export default createStackNavigator( routes, {
       return (
         <Header noLeft={!opts.headerLeft} noRight={!opts.headerRight}>
           { maybeRender( Left, opts.headerLeft, props ) }
-          <Body>
+          <Body style={stylesheet.title}>
             <Title>{opts.headerTitle}</Title>
           </Body>
           { maybeRender( Right, opts.headerRight, props ) }
@@ -55,5 +56,11 @@ export default createStackNavigator( routes, {
         return { transform: [ { translateX } ] };
       },
     };
+  },
+} );
+
+const stylesheet = StyleSheet.create( {
+  title: {
+    flex: 3,
   },
 } );
