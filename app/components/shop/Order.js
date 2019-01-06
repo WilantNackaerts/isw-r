@@ -78,7 +78,7 @@ class Order extends Component<Props, LocalState> {
       } );
     
     progress( promise )
-      .after( 3000, () => {
+      .after( 7000, () => {
         toast.warning( 'This is taking longer than usual. Hang tight!' );
       } );
   }

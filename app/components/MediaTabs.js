@@ -26,7 +26,7 @@ export default class MediaTabs extends Component<Props> {
     return (
       <Container>
         <Tabs onChangeTab={this.onChangeTab.bind( this )}>
-          <Tab heading={<TabHeading><Text>Youtube</Text></TabHeading>}>
+          <Tab heading={<TabHeading><Text>YouTube</Text></TabHeading>}>
             <Youtube navigation={this.navigator.for( 0 )} />
           </Tab>
           <Tab heading={<TabHeading><Text>Radio</Text></TabHeading>}>
