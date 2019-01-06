@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { StyleSheet, Modal, TextInput, AsyncStorage } from 'react-native';
+import { StyleSheet, Modal, TextInput, AsyncStorage, Dimensions } from 'react-native';
 import { View, Button, Text } from 'native-base';
 import CheckBox from 'react-native-check-box';
 import { btoa } from 'Base64';
@@ -91,6 +91,8 @@ export default class CamModal extends Component<Props, LocalState> {
   }
 }
 
+let width = Dimensions.get( 'window' ).width;
+
 const styles = StyleSheet.create( {
   container: {
     flex: 1,
@@ -99,18 +101,21 @@ const styles = StyleSheet.create( {
     backgroundColor: 'rgba(0,0,0,0.5)',
   },
   view: {
+    borderRadius: 10,
     color: 'black',
     backgroundColor: 'white',
     padding: 20,
+    width: width*( 3/4 ),
   },
   wrongPin: {
     color: 'red',
   },
   input: {
     flex: 0,
+    textDecorationLine: 'underline',
   },
   controls: {
-    marginTop: 10,
+    marginTop: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -118,7 +123,7 @@ const styles = StyleSheet.create( {
     flex: 0,
   },
   button:{
-    margin: 10,
+    margin: 0,
   },
 } );
 

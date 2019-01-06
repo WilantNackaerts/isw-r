@@ -31,7 +31,6 @@ export default class Cams extends Component<Props, State> {
   componentDidMount() {
     AsyncStorage.getItem( 'credentials' )
       .then( credentials => {
-        console.log( credentials );
         if ( !credentials ) {
           this.openModal();
         } else {
