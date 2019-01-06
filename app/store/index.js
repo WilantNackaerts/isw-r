@@ -9,6 +9,7 @@ import soundboard from './reducers/media/soundboard';
 import youtube from './reducers/media/youtube';
 import radio from './reducers/media/radio';
 import player from './reducers/media/player';
+import airco from './reducers/airco';
 
 const devtools =
   (
@@ -28,6 +29,7 @@ const rootReducer = combineReducers( {
     radio,
     player,
   } ),
+  airco,
 } );
 
 export default createStore( rootReducer, devtools( applyMiddleware( ...middleware ) ) ); 
